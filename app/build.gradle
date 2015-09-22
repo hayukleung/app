@@ -25,4 +25,5 @@ dependencies {
     compile project(':lib-app-util')
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile project(':lib-app-widget-collapsible')
+    compile 'com.jakewharton:butterknife:5.1.1'
 }

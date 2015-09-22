@@ -82,7 +82,11 @@ public class MainActivity extends Activity {
 
             @Override
             public boolean onOrgClick(IElement org, int position) {
-                return false;
+                if (!org.hasChildren()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
         mCollapsibleView.setAdapter(mCollapsibleAdapter);
