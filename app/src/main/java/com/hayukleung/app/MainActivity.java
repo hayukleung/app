@@ -9,7 +9,6 @@ import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.IElement;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
-import com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ public class MainActivity extends Activity {
 
     private CollapsibleView mCollapsibleView;
     private CollapsibleAdapter mCollapsibleAdapter;
-    private List<Element> mAllElements = new ArrayList<Element>();
-    private List<Element> mVisibleElements = new ArrayList<Element>();
+    private List<Element> mAllElements = new ArrayList<>();
+    private List<Element> mVisibleElements = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,13 @@ public class MainActivity extends Activity {
             public void onUsrClick(IElement usr, int position) {
                 switch (usr.getId()) {
                     case "com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity":
-                        startActivity(new Intent(MainActivity.this, TestCollapsibleActivity.class));
+                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class));
+                        break;
+                    case "com.hayukleung.app.util.screen.demo.DemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.DemoActivity.class));
+                        break;
+                    case "com.rockerhieu.emojicon.emoji.demo.DemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.rockerhieu.emojicon.emoji.demo.DemoActivity.class));
                         break;
                     default:
                         break;
@@ -113,7 +118,13 @@ public class MainActivity extends Activity {
 
         // 3级 ======================================================
         Element element;
-        element = new Element(TestCollapsibleActivity.class.getName(), "collapsible", false);
+        element = new Element(com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class.getName(), "collapsible", false);
+        element.setParentId(elementWidget.getId());
+        mAllElements.add(element);
+        element = new Element(com.hayukleung.app.util.screen.demo.DemoActivity.class.getName(), "screen-matching", false);
+        element.setParentId(elementWidget.getId());
+        mAllElements.add(element);
+        element = new Element(com.rockerhieu.emojicon.emoji.demo.DemoActivity.class.getName(), "emojicon", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 
