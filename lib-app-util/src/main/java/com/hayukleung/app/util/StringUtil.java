@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,8 @@ import java.util.regex.Pattern;
  *
  */
 public class StringUtil {
+
+    // 未归类的字符串处理方法，开始 --------------------------------------------------------------------
 
     /**
      * 获取缩略的字符串
@@ -98,8 +101,85 @@ public class StringUtil {
             return false;
         return a.equals(b);
     }
+    // 未归类的字符串处理方法，结束 --------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+    // 身份证校验，开始 ------------------------------------------------------------------------------
+
+    /** wi = 2(n-1)(mod 11) 加权因子 */
+    private static final int[] wi = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 };
+    /** 校验码 */
+    private static final int[] vi = { 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 };
+    private static int[] ai = new int[18];
+
+    /**
+     * 15位转18位
+     *
+     * @param fifteen
+     * @return
+     */
+    private static String upToEighteen(String fifteen) {
+        StringBuffer eighteen = new StringBuffer(fifteen);
+        eighteen = eighteen.insert(6, "19");
+        return eighteen.toString();
+    }
+
+    /**
+     * 计算最后一位校验值
+     *
+     * @param eighteen
+     * @return
+     * @throws NumberFormatException
+     */
+    private static String getVerify(String eighteen) throws NumberFormatException {
+        int remain = 0;
+        if (eighteen.length() == 18) {
+            eighteen = eighteen.substring(0, 17);
+        }
+        if (eighteen.length() == 17) {
+            int sum = 0;
+            for (int i = 0; i < 17; i++) {
+                String k = eighteen.substring(i, i + 1);
+                ai[i] = Integer.valueOf(k);
+            }
+            for (int i = 0; i < 17; i++) {
+                sum += wi[i] * ai[i];
+            }
+            remain = sum % 11;
+        }
+        // System.out.println("remain=>"+remain);
+        return remain == 2 ? "X" : String.valueOf(vi[remain]);
+    }
+
+    /**
+     * 校验身份证的校验码
+     *
+     * @param identity
+     * @return
+     */
+    public static boolean isIdentity(String identity) {
+        if (identity != null) {
+            identity = identity.toUpperCase(Locale.US);
+        }
+        if (identity.length() == 15) {
+            identity = upToEighteen(identity);
+        }
+        if (identity.length() != 18) {
+            return false;
+        }
+        String verify = identity.substring(17, 18);
+        try {
+            if (verify.equals(getVerify(identity))) {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // 身份证校验，结束 ------------------------------------------------------------------------------
+
+    // 正则式验证手机、电话、邮箱、链接、话题标签，开始 ---------------------------------------------------
 
     /**
      * 字符是否为中国大陆手机号码
@@ -166,7 +246,10 @@ public class StringUtil {
         }
     }
 
-    // ---------------------------------------------------------------------------------------------
+
+    // 正则式验证手机、电话、邮箱、链接、话题标签，结束 ---------------------------------------------------
+
+    // 全文查找标签，开始 -----------------------------------------------------------------------------
 
     /**
      * 全文匹配，获取标签数目
@@ -210,5 +293,8 @@ public class StringUtil {
         }
         return count;
     }
+
+
+    // 全文查找标签，结束 -----------------------------------------------------------------------------
 
 }

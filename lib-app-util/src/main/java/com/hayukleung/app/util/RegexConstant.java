@@ -6,6 +6,9 @@ package com.hayukleung.app.util;
  * http://tool.oschina.net/regex#
  * https://jex.im/regulex
  *
+ * public static final Pattern URL = Pattern.compile("((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?");
+ * public static final Pattern TEL = Pattern.compile("(\\(\\d{3,4}\\)|\\d{3,4}-|\\s)?\\d{7,14}");
+ *
  * Created by hayukleung on 15/9/21.
  */
 public class RegexConstant {
@@ -49,22 +52,14 @@ public class RegexConstant {
     public static final String REG_EMAIL = "^([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$";
 
     /**
-     * 身份证号码（全字符匹配）
-     */
-    public static final String REG_IDENTITY = "";
-    /**
-     * 身份证号码（全文匹配）
-     */
-    public static final String REG_CTX_IDENTITY = "";
-
-    /**
      * 话题标签（全字符匹配）
      * #xxx...#
      */
     public static final String REG_LABEL = "^#((?!#).)*#$";
+
     /**
      * 话题标签（全文匹配）
      */
-    public static final String REG_CTX_LABEL = "#.*?#";
+    public static final String REG_CTX_LABEL = "#.+?#";
 
 }

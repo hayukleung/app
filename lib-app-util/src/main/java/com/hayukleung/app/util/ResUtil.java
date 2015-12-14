@@ -29,6 +29,10 @@ public class ResUtil {
         this.mPackageName = activity.getPackageName();
     }
 
+    public ResUtil(final String packageName) {
+        this.mPackageName = packageName;
+    }
+
     /**
      * 以反射方式获取R.layout资源ID
      * 
@@ -160,7 +164,7 @@ public class ResUtil {
 
         LogUtil.showLog("getResourseIdByName --> " + mPackageName + " - " + className + " - " + name);
 
-        Class<?> r = null;
+        Class<?> r;
         int id = 0;
         try {
             r = Class.forName(mPackageName + ".R");
