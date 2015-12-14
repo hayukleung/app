@@ -1,1 +1,5 @@
-include ':app', ':lib-app-util', ':lib-app-widget-collapsible'
+include ':app',
+        ':lib-app-design_pattern',
+        ':lib-app-util',
+        ':lib-app-widget-collapsible',
+        ':lib-app-widget-emojicon'
