@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hayukleung.app.util;
+package com.hayukleung.app.util.screen;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
