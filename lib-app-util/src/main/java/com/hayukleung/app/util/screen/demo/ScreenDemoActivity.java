@@ -10,7 +10,7 @@ import com.hayukleung.app.util.R;
  *
  * Created by hayukleung on 12/14/15.
  */
-public class DemoActivity extends Activity {
+public class ScreenDemoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
