@@ -1,4 +1,6 @@
 工程介绍
+--app icon
+https://github.com/konifar/android-material-design-icon-generator-plugin
 --app
 主工程，展示各个module的demo
 --lib-app-design_pattern
