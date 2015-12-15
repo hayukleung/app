@@ -35,8 +35,6 @@ public class EmojiconTextView extends TextView {
     private int mTextLength = -1;
     private boolean mUseSystemDefault = false;
 
-//    private NoUnderlineSpan mNoUnderlineSpan = new NoUnderlineSpan();
-
     public EmojiconTextView(Context context) {
         super(context);
         init(null);
@@ -77,18 +75,6 @@ public class EmojiconTextView extends TextView {
         }
         super.setText(text, type);
     }
-
-//    @Override
-//    public void setText(CharSequence text, BufferType type) {
-//        super.setText(text, BufferType.EDITABLE);
-//    }
-
-//    @Override
-//    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-//        Spannable spannable = (Spannable) getText();
-//        spannable.setSpan(mNoUnderlineSpan, 0, spannable.length(), Spanned.SPAN_MARK_MARK);
-//        EmojiconHandler.addEmojis(getContext(), spannable, mEmojiconSize, mEmojiconAlignment, mEmojiconTextSize, mUseSystemDefault);
-//    }
 
     /**
      * Set the size of emojicon in pixels.

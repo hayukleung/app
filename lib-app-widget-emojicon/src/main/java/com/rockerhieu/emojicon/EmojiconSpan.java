@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.text.style.DynamicDrawableSpan;
 
 import java.lang.ref.WeakReference;
@@ -89,13 +88,8 @@ class EmojiconSpan extends DynamicDrawableSpan {
 
     private Drawable getCachedDrawable() {
         if (mDrawableRef == null || mDrawableRef.get() == null) {
-            mDrawableRef = new WeakReference<>(getDrawable());
+            mDrawableRef = new WeakReference<Drawable>(getDrawable());
         }
         return mDrawableRef.get();
-    }
-
-    @Override
-    public void updateDrawState(TextPaint ds) {
-        ds.setUnderlineText(false);
     }
 }

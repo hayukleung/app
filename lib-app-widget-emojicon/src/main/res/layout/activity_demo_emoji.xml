@@ -25,21 +25,21 @@
 
     <CheckBox
         android:id="@+id/use_system_default"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="false"
         android:text="@string/use_system_default" />
 
     <com.rockerhieu.emojicon.EmojiconTextView
         android:id="@+id/txtEmojicon"
-        android:layout_width="@dimen/x360"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         emojicon:emojiconAlignment="baseline" />
 
     <com.rockerhieu.emojicon.EmojiconEditText
         android:id="@+id/editEmojicon"
-        android:layout_width="@dimen/x360"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint=""
         android:text=""
