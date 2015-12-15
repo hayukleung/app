@@ -74,11 +74,14 @@ public class MainActivity extends Activity {
                     case "com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity":
                         startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class));
                         break;
-                    case "com.hayukleung.app.util.screen.demo.DemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.DemoActivity.class));
+                    case "com.hayukleung.app.util.screen.demo.ScreenDemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class));
                         break;
-                    case "com.rockerhieu.emojicon.emoji.demo.DemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.rockerhieu.emojicon.emoji.demo.DemoActivity.class));
+                    case "com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity.class));
+                        break;
+                    case "com.hayukleung.app.util.text.demo.TextDemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.text.demo.TextDemoActivity.class));
                         break;
                     default:
                         break;
@@ -118,13 +121,18 @@ public class MainActivity extends Activity {
 
         // 3级 ======================================================
         Element element;
+
+        element = new Element(com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class.getName(), "screen", false);
+        element.setParentId(elementUtil.getId());
+        mAllElements.add(element);
+        element = new Element(com.hayukleung.app.util.text.demo.TextDemoActivity.class.getName(), "text", false);
+        element.setParentId(elementUtil.getId());
+        mAllElements.add(element);
+
         element = new Element(com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class.getName(), "collapsible", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(com.hayukleung.app.util.screen.demo.DemoActivity.class.getName(), "screen-matching", false);
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-        element = new Element(com.rockerhieu.emojicon.emoji.demo.DemoActivity.class.getName(), "emojicon", false);
+        element = new Element(com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity.class.getName(), "emoji", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 
