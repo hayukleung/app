@@ -11,3 +11,8 @@ https://github.com/konifar/android-material-design-icon-generator-plugin
 RecyclerView实现的多级列表控件
 --lib-app-widget-emojicon
 emoji表情库
+
+
+// TODO
+--lib-app-widget-zxing
+--lib-app-network-volley

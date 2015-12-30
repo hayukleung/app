@@ -1,5 +1,11 @@
+rootProject.name='xDroid'
+
 include ':app',
+        ':appDice',
+        ':appAnalogClock',
+        ':lib-app-base',
         ':lib-app-design_pattern',
+        ':lib-app-rxandroid',
         ':lib-app-util',
         ':lib-app-widget-collapsible',
-        ':lib-app-widget-emojicon'
+        ':lib-app-widget-qrcode'
