@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_create$edit$layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/sign_create$edit_bottom$layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="#DADADA" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/x200">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:id="@+id/sign_create$sure_cut$btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x200"
+                    android:background="@drawable/selector_bg_button_base"
+                    android:paddingLeft="@dimen/x100"
+                    android:paddingRight="@dimen/x100"
+                    android:text="剪裁"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/sign_create$resetting$btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/sign_create$sure_cut$btn"
+                    android:background="@drawable/selector_bg_button_white"
+                    android:paddingLeft="@dimen/x100"
+                    android:paddingRight="@dimen/x100"
+                    android:text="重置"
+                    android:textColor="#AAAAAA"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sign_create$cut$layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_selector_white"
+                android:paddingBottom="@dimen/x150"
+                android:paddingLeft="@dimen/x175"
+                android:paddingRight="@dimen/x175"
+                android:paddingTop="@dimen/x150">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/crop_operate_icon1"
+                    android:contentDescription="@string/app_name" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/sign_create$cut$line"
+                android:layout_width="@dimen/x1"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/sign_create$cut$layout"
+                android:layout_toRightOf="@id/sign_create$cut$layout"
+                android:background="#DADADA" />
+
+            <RelativeLayout
+                android:id="@+id/sign_create$rotat$layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/sign_create$cut$line"
+                android:background="@drawable/common_selector_white"
+                android:paddingBottom="@dimen/x150"
+                android:paddingLeft="@dimen/x175"
+                android:paddingRight="@dimen/x175"
+                android:paddingTop="@dimen/x150">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/crop_operate_icon2"
+                    android:contentDescription="@string/app_name" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/sign_create$rotat$line"
+                android:layout_width="@dimen/x1"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/sign_create$rotat$layout"
+                android:layout_toRightOf="@id/sign_create$rotat$layout"
+                android:background="#DADADA" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/sign_create$edit_middle$layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/sign_create$edit_bottom$layout"
+        android:background="@android:color/black">
+
+        <LinearLayout
+            android:id="@+id/sign_create$edit_middle_bottom$layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/common_background"
+            android:visibility="invisible">
+
+            <RelativeLayout
+                android:id="@+id/sign_create$counterclockwise$layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/x160"
+                android:paddingTop="@dimen/x160">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/sign_create$counterclockwise$img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/crop_operate_icon3"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x150"
+                        android:text="逆时针旋转"
+                        android:textColor="@color/base"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"
+                android:background="#DADADA" />
+
+            <RelativeLayout
+                android:id="@+id/sign_create$clockwise$layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/x160"
+                android:paddingTop="@dimen/x160">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/sign_create$clockwise$img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/crop_operate_icon4"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x150"
+                        android:text="顺时针旋转"
+                        android:textColor="@color/base"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/sign_create$edit_middle_bottom$layout"
+            android:padding="@dimen/x175">
+
+            <com.edmodo.cropper.CropImageView
+                android:id="@+id/sign_create$crop$img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

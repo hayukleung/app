@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_background" >
+
+    <GridView
+        android:id="@+id/ActivityCommonAlbum$gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/x10"
+        android:numColumns="2"
+        android:padding="@dimen/x10"
+        android:scrollbarSize="@dimen/x8"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        android:scrollbarTrackVertical="@drawable/scrollbar_vertical_track"
+        android:verticalSpacing="@dimen/x10" />
+
+    <View
+        android:id="@+id/ActivityCommonAlbum$view_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ActivityCommonAlbum$gridview" />
+
+</RelativeLayout>

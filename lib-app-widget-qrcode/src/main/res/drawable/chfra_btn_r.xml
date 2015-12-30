@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 主Activity右分页未选中 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#D3330B" />
+
+    <size
+        android:width="@dimen/x320"
+        android:height="@dimen/x320" />
+
+    <!-- android:radius="8dp" -->
+    <corners
+        android:bottomLeftRadius="@dimen/x1"
+        android:bottomRightRadius="@dimen/x160"
+        android:topLeftRadius="@dimen/x1"
+        android:topRightRadius="@dimen/x160" />
+
+</shape>
