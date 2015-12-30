@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/gray" />
+        </shape>
+    </item>
+    <item android:bottom="1px">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFFFF" />
+            <padding
+                android:bottom="1px"
+                android:left="1px"
+                android:right="1px"
+                android:top="1px" />
+            <size
+                android:width="@dimen/registe_avatar_width"
+                android:height="@dimen/registe_avatar_height" />
+        </shape>
+    </item>
+
+</layer-list>

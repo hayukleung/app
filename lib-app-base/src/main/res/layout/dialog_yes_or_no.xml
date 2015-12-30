@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_space"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_space"
+                android:layout_marginRight="@dimen/normal_space"
+                android:layout_marginBottom="@dimen/normal_space"
+                android:layout_marginTop="@dimen/large_space"
+                android:textSize="18sp"
+                android:textColor="@color/dark_gray"
+                android:text="" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:src="#f2f2f2" />
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:divider="@drawable/divider"
+            app:showDividers="middle">
+
+            <com.hayukleung.app.view.widget.AutoScaleTextView
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="否"
+                android:textSize="16sp"
+                android:textColor="@color/main_color_normal"
+                android:gravity="center"
+                android:paddingLeft="@dimen/normal_space"
+                android:paddingRight="@dimen/normal_space"
+                android:paddingTop="@dimen/large_space"
+                android:paddingBottom="@dimen/large_space"
+                android:background="@drawable/bg_dialog_btn_right_bottom" />
+
+            <com.hayukleung.app.view.widget.AutoScaleTextView
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="是"
+                android:textSize="16sp"
+                android:textColor="@color/main_color_normal"
+                android:gravity="center"
+                android:paddingLeft="@dimen/normal_space"
+                android:paddingRight="@dimen/normal_space"
+                android:paddingTop="@dimen/large_space"
+                android:paddingBottom="@dimen/large_space"
+                android:background="@drawable/bg_dialog_btn_right_bottom" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
+</RelativeLayout>

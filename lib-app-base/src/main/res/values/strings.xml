@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">lib-app-base</string>
+
+    <!-- for progress fragment -->
+    <string name="network_error_tips">网络异常</string>
+    <string name="network_error_des1">建议检查网络后</string>
+    <string name="network_error_des2">点击屏幕尝试重新连接</string>
+    <string name="reload_data_tips">点击屏幕获取数据</string>
+
+</resources>

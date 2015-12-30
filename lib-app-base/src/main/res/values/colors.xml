@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="lighter_black">#333</color>
+    <color name="darkest_gray">#777</color>
+    <color name="darker_gray">#aaa</color>
+    <color name="gray">#ddd</color>
+    <color name="lighter_gray">#eee</color>
+    <color name="danger">#d9534f</color>
+    <color name="warning">#f0ad4e</color>
+    <color name="info">#5bc0de</color>
+    <color name="success">#5cb85c</color>
+    <color name="dark_gray">#333333</color>
+
+    <color name="window_background">@color/lighter_gray</color>
+    <color name="main_color_normal">#ffcc0022</color>
+    <color name="main_color_pressed">#ff990022</color>
+    <color name="textColorLink">#576b95</color>
+
+    <color name="header_title">@color/white</color>
+
+    <color name="content_title">@color/lighter_black</color>
+    <color name="content_time_now">#ffEA830A</color>
+    <color name="content_time">#ff7e7e7e</color>
+    <color name="content_from">#ff7e7e7e</color>
+    <color name="content">@color/lighter_black</color>
+    <color name="content_footer">#ff7e7e7e</color>
+
+    <!-- 积极的 -->
+    <color name="positive_normal">#ffcc0022</color>
+    <color name="positive_pressed">#ff990022</color>
+    <color name="positive_disable">@color/lighter_black</color>
+    <!-- 消极的 -->
+    <color name="negative_normal">@color/lighter_gray</color>
+    <color name="negative_pressed">@color/darker_gray</color>
+    <color name="negative_disable">@color/lighter_black</color>
+    <!-- 中性的 -->
+    <color name="neutral_normal">@color/lighter_gray</color>
+    <color name="neutral_pressed">@color/lighter_gray</color>
+
+</resources>
