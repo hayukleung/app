@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- app 主色调 -->
+    <color name="main_color">#ff4969ab</color>
+    <color name="main_color_normal">#ff4969ab</color>
+    <color name="main_color_pressed">#ff39599b</color>
+
+    <color name="window_background">#fff2f2f2</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent_cover">#25000000</color>
+    <color name="transparent_message_cover">#85000000</color>
+
+    <!--theme-->
+    <color name="dark_theme_background">#201E1C</color>
+
+
+</resources>

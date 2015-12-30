@@ -77,11 +77,11 @@ public class MainActivity extends Activity {
                     case "com.hayukleung.app.util.screen.demo.ScreenDemoActivity":
                         startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class));
                         break;
-                    case "com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity.class));
-                        break;
                     case "com.hayukleung.app.util.text.demo.TextDemoActivity":
                         startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.text.demo.TextDemoActivity.class));
+                        break;
+                    case "com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity":
+                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class));
                         break;
                     default:
                         break;
@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
         element = new Element(com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class.getName(), "collapsible", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(com.rockerhieu.emojicon.emoji.demo.EmojiDemoActivity.class.getName(), "emoji", false);
+        element = new Element(com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class.getName(), "qrcode", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 
