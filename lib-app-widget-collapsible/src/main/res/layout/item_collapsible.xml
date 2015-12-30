@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ItemCollapsible$rl_item"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x100"
+    android:layout_height="wrap_content"
     android:background="@color/tree_org_off">
 
     <ImageView
@@ -12,19 +12,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:contentDescription="@string/app_name"
-        android:layout_marginLeft="10dp" />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/ItemCollapsible$txt_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/x180"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:layout_toRightOf="@id/ItemCollapsible$img_toggle"
         android:layout_toEndOf="@id/ItemCollapsible$img_toggle"
+        android:layout_toRightOf="@id/ItemCollapsible$img_toggle"
+        android:gravity="center_vertical"
         android:textSize="17sp"
         android:textStyle="bold" />
 
