@@ -163,9 +163,9 @@ public class DimenGenerator {
      * @param args
      */
     public static void main(String[] args) {
-        /** 基准分辨率1280X720 */
-        int baseW = 720;
-        int baseH = 1280;
+        /** 基准分辨率2560X1440 */
+        int baseW = 1440;
+        int baseH = 2560;
         String addition = "";
         try {
             if (args.length >= 3) {

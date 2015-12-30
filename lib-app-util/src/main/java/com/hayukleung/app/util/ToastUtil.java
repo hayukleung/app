@@ -36,6 +36,9 @@ public class ToastUtil {
         toast.show();
     }
 
+    /**
+     * 默认Toast
+     */
     public static class CustomToast extends Toast {
 
         private TextView mTxtContent;

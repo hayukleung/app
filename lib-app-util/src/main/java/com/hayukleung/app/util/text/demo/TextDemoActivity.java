@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hayukleung.app.util.R;
 import com.hayukleung.app.util.RegexConstant;
+import com.hayukleung.app.util.ToastUtil;
 import com.hayukleung.app.util.text.SpanUtils;
 import com.hayukleung.app.util.text.URLSpan;
 
@@ -78,7 +79,7 @@ public class TextDemoActivity extends Activity {
                 return new URLSpan(url, getResources().getColor(android.R.color.holo_blue_bright), 0, 0, true) {
                     @Override
                     public void onClick(View widget) {
-                        super.onClick(widget);
+                        ToastUtil.showToast(TextDemoActivity.this, ((TextView) widget).getText());
                     }
                 };
             }
@@ -91,7 +92,7 @@ public class TextDemoActivity extends Activity {
                 return new URLSpan(url, getResources().getColor(android.R.color.holo_blue_bright), 0, 0, false) {
                     @Override
                     public void onClick(View widget) {
-                        super.onClick(widget);
+                        ToastUtil.showToast(TextDemoActivity.this, ((TextView) widget).getText());
                     }
                 };
             }

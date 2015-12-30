@@ -1,5 +1,9 @@
 package com.hayukleung.app.util;
 
+import android.app.Activity;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+
 /**
  * Html.fromHtml方法集
  *
@@ -19,5 +23,18 @@ public class HtmlUtil {
             content = "";
         }
         return String.format("<font color='%d'>%s</font>", color, content);
+    }
+
+    /**
+     * 返回着色代码包装后的Html代码
+     *
+     * @param activity
+     * @param content
+     * @param colorResId 颜色资源ID如R.color.red
+     * @return
+     */
+    @ColorInt
+    public static String toHtml(Activity activity, String content, @ColorRes int colorResId) {
+        return toHtml(content, activity.getResources().getColor(colorResId));
     }
 }
