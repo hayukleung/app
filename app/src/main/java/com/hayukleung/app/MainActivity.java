@@ -3,7 +3,9 @@ package com.hayukleung.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 
+import com.hayukleung.app.util.LogUtil;
 import com.hayukleung.app.widget.collapsible.CollapsibleAdapter;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
@@ -36,6 +38,9 @@ public class MainActivity extends Activity {
         } else {
             onRestoreInstanceState(savedInstanceState);
         }
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        LogUtil.showLog(String.format("width --> %d height --> %d", displayMetrics.widthPixels, displayMetrics.heightPixels));
     }
 
     @Override

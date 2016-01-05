@@ -28,8 +28,12 @@ public class DimenGenerator {
     private final static String WTemplate = "<dimen name=\"x{0}\">{1}px</dimen>\n";
     private final static String HTemplate = "<dimen name=\"y{0}\">{1}px</dimen>\n";
 
+    private final static String WTemplatePercentage = "<dimen name=\"x{0}\">{1}</dimen>\n";
+    private final static String HTemplatePercentage = "<dimen name=\"y{0}\">{1}</dimen>\n";
+
     /**
      * {0}-HEIGHT
+     * {1}-WIDTH
      */
     private final static String VALUE_TEMPLATE = "values-{0}x{1}";
 
@@ -37,6 +41,9 @@ public class DimenGenerator {
      * 待生成分辨率
      */
     private static final String SUPPORT_DIMESION =
+            "240,320;" +
+            "240,400;" +
+            "240,432;" +
             "320,400;" +
             "320,480;" +
             "480,800;" +
@@ -50,7 +57,10 @@ public class DimenGenerator {
             "800,1280;" +
             "1080,1812;" +
             "1080,1920;" +
-            "1440,2560;";
+            "1200,1920;" +
+            "1440,2392;" +
+            "1440,2560;" +
+            "1600,2560;";
 
     private String supportStr = SUPPORT_DIMESION;
 
@@ -105,15 +115,16 @@ public class DimenGenerator {
             String[] wh = val.split(",");
             generateXmlFile(Integer.parseInt(wh[0]), Integer.parseInt(wh[1]));
         }
+
+        generatePercentageDimenValues();
     }
 
     private void generateXmlFile(int w, int h) {
 
         StringBuffer sbForWidth = new StringBuffer();
         sbForWidth.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-        sbForWidth.append("<resources>");
+        sbForWidth.append("<resources>\n");
         float cellw = w * 1.0f / baseW;
-
         System.out.println("width : " + w + "," + baseW + "," + cellw);
         for (int i = 1; i < baseW; i++) {
             sbForWidth.append(WTemplate.replace("{0}", i + "").replace("{1}", change(cellw * i) + ""));
@@ -123,7 +134,7 @@ public class DimenGenerator {
 
         StringBuffer sbForHeight = new StringBuffer();
         sbForHeight.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-        sbForHeight.append("<resources>");
+        sbForHeight.append("<resources>\n");
         float cellh = h * 1.0f / baseH;
         System.out.println("height : " + h + "," + baseH + "," + cellh);
         for (int i = 1; i < baseH; i++) {
@@ -135,6 +146,48 @@ public class DimenGenerator {
 
         File fileDir = new File(dirStr + File.separator + VALUE_TEMPLATE.replace("{0}", h + "").replace("{1}", w + ""));
         fileDir.mkdir();
+
+        File layxFile = new File(fileDir.getAbsolutePath(), "lay_x.xml");
+        File layyFile = new File(fileDir.getAbsolutePath(), "lay_y.xml");
+        try {
+            PrintWriter pw = new PrintWriter(new FileOutputStream(layxFile));
+            pw.print(sbForWidth.toString());
+            pw.close();
+            pw = new PrintWriter(new FileOutputStream(layyFile));
+            pw.print(sbForHeight.toString());
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 百分比dimen(1-100)
+     */
+    private void generatePercentageDimenValues() {
+        StringBuffer sbForWidth = new StringBuffer();
+        sbForWidth.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+        sbForWidth.append("<resources>\n");
+        for (float i = 1; i < 100; i++) {
+            sbForWidth.append(WTemplatePercentage.replace("{0}", "p" + i).replace("{1}", String.format("@dimen/x%d", (int) Math.abs((float) baseW / 100f * i))));
+        }
+        sbForWidth.append(WTemplatePercentage.replace("{0}", "p100").replace("{1}", String.format("@dimen/x%d", baseW)));
+        sbForWidth.append("</resources>");
+
+        StringBuffer sbForHeight = new StringBuffer();
+        sbForHeight.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+        sbForHeight.append("<resources>\n");
+        for (float i = 1; i < 100; i++) {
+            sbForHeight.append(HTemplatePercentage.replace("{0}", "p" + i).replace("{1}", String.format("@dimen/y%d", (int) Math.abs((float) baseH / 100f * i))));
+        }
+        sbForHeight.append(HTemplatePercentage.replace("{0}", "p100").replace("{1}", String.format("@dimen/y%d", baseH)));
+        sbForHeight.append("</resources>");
+
+
+        File fileDir = new File(dirStr + File.separator + "values");
+        if (!fileDir.exists()) {
+            fileDir.mkdir();
+        }
 
         File layxFile = new File(fileDir.getAbsolutePath(), "lay_x.xml");
         File layyFile = new File(fileDir.getAbsolutePath(), "lay_y.xml");
@@ -163,9 +216,9 @@ public class DimenGenerator {
      * @param args
      */
     public static void main(String[] args) {
-        /** 基准分辨率2560X1440 */
-        int baseW = 1440;
-        int baseH = 2560;
+        /** 基准分辨率1080X1920 */
+        int baseW = 1080;
+        int baseH = 1920;
         String addition = "";
         try {
             if (args.length >= 3) {

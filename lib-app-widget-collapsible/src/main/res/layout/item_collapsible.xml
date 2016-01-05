@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/ItemCollapsible$txt_name"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/x180"
+        android:layout_height="@dimen/xp15.0"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"

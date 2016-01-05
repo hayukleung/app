@@ -60,6 +60,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+//    retrolambda {
+//        jdk System.getenv("JAVA_HOME_1_8_0_66")
+//        oldJdk System.getenv("JAVA_HOME_1_6_0_65")
+//        javaVersion JavaVersion.VERSION_1_8
+//    }
 }
 
 dependencies {
@@ -68,10 +74,11 @@ dependencies {
     compile project(':lib-app-widget-collapsible')
     compile project(':lib-app-widget-qrcode')
     compile project(':lib-app-rxandroid')
-    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.+'
     compile 'com.rockerhieu.emojicon:library:1.3.2'
     compile 'io.reactivex:rxjava:1.1.0'
+//    compile 'me.tatarka:gradle-retrolambda:3.2.4'
 }

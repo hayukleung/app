@@ -4,8 +4,9 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="@dimen/x720"
-        android:layout_height="@dimen/x720"
+        android:id="@+id/square"
+        android:layout_width="@dimen/xp50.0"
+        android:layout_height="@dimen/xp50.0"
         android:layout_centerInParent="true"
         android:background="@android:color/white"
         android:gravity="center"
