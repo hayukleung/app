@@ -15,8 +15,8 @@
                 android:right="1px"
                 android:top="1px" />
             <size
-                android:width="@dimen/registe_avatar_width"
-                android:height="@dimen/registe_avatar_height" />
+                android:width="@dimen/header_avatar_size"
+                android:height="@dimen/header_avatar_size" />
         </shape>
     </item>
 

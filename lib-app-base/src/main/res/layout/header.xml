@@ -23,8 +23,8 @@
                 android:layout_width="@dimen/header_button_width"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="@dimen/normal_space"
-                android:paddingRight="@dimen/normal_space" />
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal" />
 
             <FrameLayout
                 android:id="@+id/header_center"
@@ -38,8 +38,8 @@
                 android:layout_width="@dimen/header_button_width"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="@dimen/normal_space"
-                android:paddingRight="@dimen/normal_space" />
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal" />
         </LinearLayout>
     </LinearLayout>
 

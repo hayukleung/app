@@ -1,32 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ActivityCapture$framelayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.hayukleung.app.view.Header
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height" />
+<FrameLayout android:id="@+id/ActivityCapture$framelayout"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <SurfaceView
         android:id="@+id/preview_view"
-        android:layout_marginTop="@dimen/header_height"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_horizontal|top"/>
 
     <com.hayukleung.app.widget.qrcode.ViewfinderView
         android:id="@+id/viewfinder_view"
-        android:layout_marginTop="@dimen/header_height"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00FFFFFF" />
+        android:background="#00FFFFFF"/>
 
     <TextView
         android:id="@+id/txtResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
+
+    <com.hayukleung.app.view.Header
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"/>
 
 </FrameLayout>

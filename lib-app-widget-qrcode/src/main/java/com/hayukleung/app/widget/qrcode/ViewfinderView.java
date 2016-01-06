@@ -27,7 +27,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.zxing.ResultPoint;
-import com.hayukleung.app.util.screen.Screen;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -74,7 +73,7 @@ public final class ViewfinderView extends View {
     /**
      * 中间那条线每次刷新移动的距离
      */
-    private final int SPEEN_DISTANCE;
+    private final int SPEED_DISTANCE;
     /**
      * 中间滑动线的最顶端位置
      */
@@ -96,13 +95,13 @@ public final class ViewfinderView extends View {
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        Screen screen = Screen.getInstance(context);
+//        Screen screen = Screen.getInstance(context);
 
-        CORNER_WIDTH = screen.dp2px(getResources().getDimension(R.dimen.x8));
-        SPEEN_DISTANCE = screen.dp2px(8);
+        CORNER_WIDTH = getResources().getDimensionPixelSize(R.dimen.x4);
+        SPEED_DISTANCE = getResources().getDimensionPixelSize(R.dimen.x6);
 
         // 将像素转换成dp
-        cornerLength = screen.dp2px(getResources().getDimension(R.dimen.x40));
+        cornerLength = getResources().getDimensionPixelSize(R.dimen.x40);
 
         // Initialize these once for performance rather than calling them every time in onDraw().
         paint = new Paint();
@@ -113,7 +112,7 @@ public final class ViewfinderView extends View {
         // laserColor = resources.getColor(R.color.viewfinder_laser);
         // resultPointColor = resources.getColor(R.color.possible_result_points);
         // scannerAlpha = 0;
-        possibleResultPoints = new HashSet<ResultPoint>(5);
+        possibleResultPoints = new HashSet<>(5);
 
         mLineRect = new Rect();
     }
@@ -178,7 +177,7 @@ public final class ViewfinderView extends View {
             canvas.drawRect(frame.right - CORNER_WIDTH, frame.bottom - cornerLength, frame.right, frame.bottom, paint);
 
             // 绘制中间的线，每次刷新界面，中间的线往下移动SPEEN_DISTANCE
-            slideTop += SPEEN_DISTANCE;
+            slideTop += SPEED_DISTANCE;
             if (slideTop >= frame.bottom) {
                 slideTop = frame.top;
             }

@@ -58,7 +58,7 @@ public class DimenGenerator {
             "1080,1812;" +
             "1080,1920;" +
             "1200,1920;" +
-            "1440,2392;" +
+            "1440,2392;" + // 虚假屏幕分辨率，Nexus 6P读取不到values-1440X2560的文件夹
             "1440,2560;" +
             "1600,2560;";
 
@@ -135,12 +135,13 @@ public class DimenGenerator {
         StringBuffer sbForHeight = new StringBuffer();
         sbForHeight.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
         sbForHeight.append("<resources>\n");
-        float cellh = h * 1.0f / baseH;
+        // 虚假分辨率
+        float cellh = (2392 == h ? 2560 : h) * 1.0f / baseH;
         System.out.println("height : " + h + "," + baseH + "," + cellh);
         for (int i = 1; i < baseH; i++) {
             sbForHeight.append(HTemplate.replace("{0}", i + "").replace("{1}", change(cellh * i) + ""));
         }
-        sbForHeight.append(HTemplate.replace("{0}", baseH + "").replace("{1}", h + ""));
+        sbForHeight.append(HTemplate.replace("{0}", baseH + "").replace("{1}", (2392 == h ? 2560 : h) + ""));
         sbForHeight.append("</resources>");
 
 

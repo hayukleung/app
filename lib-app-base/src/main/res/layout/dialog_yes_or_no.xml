@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_space"
+            android:layout_margin="@dimen/space_normal"
             android:orientation="vertical"
             android:gravity="center">
 
@@ -21,10 +21,10 @@
                 android:id="@+id/content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/normal_space"
-                android:layout_marginRight="@dimen/normal_space"
-                android:layout_marginBottom="@dimen/normal_space"
-                android:layout_marginTop="@dimen/large_space"
+                android:layout_marginLeft="@dimen/space_normal"
+                android:layout_marginRight="@dimen/space_normal"
+                android:layout_marginBottom="@dimen/space_normal"
+                android:layout_marginTop="@dimen/space_large"
                 android:textSize="18sp"
                 android:textColor="@color/dark_gray"
                 android:text="" />
@@ -52,10 +52,10 @@
                 android:textSize="16sp"
                 android:textColor="@color/main_color_normal"
                 android:gravity="center"
-                android:paddingLeft="@dimen/normal_space"
-                android:paddingRight="@dimen/normal_space"
-                android:paddingTop="@dimen/large_space"
-                android:paddingBottom="@dimen/large_space"
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal"
+                android:paddingTop="@dimen/space_large"
+                android:paddingBottom="@dimen/space_large"
                 android:background="@drawable/bg_dialog_btn_right_bottom" />
 
             <com.hayukleung.app.view.widget.AutoScaleTextView
@@ -67,10 +67,10 @@
                 android:textSize="16sp"
                 android:textColor="@color/main_color_normal"
                 android:gravity="center"
-                android:paddingLeft="@dimen/normal_space"
-                android:paddingRight="@dimen/normal_space"
-                android:paddingTop="@dimen/large_space"
-                android:paddingBottom="@dimen/large_space"
+                android:paddingLeft="@dimen/space_normal"
+                android:paddingRight="@dimen/space_normal"
+                android:paddingTop="@dimen/space_large"
+                android:paddingBottom="@dimen/space_large"
                 android:background="@drawable/bg_dialog_btn_right_bottom" />
         </android.support.v7.widget.LinearLayoutCompat>
     </LinearLayout>

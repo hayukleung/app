@@ -8,13 +8,11 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -101,9 +99,9 @@ public abstract class CaptureActivity extends CommonActivity implements Callback
         header.setCenterText("二维码扫描", null);
 
         // 加上title bar之後，掃描長寬比不正確，需要作調整
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.ActivityCapture$framelayout);
-        ViewGroup.LayoutParams params = frameLayout.getLayoutParams();
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.ActivityCapture$framelayout);
+//        ViewGroup.LayoutParams params = frameLayout.getLayoutParams();
+//        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         // int sbar = 0;
         // try {
         // Class<?> c = Class.forName("com.android.internal.R$dimen");
@@ -115,9 +113,9 @@ public abstract class CaptureActivity extends CommonActivity implements Callback
         // }
         // params.height = displayMetrics.heightPixels - sbar - (int) getResources().getDimension(R.dimen.distance_px_120);
         // params.width = (int) ((float) params.height * (float) displayMetrics.widthPixels / (float) displayMetrics.heightPixels);
-        params.width = displayMetrics.widthPixels;
-        params.height = (int) ((float) displayMetrics.heightPixels * (float) params.width / (float) displayMetrics.widthPixels);
-        frameLayout.setLayoutParams(params);
+//        params.width = displayMetrics.widthPixels;
+//        params.height = (int) ((float) displayMetrics.heightPixels * (float) params.width / (float) displayMetrics.widthPixels);
+//        frameLayout.setLayoutParams(params);
 
         // Rect rect = new Rect();
         // Window window = getWindow();
@@ -143,7 +141,13 @@ public abstract class CaptureActivity extends CommonActivity implements Callback
     @Override
     protected void onResume() {
         super.onResume();
+
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+        ViewGroup.LayoutParams params = surfaceView.getLayoutParams();
+        params.width = (int) getResources().getDimension(R.dimen.xp100);
+        params.height = (int) getResources().getDimension(R.dimen.yp100);
+        surfaceView.setLayoutParams(params);
+
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         // surface绘制完成才初始化相机，没有绘制完成则为surfaceHolder添加回调
         if (hasSurface) {
