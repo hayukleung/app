@@ -78,17 +78,17 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
                 holder.rlItem.setBackgroundResource(R.drawable.selector_tree_org);
                 if (!element.isExpanded()) {
                     // 已闭合
-                    holder.imgToggle.setImageResource(R.drawable.treeview_close);
+                    holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
                     holder.imgToggle.setVisibility(View.VISIBLE);
                 } else {
                     // 已展开
-                    holder.imgToggle.setImageResource(R.drawable.treeview_open);
+                    holder.imgToggle.setImageResource(R.drawable.ic_expand_more_white_24dp);
                     holder.imgToggle.setVisibility(View.VISIBLE);
                 }
             } else {
                 // 没有孩子结点
                 holder.rlItem.setBackgroundResource(R.drawable.selector_tree_org);
-                holder.imgToggle.setImageResource(R.drawable.treeview_close);
+                holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
                 holder.imgToggle.setVisibility(View.INVISIBLE);
             }
             holder.rlItem.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +110,7 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
         } else {
             // 人员类型
             holder.rlItem.setBackgroundResource(R.drawable.selector_tree_usr);
-            holder.imgToggle.setImageResource(R.drawable.treeview_close);
+            holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
             holder.imgToggle.setVisibility(View.INVISIBLE);
             holder.rlItem.setOnClickListener(new View.OnClickListener() {
 

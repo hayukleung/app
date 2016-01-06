@@ -1,6 +1,5 @@
 package com.hayukleung.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Created by hayukleung on 15/9/3.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends CommonActivity {
 
     private CollapsibleView mCollapsibleView;
     private CollapsibleAdapter mCollapsibleAdapter;
@@ -64,6 +63,11 @@ public class MainActivity extends Activity {
         super.onSaveInstanceState(outState);
         outState.putSerializable("all", (Serializable) mAllElements);
         outState.putSerializable("visible", (Serializable) mVisibleElements);
+    }
+
+    @Override
+    protected BaseFragment newFragment() {
+        return null;
     }
 
     /**
