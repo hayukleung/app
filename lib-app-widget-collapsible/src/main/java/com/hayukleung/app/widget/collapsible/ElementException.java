@@ -16,6 +16,21 @@ public class ElementException extends RuntimeException {
    */
     private static final long serialVersionUID = 4255166407571792798L;
 
+    public ElementException() {
+    }
+
+    public ElementException(String detailMessage) {
+        super(detailMessage);
+    }
+
+    public ElementException(String detailMessage, Throwable throwable) {
+        super(detailMessage, throwable);
+    }
+
+    public ElementException(Throwable throwable) {
+        super(throwable);
+    }
+
     @Override
     public Throwable fillInStackTrace() {
         // TODO Auto-generated method stub

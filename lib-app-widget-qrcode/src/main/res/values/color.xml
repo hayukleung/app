@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- <color name="base_darker">#2D93F9</color> 基色更深
-    <color name="base_dark">#3096FC</color> 基色深
-    <color name="base">#3399FF</color> 基色
-    <color name="base_light">#3F9FFF</color> 基色浅
-    <color name="base_lighter">#43A3FF</color> 基色更浅 -->
-
     <color name="common_background">#F2F2F2</color>
 
     <color name="base_darker">#CA300F</color>

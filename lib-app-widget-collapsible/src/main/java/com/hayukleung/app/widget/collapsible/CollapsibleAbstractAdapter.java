@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 /**
- * Created by hayukleung on 15/8/30.
+ * CollapsibleAbstractAdapter.java
+ * <p>
+ * Created by hayukleung on 1/8/16.
  */
 public abstract class CollapsibleAbstractAdapter<M, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
@@ -19,7 +21,7 @@ public abstract class CollapsibleAbstractAdapter<M, VH extends RecyclerView.View
      *
      * @param tops
      */
-    abstract void sortTree(List<Element> tops);
+    abstract void sortTree(List<M> tops);
 
     /**
      * 展开或闭合，展开后孩子结点默认闭合
@@ -27,7 +29,7 @@ public abstract class CollapsibleAbstractAdapter<M, VH extends RecyclerView.View
      * @param element
      * @param position
      */
-    abstract void toggle(IElement element, int position);
+    abstract void toggle(M element, int position);
 
     /**
      * 递归地展开或闭合，展开后孩子结点保留之前的开闭状态
@@ -35,5 +37,5 @@ public abstract class CollapsibleAbstractAdapter<M, VH extends RecyclerView.View
      * @param element
      * @param position
      */
-    abstract void toggleRecursively(IElement element, final int position);
+    abstract void toggleRecursively(M element, final int position);
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- app基础颜色定义 -->
+<resources>
+    <color name="colorPrimaryLight">#FF7ED886</color>
+    <color name="colorPrimary">#FF5EB866</color>
+    <color name="colorPrimaryDark">#FF3E9846</color>
+
+    <color name="windowBackground">#FFF2F2F2</color>
+    <color name="colorAccent">#FFF2F2F2</color>
+    <color name="navigationBarColor">#88000000</color>
+
+    <color name="textColorPrimary">#FF222222</color>
+    <color name="textColorLink">#FF4444FF</color>
+</resources>

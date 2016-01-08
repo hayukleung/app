@@ -3,7 +3,6 @@ package com.hayukleung.app.widget.collapsible.demo;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.hayukleung.app.widget.collapsible.CollapsibleAdapter;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.IElement;
@@ -20,9 +19,8 @@ import java.util.List;
 public class TestCollapsibleActivity extends Activity {
 
     private CollapsibleView mCollapsibleView;
-    private CollapsibleAdapter mCollapsibleAdapter;
-    private List<Element> mAllElements = new ArrayList<Element>();
-    private List<Element> mVisibleElements = new ArrayList<Element>();
+    private List<Element> mAllElements = new ArrayList<>();
+    private List<Element> mVisibleElements = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,9 @@ public class TestCollapsibleActivity extends Activity {
             if (0 == mVisibleElements.size()) {
                 mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
             }
-            mCollapsibleAdapter.buildTree();
-//            mCollapsibleAdapter.sortTree(mVisibleElements);
-            mCollapsibleAdapter.notifyDataSetChanged();
+            mCollapsibleView
+                    .buildTree()
+                    .notifyDataSetChanged();
         }
     }
 
@@ -66,18 +64,20 @@ public class TestCollapsibleActivity extends Activity {
      */
     private void initWidgets() {
         mCollapsibleView = (CollapsibleView) findViewById(R.id.collapsible_view);
-        mCollapsibleAdapter = new CollapsibleAdapter(TestCollapsibleActivity.this, mAllElements, mVisibleElements, new OnCollapsibleClickListener() {
-            @Override
-            public void onUsrClick(IElement usr, int position) {
+        mCollapsibleView
+                .setAllElements(mAllElements)
+                .setVisibleElements(mVisibleElements)
+                .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
+                    @Override
+                    public void onUsrClick(IElement usr, int position) {
 
-            }
+                    }
 
-            @Override
-            public boolean onOrgClick(IElement org, int position) {
-                return false;
-            }
-        });
-        mCollapsibleView.setAdapter(mCollapsibleAdapter);
+                    @Override
+                    public boolean onOrgClick(IElement org, int position) {
+                        return false;
+                    }
+                }).commit();
     }
 
     /**
@@ -238,8 +238,9 @@ public class TestCollapsibleActivity extends Activity {
         // 市区 ======================================================
 
         // 下面三行代码按顺序照抄
-        mCollapsibleAdapter.buildTree();
-        mCollapsibleAdapter.sortTree(mVisibleElements);
-        mCollapsibleAdapter.notifyDataSetChanged();
+        mCollapsibleView
+                .buildTree()
+                .sortTree()
+                .notifyDataSetChanged();
     }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import com.hayukleung.app.util.LogUtil;
-import com.hayukleung.app.widget.collapsible.CollapsibleAdapter;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.IElement;
@@ -21,7 +20,6 @@ import java.util.List;
 public class MainActivity extends CommonActivity {
 
     private CollapsibleView mCollapsibleView;
-    private CollapsibleAdapter mCollapsibleAdapter;
     private List<Element> mAllElements = new ArrayList<>();
     private List<Element> mVisibleElements = new ArrayList<>();
 
@@ -30,6 +28,18 @@ public class MainActivity extends CommonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getWindow();
+//
+//            // clear FLAG_TRANSLUCENT_STATUS flag:
+//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+//            // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//
+//            // finally change the color
+//            window.setStatusBarColor(getResources().getColor(R.color.base));
+//        }
         initWidgets();
 
         if (null == savedInstanceState) {
@@ -52,9 +62,7 @@ public class MainActivity extends CommonActivity {
             if (0 == mVisibleElements.size()) {
                 mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
             }
-            mCollapsibleAdapter.buildTree();
-//            mCollapsibleAdapter.sortTree(mVisibleElements);
-            mCollapsibleAdapter.notifyDataSetChanged();
+            mCollapsibleView.buildTree().notifyDataSetChanged();
         }
     }
 
@@ -75,38 +83,40 @@ public class MainActivity extends CommonActivity {
      */
     private void initWidgets() {
         mCollapsibleView = (CollapsibleView) findViewById(R.id.ActivityMain$collapsible_view);
-        mCollapsibleAdapter = new CollapsibleAdapter(MainActivity.this, mAllElements, mVisibleElements, new OnCollapsibleClickListener() {
+        mCollapsibleView
+                .setAllElements(mAllElements)
+                .setVisibleElements(mVisibleElements)
+                .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
 
-            @Override
-            public void onUsrClick(IElement usr, int position) {
-                switch (usr.getId()) {
-                    case "com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity":
-                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class));
-                        break;
-                    case "com.hayukleung.app.util.screen.demo.ScreenDemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class));
-                        break;
-                    case "com.hayukleung.app.util.text.demo.TextDemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.text.demo.TextDemoActivity.class));
-                        break;
-                    case "com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity":
-                        startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class));
-                        break;
-                    default:
-                        break;
-                }
-            }
+                    @Override
+                    public void onUsrClick(IElement usr, int position) {
+                        switch (usr.getId()) {
+                            case "com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity":
+                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class));
+                                break;
+                            case "com.hayukleung.app.util.screen.demo.ScreenDemoActivity":
+                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class));
+                                break;
+                            case "com.hayukleung.app.util.text.demo.TextDemoActivity":
+                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.text.demo.TextDemoActivity.class));
+                                break;
+                            case "com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity":
+                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
-            @Override
-            public boolean onOrgClick(IElement org, int position) {
-                if (!org.hasChildren()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-        mCollapsibleView.setAdapter(mCollapsibleAdapter);
+                    @Override
+                    public boolean onOrgClick(IElement org, int position) {
+                        if (!org.hasChildren()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+        }).commit();
     }
 
     /**
@@ -148,8 +158,6 @@ public class MainActivity extends CommonActivity {
         // 4级 ======================================================
 
         // 下面三行代码按顺序照抄
-        mCollapsibleAdapter.buildTree();
-        mCollapsibleAdapter.sortTree(mVisibleElements);
-        mCollapsibleAdapter.notifyDataSetChanged();
+        mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();
     }
 }

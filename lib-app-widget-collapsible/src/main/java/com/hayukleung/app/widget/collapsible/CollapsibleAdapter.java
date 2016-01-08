@@ -1,30 +1,30 @@
 package com.hayukleung.app.widget.collapsible;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.hayukleung.app.widget.collapsible.CollapsibleAdapter.CollapsibleViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Collapsible适配器
- *
- * Created by administrator on 2015/8/26.
+ * CollapsibleAdapter.java
+ * <p>
+ * Created by hayukleung on 1/8/16.
  */
 public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, CollapsibleViewHolder> {
 
     private OnCollapsibleClickListener mOnCollapsibleClickListener;
 
     private LayoutInflater mLayoutInflater;
+
+    /** resource ids */
+    private int mBgResIdOrg;
+    private int mBgResIdUsr;
+    private int mBgResIdClosed;
+    private int mBgResIdOpened;
 
     /** 元素数据源 */
     private List<Element> mAllElements;
@@ -47,12 +47,28 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
      * 构造函数
      *
      * @param context
+     * @param bgResIdOrg
+     * @param bgResIdUsr
+     * @param bgResIdClosed
+     * @param bgResIdOpened
      * @param allElements
      * @param visibleElements
      * @param onCollapsibleClickListener
      */
-    public CollapsibleAdapter(Context context, List<Element> allElements, List<Element> visibleElements, OnCollapsibleClickListener onCollapsibleClickListener) {
+    public CollapsibleAdapter(
+            Context context,
+            int bgResIdOrg,
+            int bgResIdUsr,
+            int bgResIdClosed,
+            int bgResIdOpened,
+            List<Element> allElements,
+            List<Element> visibleElements,
+            OnCollapsibleClickListener onCollapsibleClickListener) {
         this.mLayoutInflater = LayoutInflater.from(context);
+        this.mBgResIdOrg = bgResIdOrg;
+        this.mBgResIdUsr = bgResIdUsr;
+        this.mBgResIdClosed = bgResIdClosed;
+        this.mBgResIdOpened = bgResIdOpened;
         this.mAllElements = allElements;
         this.mVisibleElements = visibleElements;
         this.mOnCollapsibleClickListener = onCollapsibleClickListener;
@@ -67,7 +83,7 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
 
     @Override
     public void onBindViewHolder(CollapsibleViewHolder holder, final int position) {
-        final IElement element = mVisibleElements.get(position);
+        final Element element = mVisibleElements.get(position);
 
         holder.txtName.setText(element.getName());
 
@@ -75,20 +91,20 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
             // 组织类型
             if (element.hasChildren()) {
                 // 有孩子结点
-                holder.rlItem.setBackgroundResource(R.drawable.selector_tree_org);
+                holder.rlItem.setBackgroundResource(mBgResIdOrg);
                 if (!element.isExpanded()) {
                     // 已闭合
-                    holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
+                    holder.imgToggle.setImageResource(mBgResIdClosed);
                     holder.imgToggle.setVisibility(View.VISIBLE);
                 } else {
                     // 已展开
-                    holder.imgToggle.setImageResource(R.drawable.ic_expand_more_white_24dp);
+                    holder.imgToggle.setImageResource(mBgResIdOpened);
                     holder.imgToggle.setVisibility(View.VISIBLE);
                 }
             } else {
                 // 没有孩子结点
-                holder.rlItem.setBackgroundResource(R.drawable.selector_tree_org);
-                holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
+                holder.rlItem.setBackgroundResource(mBgResIdOrg);
+                holder.imgToggle.setImageResource(mBgResIdOpened);
                 holder.imgToggle.setVisibility(View.INVISIBLE);
             }
             holder.rlItem.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +125,8 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
             });
         } else {
             // 人员类型
-            holder.rlItem.setBackgroundResource(R.drawable.selector_tree_usr);
-            holder.imgToggle.setImageResource(R.drawable.ic_expand_less_white_24dp);
+            holder.rlItem.setBackgroundResource(mBgResIdUsr);
+            holder.imgToggle.setImageResource(mBgResIdOpened);
             holder.imgToggle.setVisibility(View.INVISIBLE);
             holder.rlItem.setOnClickListener(new View.OnClickListener() {
 
@@ -145,7 +161,7 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
     @Override
     public void buildTree() {
 
-        List<Element> temp = new ArrayList<Element>();
+        List<Element> temp = new ArrayList<>();
         temp.addAll(mAllElements);
         for (Element element1 : mAllElements) {
             temp.remove(element1);
@@ -227,7 +243,7 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
     }
 
     @Override
-    public void toggle(IElement element, int position) {
+    public void toggle(Element element, int position) {
 
         if (IElement.TYPE_USR == element.getType()) {
             return;
@@ -253,7 +269,7 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
     }
 
     @Override
-    public void toggleRecursively(IElement element, final int position) {
+    public void toggleRecursively(Element element, final int position) {
 
         if (IElement.TYPE_USR == element.getType()) {
             return;
@@ -307,23 +323,6 @@ public class CollapsibleAdapter extends CollapsibleAbstractAdapter<Element, Coll
                 public void doInTraverseChildren(List<Element> children, int nth) {
                 }
             });
-        }
-    }
-
-    /**
-     * 视图容器
-     */
-    static class CollapsibleViewHolder extends RecyclerView.ViewHolder {
-
-        RelativeLayout rlItem;
-        ImageView imgToggle;
-        TextView txtName;
-
-        public CollapsibleViewHolder(View itemView) {
-            super(itemView);
-            rlItem = (RelativeLayout) itemView.findViewById(R.id.ItemCollapsible$rl_item);
-            imgToggle = (ImageView) itemView.findViewById(R.id.ItemCollapsible$img_toggle);
-            txtName = (TextView) itemView.findViewById(R.id.ItemCollapsible$txt_name);
         }
     }
 }
