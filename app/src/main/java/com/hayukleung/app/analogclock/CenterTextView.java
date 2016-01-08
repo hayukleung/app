@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hayukleung.analogclock;
+package com.hayukleung.app.analogclock;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,8 +11,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetrics;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.cndatacom.cdcutils.method.LogMgr;
 
 /**
  * 自定义文本显示控件</br>
@@ -95,10 +93,6 @@ public class CenterTextView extends View {
         init();
     }
 
-    private void showLog(String log) {
-        LogMgr.showLog(mContext, log, LogMgr.VERBOSE);
-    }
-
     /**
      * 变量初始化
      */
@@ -123,7 +117,7 @@ public class CenterTextView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // canvas.save();
-        showLog(CenterTextView.class.getSimpleName() + " " + mText + " " + canvas.getWidth() + " - " + canvas.getHeight());
+//        showLog(CenterTextView.class.getSimpleName() + " " + mText + " " + canvas.getWidth() + " - " + canvas.getHeight());
         // canvas.translate(0, 0);
         // 绘制控件内容
         setTextLocation();

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hayukleung.analogclock;
+package com.hayukleung.app.analogclock;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

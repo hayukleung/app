@@ -1,4 +1,4 @@
-package com.hayukleung.analogclock;
+package com.hayukleung.app.analogclock;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-
-import com.cndatacom.cdcutils.method.LogMgr;
 
 /**
  * 指针
@@ -77,31 +75,31 @@ public class ClockHandView extends View {
         // 图片配置动画
         setAnimation(this.mAnimator);
         // setBackgroundColor(mContext.getResources().getColor(android.R.color.background_light));
-        showLog("init()");
+//        showLog("init()");
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        showLog("onMeasure(): w --> " + widthMeasureSpec + " h --> " + heightMeasureSpec);
+//        showLog("onMeasure(): w --> " + widthMeasureSpec + " h --> " + heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
     
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        showLog("onLayout(): changed --> " + changed);
-        showLog("onLayout(): left    --> " + left);
-        showLog("onLayout(): top     --> " + top);
-        showLog("onLayout(): right   --> " + right);
-        showLog("onLayout(): bottom  --> " + bottom);
+//        showLog("onLayout(): changed --> " + changed);
+//        showLog("onLayout(): left    --> " + left);
+//        showLog("onLayout(): top     --> " + top);
+//        showLog("onLayout(): right   --> " + right);
+//        showLog("onLayout(): bottom  --> " + bottom);
         super.onLayout(changed, left, top, right, bottom);
     }
     
     @Override
     protected void onDraw(Canvas canvas) {
-        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
-        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
-        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
-        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
+//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
+//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
+//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
+//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
         super.onDraw(canvas);
         mPaint.setARGB(mHandColorA, mHandColorR, mHandColorG, mHandColorB);
         mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -172,10 +170,6 @@ public class ClockHandView extends View {
         this.mHandColorG = g;
         this.mHandColorB = b;
         invalidate();
-    }
-    
-    private void showLog(String log) {
-        LogMgr.showLog(mContext, log, LogMgr.VERBOSE);
     }
     
     /**

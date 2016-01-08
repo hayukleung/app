@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hayukleung.analogclock;
+package com.hayukleung.app.analogclock;
 
 /**
  * 单位转换工具

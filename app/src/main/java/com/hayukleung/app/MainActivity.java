@@ -103,6 +103,9 @@ public class MainActivity extends CommonActivity {
                             case "com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity":
                                 startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class));
                                 break;
+                            case "com.hayukleung.app.analogclock.ClockActivity":
+                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.analogclock.ClockActivity.class));
+                                break;
                             default:
                                 break;
                         }
@@ -152,6 +155,9 @@ public class MainActivity extends CommonActivity {
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
         element = new Element(com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class.getName(), "qrcode", false);
+        element.setParentId(elementWidget.getId());
+        mAllElements.add(element);
+        element = new Element(com.hayukleung.app.analogclock.ClockActivity.class.getName(), "clock", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 

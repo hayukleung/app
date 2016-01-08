@@ -1,12 +1,12 @@
-package com.hayukleung.analogclock;
-
-import com.hayukleung.analogclock.R;
+package com.hayukleung.app.analogclock;
 
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.hayukleung.app.R;
+
 /**
- * 展示{@link com.hayukleung.analogclock.AnalogClockView}
+ * 展示{@link com.hayukleung.app.analogclock.AnalogClockView}
  * 
  * @author HayukLeung
  *

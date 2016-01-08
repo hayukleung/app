@@ -2,7 +2,6 @@ rootProject.name='xDroid'
 
 include ':app',
         ':appDice',
-        ':appAnalogClock',
         ':lib-app-base',
 //        ':lib-app-design_pattern',
         ':lib-app-rxandroid',

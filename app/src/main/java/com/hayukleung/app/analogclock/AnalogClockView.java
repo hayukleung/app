@@ -1,8 +1,4 @@
-package com.hayukleung.analogclock;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+package com.hayukleung.app.analogclock;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,7 +6,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cndatacom.cdcutils.method.LogMgr;
+import com.hayukleung.app.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * 数字时钟
@@ -46,9 +46,9 @@ public class AnalogClockView extends ViewGroup {
         
         mSimpleDateFormat = new SimpleDateFormat("HH-mm-ss", Locale.getDefault());
         mDate = new Date();
-        
-        final int txtSizeBig = (int) mContext.getResources().getDimension(R.dimen.text_size_48);
-        final int txtSizeSmall = (int) mContext.getResources().getDimension(R.dimen.text_size_40);
+
+        final int txtSizeBig = DisplayUtil.sp2px(17, mContext.getResources().getDisplayMetrics().scaledDensity);
+        final int txtSizeSmall = DisplayUtil.sp2px(14, mContext.getResources().getDisplayMetrics().scaledDensity);
         final int txtColor = mContext.getResources().getColor(android.R.color.holo_green_light);
 
         int padding = 0;
@@ -177,11 +177,11 @@ public class AnalogClockView extends ViewGroup {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // 获取该ViewGroup的实际长和宽
         // 涉及到MeasureSpec类的使用
-        int specSizeWidht = MeasureSpec.getSize(widthMeasureSpec);
-        int specSizeHeigth = MeasureSpec.getSize(heightMeasureSpec);
+        int specSizeWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
         // 设置本ViewGroup的宽高
-        int minSize = specSizeWidht < specSizeHeigth ? specSizeWidht : specSizeHeigth;
-        showLog("minSize --> " + minSize);
+        int minSize = specSizeWidth < specSizeHeight ? specSizeWidth : specSizeHeight;
+//        showLog("minSize --> " + minSize);
         
         setMeasuredDimension(minSize, minSize);
         
@@ -221,7 +221,7 @@ public class AnalogClockView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         
-        showLog("changed --> " + changed + " l --> " + l + " t --> " + t + " r --> " + r + " b --> " + b);
+//        showLog("changed --> " + changed + " l --> " + l + " t --> " + t + " r --> " + r + " b --> " + b);
         // 表盘宽度
         final double clockWidth = r - l;
         // 表盘高度
@@ -281,10 +281,6 @@ public class AnalogClockView extends ViewGroup {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-    }
-    
-    private void showLog(String log) {
-        LogMgr.showLog(mContext, log, LogMgr.VERBOSE);
     }
     
     /**
