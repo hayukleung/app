@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.hayukleung.app.widget.clock.AnalogClockView
+        android:id="@+id/ActivityHelloView$analog_clock_view"
+        android:layout_width="@dimen/xp80.0"
+        android:layout_height="@dimen/xp80.0"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:clock01="·"
+        app:clock02="·"
+        app:clock03="•"
+        app:clock04="·"
+        app:clock05="·"
+        app:clock06="•"
+        app:clock07="·"
+        app:clock08="·"
+        app:clock09="•"
+        app:clock10="·"
+        app:clock11="·"
+        app:clock12="•" />
+
+</RelativeLayout>

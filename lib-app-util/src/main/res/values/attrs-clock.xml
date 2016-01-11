@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <declare-styleable name="RotateTextView">
+        <attr name="degree" format="integer"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="AnalogClockView">
+        <attr name="clock01" format="string"></attr>
+        <attr name="clock02" format="string"></attr>
+        <attr name="clock03" format="string"></attr>
+        <attr name="clock04" format="string"></attr>
+        <attr name="clock05" format="string"></attr>
+        <attr name="clock06" format="string"></attr>
+        <attr name="clock07" format="string"></attr>
+        <attr name="clock08" format="string"></attr>
+        <attr name="clock09" format="string"></attr>
+        <attr name="clock10" format="string"></attr>
+        <attr name="clock11" format="string"></attr>
+        <attr name="clock12" format="string"></attr>
+    </declare-styleable>
+
+</resources>

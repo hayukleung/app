@@ -6,10 +6,15 @@ import android.util.DisplayMetrics;
 
 import com.hayukleung.app.util.LogUtil;
 import com.hayukleung.app.util.screen.Screen;
+import com.hayukleung.app.util.screen.demo.DemoScreenActivity;
+import com.hayukleung.app.util.text.demo.DemoTextActivity;
+import com.hayukleung.app.widget.clock.demo.DemoClockActivity;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.IElement;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
+import com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity;
+import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -94,20 +99,20 @@ public class MainActivity extends CommonActivity {
                     @Override
                     public void onUsrClick(IElement usr, int position) {
                         switch (usr.getId()) {
-                            case "com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity":
-                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class));
+                            case "com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity":
+                                startActivity(new Intent(MainActivity.this, DemoCollapsibleActivity.class));
                                 break;
-                            case "com.hayukleung.app.util.screen.demo.ScreenDemoActivity":
-                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class));
+                            case "com.hayukleung.app.util.screen.demo.DemoScreenActivity":
+                                startActivity(new Intent(MainActivity.this, DemoScreenActivity.class));
                                 break;
-                            case "com.hayukleung.app.util.text.demo.TextDemoActivity":
-                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.util.text.demo.TextDemoActivity.class));
+                            case "com.hayukleung.app.util.text.demo.DemoTextActivity":
+                                startActivity(new Intent(MainActivity.this, DemoTextActivity.class));
                                 break;
-                            case "com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity":
-                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class));
+                            case "com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity":
+                                startActivity(new Intent(MainActivity.this, DemoQRCodeActivity.class));
                                 break;
-                            case "com.hayukleung.app.analogclock.ClockActivity":
-                                startActivity(new Intent(MainActivity.this, com.hayukleung.app.analogclock.ClockActivity.class));
+                            case "com.hayukleung.app.widget.clock.demo.DemoClockActivity":
+                                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
                                 break;
                             default:
                                 break;
@@ -147,20 +152,20 @@ public class MainActivity extends CommonActivity {
         // 3级 ======================================================
         Element element;
 
-        element = new Element(com.hayukleung.app.util.screen.demo.ScreenDemoActivity.class.getName(), "screen", false);
+        element = new Element(DemoScreenActivity.class.getName(), "screen", false);
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
-        element = new Element(com.hayukleung.app.util.text.demo.TextDemoActivity.class.getName(), "text", false);
+        element = new Element(DemoTextActivity.class.getName(), "text", false);
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
 
-        element = new Element(com.hayukleung.app.widget.collapsible.demo.TestCollapsibleActivity.class.getName(), "collapsible", false);
+        element = new Element(DemoCollapsibleActivity.class.getName(), "collapsible", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(com.hayukleung.app.widget.qrcode.demo.QRCodeDemoActivity.class.getName(), "qrcode", false);
+        element = new Element(DemoQRCodeActivity.class.getName(), "qrcode", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(com.hayukleung.app.analogclock.ClockActivity.class.getName(), "clock", false);
+        element = new Element(DemoClockActivity.class.getName(), "clock", false);
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 

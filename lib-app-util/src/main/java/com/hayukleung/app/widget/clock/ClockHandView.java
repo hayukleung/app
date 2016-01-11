@@ -1,4 +1,4 @@
-package com.hayukleung.app.analogclock;
+package com.hayukleung.app.widget.clock;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+
+import com.hayukleung.app.util.LogUtil;
 
 /**
  * 指针
@@ -32,6 +34,8 @@ public class ClockHandView extends View {
     private int mHandColorG;
     private int mHandColorB;
     // private RectF mRectF;
+    /** 指针粗细 */
+    private int mHandStroke;
 
     public ClockHandView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -60,6 +64,7 @@ public class ClockHandView extends View {
         this.mHandColorG = 0x00;
         this.mHandColorB = 0x00;
         // this.mRectF = new RectF();
+        this.mHandStroke = 2;
         this.mPaint = new Paint();
         this.mAnimator = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         // 动画重复次数(-1 表示一直重复)
@@ -96,15 +101,18 @@ public class ClockHandView extends View {
     
     @Override
     protected void onDraw(Canvas canvas) {
-//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
-//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
-//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
-//        showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
+        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
+        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
+        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
+        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
         super.onDraw(canvas);
         mPaint.setARGB(mHandColorA, mHandColorR, mHandColorG, mHandColorB);
         mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mPaint.setShadowLayer(1, 1, 1, 0xff222222);
-        
+        mPaint.setAntiAlias(true);
+//        mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.xp2_0));
+        mPaint.setStrokeWidth(mHandStroke);
+
         // canvas.drawLine((getRight() - getLeft()) / 2, (getBottom() - getTop()) / 2, (getRight() - getLeft()) / 2, 0, mPaint);
         float startX = (getRight() - getLeft()) / 2;
         float startY = (getBottom() - getTop()) / 2;
@@ -169,6 +177,16 @@ public class ClockHandView extends View {
         this.mHandColorR = r;
         this.mHandColorG = g;
         this.mHandColorB = b;
+        invalidate();
+    }
+
+    /**
+     * 设置指针粗细
+     *
+     * @param handStroke
+     */
+    public void setHandStroke(int handStroke) {
+        this.mHandStroke = handStroke;
         invalidate();
     }
     

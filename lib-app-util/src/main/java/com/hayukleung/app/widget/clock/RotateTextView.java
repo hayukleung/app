@@ -1,4 +1,4 @@
-package com.hayukleung.app.analogclock;
+package com.hayukleung.app.widget.clock;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.hayukleung.app.R;
+import com.hayukleung.app.util.R;
 
 public class RotateTextView extends TextView {
 

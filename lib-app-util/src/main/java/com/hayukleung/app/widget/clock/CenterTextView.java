@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hayukleung.app.analogclock;
+package com.hayukleung.app.widget.clock;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -197,8 +197,7 @@ public class CenterTextView extends View {
      *            文本大小，单位是sp
      */
     public void setTextSize(int textSizeSp) {
-        DisplayParams displayParams = DisplayParams.getInstance(mContext);
-        this.mTextSize = Screen.sp2px(textSizeSp, displayParams.fontScale);
+        this.mTextSize = Screen.sp2px(textSizeSp, getResources().getDisplayMetrics().scaledDensity);
         invalidate();
     }
 

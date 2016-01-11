@@ -1,22 +1,23 @@
-package com.hayukleung.app.analogclock;
+package com.hayukleung.app.widget.clock.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.hayukleung.app.R;
+import com.hayukleung.app.util.R;
+import com.hayukleung.app.widget.clock.AnalogClockView;
 
 /**
- * 展示{@link com.hayukleung.app.analogclock.AnalogClockView}
+ * 展示{@link AnalogClockView}
  * 
  * @author HayukLeung
  *
  */
-public class ClockActivity extends Activity {
+public class DemoClockActivity extends Activity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clock);
+        setContentView(R.layout.activity_demo_clock);
         // AnalogClockView analogClockView = (AnalogClockView) findViewById(R.id.ActivityHelloView$analog_clock_view);
     }
     

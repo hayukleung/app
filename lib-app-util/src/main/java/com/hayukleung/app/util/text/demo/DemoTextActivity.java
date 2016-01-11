@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hayukleung on 12/15/15.
  */
-public class TextDemoActivity extends Activity {
+public class DemoTextActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class TextDemoActivity extends Activity {
                 return new URLSpan(url, getResources().getColor(android.R.color.holo_blue_bright), 0, 0, true) {
                     @Override
                     public void onClick(View widget) {
-                        ToastUtil.showToast(TextDemoActivity.this, ((TextView) widget).getText());
+                        ToastUtil.showToast(DemoTextActivity.this, ((TextView) widget).getText());
                     }
                 };
             }
@@ -92,7 +92,7 @@ public class TextDemoActivity extends Activity {
                 return new URLSpan(url, getResources().getColor(android.R.color.holo_blue_bright), 0, 0, false) {
                     @Override
                     public void onClick(View widget) {
-                        ToastUtil.showToast(TextDemoActivity.this, ((TextView) widget).getText());
+                        ToastUtil.showToast(DemoTextActivity.this, ((TextView) widget).getText());
                     }
                 };
             }
