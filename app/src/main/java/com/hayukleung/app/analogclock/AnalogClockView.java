@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hayukleung.app.R;
+import com.hayukleung.app.util.screen.Screen;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,8 +48,8 @@ public class AnalogClockView extends ViewGroup {
         mSimpleDateFormat = new SimpleDateFormat("HH-mm-ss", Locale.getDefault());
         mDate = new Date();
 
-        final int txtSizeBig = DisplayUtil.sp2px(17, mContext.getResources().getDisplayMetrics().scaledDensity);
-        final int txtSizeSmall = DisplayUtil.sp2px(14, mContext.getResources().getDisplayMetrics().scaledDensity);
+        final int txtSizeBig = Screen.sp2px(17, mContext.getResources().getDisplayMetrics().scaledDensity);
+        final int txtSizeSmall = Screen.sp2px(14, mContext.getResources().getDisplayMetrics().scaledDensity);
         final int txtColor = mContext.getResources().getColor(android.R.color.holo_green_light);
 
         int padding = 0;

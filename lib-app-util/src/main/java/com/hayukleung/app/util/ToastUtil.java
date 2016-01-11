@@ -39,7 +39,7 @@ public class ToastUtil {
     /**
      * 默认Toast
      */
-    public static class CustomToast extends Toast {
+    private static class CustomToast extends Toast {
 
         private TextView mTxtContent;
 
@@ -50,7 +50,8 @@ public class ToastUtil {
             super(context);
             View layout = LayoutInflater.from(context).inflate(R.layout.layout_custom_toast, null);
             mTxtContent = (TextView) layout.findViewById(R.id.LayoutCustomToast$txt_content);
-            setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 0);
+            setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, context.getResources().getDimensionPixelSize(R.dimen.yp10_0));
+//            setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 0);
             setDuration(Toast.LENGTH_SHORT);
             setView(layout);
         }

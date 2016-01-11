@@ -3,8 +3,12 @@
  */
 package com.hayukleung.app.util.screen;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
+
+import com.hayukleung.app.util.LogUtil;
 
 /**
  * 屏幕模型，对DisplayMetrics进行封装
@@ -48,6 +52,11 @@ public class Screen {
         this.densityScale = metrics.density;
         this.fontScale = metrics.scaledDensity;
         this.orientation = heightPx > widthPx ? ORIENTATION_VERTICAL : ORIENTATION_HORIZONTAL;
+        LogUtil.showLog(context, String.format("width --> %dpx height --> %dpx", this.widthPx, this.heightPx));
+
+        Point point = new Point();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getSize(point);
+        LogUtil.showLog(context, "the screen size is " + point.toString());
     }
 
     /**
@@ -103,4 +112,51 @@ public class Screen {
         return (int) (valueSp * fontScale + 0.5f);
     }
 
+    /**
+     * 将px值转换为dp值，保证尺寸大小不变
+     *
+     * @param pxValue
+     * @param scale
+     *            （DisplayMetrics类中属性density）
+     * @return
+     */
+    public static int px2dp(float pxValue, float scale) {
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 将dp值转换为px值，保证尺寸大小不变
+     *
+     * @param dpValue
+     * @param scale
+     *            （DisplayMetrics类中属性density）
+     * @return
+     */
+    public static int dp2px(float dpValue, float scale) {
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 将px值转换为sp值，保证文字大小不变
+     *
+     * @param pxValue
+     * @param fontScale
+     *            （DisplayMetrics类中属性scaledDensity）
+     * @return
+     */
+    public static int px2sp(float pxValue, float fontScale) {
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * 将sp值转换为px值，保证文字大小不变
+     *
+     * @param spValue
+     * @param fontScale
+     *            （DisplayMetrics类中属性scaledDensity）
+     * @return
+     */
+    public static int sp2px(float spValue, float fontScale) {
+        return (int) (spValue * fontScale + 0.5f);
+    }
 }

@@ -12,6 +12,8 @@ import android.graphics.Paint.FontMetrics;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.hayukleung.app.util.screen.Screen;
+
 /**
  * 自定义文本显示控件</br>
  * 该自定义控件中的文本可以在9个方位进行控制</br>
@@ -196,7 +198,7 @@ public class CenterTextView extends View {
      */
     public void setTextSize(int textSizeSp) {
         DisplayParams displayParams = DisplayParams.getInstance(mContext);
-        this.mTextSize = DisplayUtil.sp2px(textSizeSp, displayParams.fontScale);
+        this.mTextSize = Screen.sp2px(textSizeSp, displayParams.fontScale);
         invalidate();
     }
 

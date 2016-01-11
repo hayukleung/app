@@ -3,6 +3,7 @@ package com.hayukleung.app.widget.collapsible.demo;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.hayukleung.app.util.ToastUtil;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.IElement;
@@ -70,7 +71,7 @@ public class TestCollapsibleActivity extends Activity {
                 .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
                     @Override
                     public void onUsrClick(IElement usr, int position) {
-
+                        ToastUtil.showToast(TestCollapsibleActivity.this, usr.getName());
                     }
 
                     @Override

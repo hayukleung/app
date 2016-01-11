@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:background="@android:color/white">
+             android:layout_marginLeft="@dimen/xp5.0"
+             android:layout_marginRight="@dimen/xp5.0"
+             android:background="@drawable/bg_custom_toast">
 
     <TextView
         android:id="@+id/LayoutCustomToast$txt_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/xp2.0"
-        android:layout_marginLeft="@dimen/xp2.0"
-        android:layout_marginRight="@dimen/xp2.0"
-        android:layout_marginTop="@dimen/xp2.0"
         android:gravity="center"
+        android:minEms="8"
         android:text="toast"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold"/>
 
