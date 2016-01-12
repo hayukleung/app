@@ -7,7 +7,7 @@
 
     <color name="windowBackground">#FFF2F2F2</color>
     <color name="colorAccent">#FFF2F2F2</color>
-    <color name="navigationBarColor">#88000000</color>
+    <color name="navigationBarColor">#CC5EB866</color>
 
     <color name="textColorPrimary">#FF222222</color>
     <color name="textColorLink">#FF4444FF</color>

@@ -16,5 +16,8 @@
         <item name="android:textColorLink">@color/textColorLink</item>
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:navigationBarColor">@color/navigationBarColor</item>
+        <!-- 自定义头部 -->
+        <item name="headerBackground">@color/colorPrimary</item>
+        <item name="headerTextColor">@android:color/white</item>
     </style>
 </resources>

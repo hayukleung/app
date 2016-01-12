@@ -9,8 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import com.hayukleung.app.util.LogUtil;
-
 /**
  * 指针
  * 
@@ -101,10 +99,10 @@ public class ClockHandView extends View {
     
     @Override
     protected void onDraw(Canvas canvas) {
-        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
-        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
-        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
-        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
+//        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " left   --> " + getLeft());
+//        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " right  --> " + getRight());
+//        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " top    --> " + getTop());
+//        LogUtil.showLog(ClockHandView.class.getSimpleName() + " onDraw()" + " bottom --> " + getBottom());
         super.onDraw(canvas);
         mPaint.setARGB(mHandColorA, mHandColorR, mHandColorG, mHandColorB);
         mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);

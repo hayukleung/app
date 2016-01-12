@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 自定义头部 -->
+    <declare-styleable name="Header">
+        <!-- 背景 -->
+        <attr name="headerBackground" format="reference"/>
+        <!-- 字体颜色 -->
+        <attr name="headerTextColor" format="reference"/>
+    </declare-styleable>
+    
+</resources>

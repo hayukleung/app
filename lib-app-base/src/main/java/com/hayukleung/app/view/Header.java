@@ -1,8 +1,11 @@
 package com.hayukleung.app.view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -23,23 +26,39 @@ public class Header extends LinearLayout {
     private SmoothProgressBar mProgressBar;
     private View mRoot;
 
+    private int mTextColorResId;
+
     public Header(Context context) {
-        super(context);
-        init(context);
+        this(context, null);
     }
 
     public Header(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs, 0);
     }
 
-    public void init(final Context context) {
+    public Header(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public Header(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs, defStyleAttr);
+    }
+
+    public void init(final Context context, AttributeSet attrs, int defStyleAttr) {
         View view = LayoutInflater.from(context).inflate(R.layout.header, this, true);
         mRoot = view.findViewById(R.id.header_root);
         mLeft = (FrameLayout) view.findViewById(R.id.header_left);
         mCenter = (FrameLayout) view.findViewById(R.id.header_center);
         mRight = (FrameLayout) view.findViewById(R.id.header_right);
         mProgressBar = (SmoothProgressBar) view.findViewById(R.id.header_progressBar);
+
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Header, defStyleAttr, 0);
+        mRoot.setBackgroundResource(a.getResourceId(R.styleable.Header_headerBackground, R.drawable.bg_header));
+        mTextColorResId = a.getResourceId(R.styleable.Header_headerTextColor, R.color.darker_gray);
+        a.recycle();
     }
 
     public void removeLeft() {
@@ -54,7 +73,7 @@ public class Header extends LinearLayout {
         AutoScaleTextView view = new AutoScaleTextView(getContext());
         view.setSingleLine();
 //        view.setMinTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics()));
-        view.setTextColor(getResources().getColor(R.color.dark_gray));
+        view.setTextColor(getResources().getColor(mTextColorResId));
         view.setGravity(Gravity.CENTER);
         view.setText(text);
 
@@ -109,7 +128,7 @@ public class Header extends LinearLayout {
         AutoScaleTextView view = new AutoScaleTextView(getContext());
         view.setSingleLine();
 //        view.setMinTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics()));
-        view.setTextColor(getResources().getColor(R.color.dark_gray));
+        view.setTextColor(getResources().getColor(mTextColorResId));
         view.setGravity(Gravity.CENTER);
         view.setText(text);
 
@@ -172,7 +191,7 @@ public class Header extends LinearLayout {
         TextView view = new TextView(getContext());
         view.setSingleLine();
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-        view.setTextColor(getResources().getColor(R.color.dark_gray));
+        view.setTextColor(getResources().getColor(mTextColorResId));
         view.setGravity(Gravity.CENTER);
         // 加粗
         view.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));

@@ -422,6 +422,7 @@ public class AnalogClockView extends ViewGroup {
 //        int hh = Integer.parseInt(currentTime.substring(0, 2));
 //        int mm = Integer.parseInt(currentTime.substring(3, 5));
 //        int ss = Integer.parseInt(currentTime.substring(6, 8));
+        mCalendar.setToNow();
         int hh = mCalendar.hour;
         int mm = mCalendar.minute;
         int ss = mCalendar.second;
@@ -437,6 +438,7 @@ public class AnalogClockView extends ViewGroup {
 //        String currentTime = mSimpleDateFormat.format(mDate);
 //        int mm = Integer.parseInt(currentTime.substring(3, 5));
 //        int ss = Integer.parseInt(currentTime.substring(6, 8));
+        mCalendar.setToNow();
         int mm = mCalendar.minute;
         int ss = mCalendar.second;
         return 2 * Math.PI / 60 * mm + 2 * Math.PI / 60 / 60 * ss;
@@ -450,6 +452,7 @@ public class AnalogClockView extends ViewGroup {
     private double getCurrentSSAngle() {
 //        String currentTime = mSimpleDateFormat.format(mDate);
 //        int ss = Integer.parseInt(currentTime.substring(6, 8));
+        mCalendar.setToNow();
         int ss = mCalendar.second;
         return 2 * Math.PI / 60 * ss;
     }

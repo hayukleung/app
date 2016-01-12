@@ -2,7 +2,6 @@ package com.hayukleung.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 
 import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
 import com.hayukleung.app.util.LogUtil;
@@ -32,8 +31,6 @@ public class MainActivity extends CommonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Screen screen = Screen.getInstance(MainActivity.this);
-
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            Window window = getWindow();
 //
@@ -54,8 +51,8 @@ public class MainActivity extends CommonActivity {
             onRestoreInstanceState(savedInstanceState);
         }
 
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        LogUtil.showLog(String.format("width --> %d height --> %d", displayMetrics.widthPixels, displayMetrics.heightPixels));
+        int[] screen = Screen.getScreenSize(MainActivity.this, true);
+        LogUtil.showLog(String.format("width --> %d height --> %d", screen[0], screen[1]));
     }
 
     @Override
@@ -132,6 +129,16 @@ public class MainActivity extends CommonActivity {
         mAllElements.add(rootElement);
         // 2级 ======================================================
 
+        Element elementSnippet = new Element("com.hayukleung.app.snippet", "snippet", true) {
+
+            @Override
+            public void onElementClick() {
+
+            }
+        };
+        elementSnippet.setParentId(rootElement.getId());
+        mAllElements.add(elementSnippet);
+
         Element elementUtil = new Element("com.hayukleung.app.util", "util", true) {
 
             @Override
@@ -153,17 +160,17 @@ public class MainActivity extends CommonActivity {
         mAllElements.add(elementWidget);
 
         // 3级 ======================================================
-        Element elementSnippet = new Element("com.hayukleung.app.util.snippet", "snippet", true) {
+        Element element;
+
+        element = new Element(DownloadQueueActivity.class.getName(), "handler", false) {
 
             @Override
             public void onElementClick() {
-
+                startActivity(new Intent(MainActivity.this, DownloadQueueActivity.class));
             }
         };
-        elementSnippet.setParentId(elementUtil.getId());
-        mAllElements.add(elementSnippet);
-
-        Element element;
+        element.setParentId(elementSnippet.getId());
+        mAllElements.add(element);
 
         element = new Element(DemoScreenActivity.class.getName(), "screen", false) {
 
@@ -213,15 +220,6 @@ public class MainActivity extends CommonActivity {
         mAllElements.add(element);
 
         // 4级 ======================================================
-        element = new Element(DownloadQueueActivity.class.getName(), "handler", false) {
-
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DownloadQueueActivity.class));
-            }
-        };
-        element.setParentId(elementSnippet.getId());
-        mAllElements.add(element);
 
         // 下面三行代码按顺序照抄
         mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();

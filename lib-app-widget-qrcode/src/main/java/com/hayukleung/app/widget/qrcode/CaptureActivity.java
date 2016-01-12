@@ -90,7 +90,7 @@ public abstract class CaptureActivity extends CommonActivity implements Callback
         setContentView(R.layout.activity_capture);
 
         Header header = (Header) findViewById(R.id.header);
-        header.setLeftIcon(R.drawable.ic_header_back, new View.OnClickListener() {
+        header.setLeftIcon(R.drawable.ic_arrow_back_white_36dp, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
