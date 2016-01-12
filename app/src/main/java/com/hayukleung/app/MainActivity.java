@@ -2,12 +2,15 @@ package com.hayukleung.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
 import com.hayukleung.app.util.LogUtil;
 import com.hayukleung.app.util.screen.Screen;
 import com.hayukleung.app.util.screen.demo.DemoScreenActivity;
 import com.hayukleung.app.util.text.demo.DemoTextActivity;
+import com.hayukleung.app.view.Header;
+import com.hayukleung.app.widget.clock.AnalogClockView;
 import com.hayukleung.app.widget.clock.demo.DemoClockActivity;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
@@ -90,6 +93,21 @@ public class MainActivity extends CommonActivity {
      * 初始化控件
      */
     private void initWidgets() {
+        Header header = (Header) findViewById(R.id.header);
+        AnalogClockView analogClockView = new AnalogClockView(MainActivity.this);
+//        ViewGroup.LayoutParams params = analogClockView.getLayoutParams();
+//        params.height = getResources().getDimensionPixelSize(R.dimen.header_button_width);
+//        params.width = params.height;
+//        analogClockView.setLayoutParams(params);
+        header.setLeftView(analogClockView, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
+            }
+        });
+        header.setCenterText(R.string.app_name, null);
+
         mCollapsibleView = (CollapsibleView) findViewById(R.id.ActivityMain$collapsible_view);
         mCollapsibleView
                 .setAllElements(mAllElements)

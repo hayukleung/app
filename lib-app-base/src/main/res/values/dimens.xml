@@ -8,6 +8,7 @@
     <dimen name="header_avatar_size">@dimen/xp5.0</dimen>
     <dimen name="footer_height">@dimen/xp18.0</dimen>
 
+    <dimen name="space_small">@dimen/xp2.0</dimen>
     <dimen name="space_normal">@dimen/xp3.0</dimen>
     <dimen name="space_large">@dimen/xp5.0</dimen>
 

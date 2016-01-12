@@ -96,7 +96,9 @@ public class Header extends LinearLayout {
     public void setLeftView(View view, OnClickListener listener) {
         mLeft.removeAllViews();
         LayoutParams pa = (LayoutParams) mLeft.getLayoutParams();
-        pa.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+//        pa.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        pa.width = getContext().getResources().getDimensionPixelSize(R.dimen.header_button_width);
+        pa.height = getContext().getResources().getDimensionPixelSize(R.dimen.header_button_width);
         mLeft.setLayoutParams(pa);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -162,6 +164,11 @@ public class Header extends LinearLayout {
 
     public void setRightView(View view, OnClickListener listener) {
         mRight.removeAllViews();
+        LayoutParams pa = (LayoutParams) mRight.getLayoutParams();
+        pa.width = getContext().getResources().getDimensionPixelSize(R.dimen.header_button_width);
+        pa.height = getContext().getResources().getDimensionPixelSize(R.dimen.header_button_width);
+        mRight.setLayoutParams(pa);
+
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER;
         mRight.addView(view, params);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/header_root"
@@ -21,25 +21,23 @@
             <FrameLayout
                 android:id="@+id/header_left"
                 android:layout_width="@dimen/header_button_width"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/header_button_width"
                 android:gravity="center"
-                android:paddingLeft="@dimen/space_normal"
-                android:paddingRight="@dimen/space_normal" />
+                android:padding="@dimen/space_small"/>
 
             <FrameLayout
                 android:id="@+id/header_center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"/>
 
             <FrameLayout
                 android:id="@+id/header_right"
                 android:layout_width="@dimen/header_button_width"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/header_button_width"
                 android:gravity="center"
-                android:paddingLeft="@dimen/space_normal"
-                android:paddingRight="@dimen/space_normal" />
+                android:padding="@dimen/space_small"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -48,8 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
         android:background="@drawable/bg_header_img_bottom"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
 
     </LinearLayout>
@@ -57,5 +55,5 @@
     <com.hayukleung.app.view.refresh.SmoothProgressBar
         android:id="@+id/header_progressBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

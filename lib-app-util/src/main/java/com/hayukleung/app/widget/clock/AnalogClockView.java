@@ -85,6 +85,19 @@ public class AnalogClockView extends ViewGroup {
             clock11 = a.getString(R.styleable.AnalogClockView_clock11);
             clock12 = a.getString(R.styleable.AnalogClockView_clock12);
             a.recycle();
+        } else {
+            clock01 = "•";
+            clock02 = "•";
+            clock03 = "•";
+            clock04 = "•";
+            clock05 = "•";
+            clock06 = "•";
+            clock07 = "•";
+            clock08 = "•";
+            clock09 = "•";
+            clock10 = "•";
+            clock11 = "•";
+            clock12 = "•";
         }
         
 //        mSimpleDateFormat = new SimpleDateFormat("HH-mm-ss", Locale.getDefault());
