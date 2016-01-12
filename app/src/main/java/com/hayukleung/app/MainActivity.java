@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
 import com.hayukleung.app.util.LogUtil;
 import com.hayukleung.app.util.screen.Screen;
 import com.hayukleung.app.util.screen.demo.DemoScreenActivity;
@@ -11,14 +12,11 @@ import com.hayukleung.app.util.text.demo.DemoTextActivity;
 import com.hayukleung.app.widget.clock.demo.DemoClockActivity;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
-import com.hayukleung.app.widget.collapsible.IElement;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
 import com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity;
 import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hayukleung on 15/9/3.
@@ -26,8 +24,8 @@ import java.util.List;
 public class MainActivity extends CommonActivity {
 
     private CollapsibleView mCollapsibleView;
-    private List<Element> mAllElements = new ArrayList<>();
-    private List<Element> mVisibleElements = new ArrayList<>();
+    private ArrayList<Element> mAllElements = new ArrayList<>();
+    private ArrayList<Element> mVisibleElements = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +63,25 @@ public class MainActivity extends CommonActivity {
         super.onRestoreInstanceState(savedInstanceState);
         if (null != savedInstanceState) {
             if (0 == mAllElements.size()) {
-                mAllElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("all"));
+//                mAllElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("all"));
+                mAllElements = savedInstanceState.getParcelableArrayList("all");
             }
             if (0 == mVisibleElements.size()) {
-                mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
+//                mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
+                mVisibleElements = savedInstanceState.getParcelableArrayList("visible");
             }
-            mCollapsibleView.buildTree().notifyDataSetChanged();
+            mCollapsibleView.setAllElements(mAllElements).setVisibleElements(mVisibleElements).commit();
+//            mCollapsibleView.buildTree().notifyDataSetChanged();
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("all", (Serializable) mAllElements);
-        outState.putSerializable("visible", (Serializable) mVisibleElements);
+//        outState.putSerializable("all", (Serializable) mAllElements);
+        outState.putParcelableArrayList("all", mAllElements);
+//        outState.putSerializable("visible", (Serializable) mVisibleElements);
+        outState.putParcelableArrayList("visible", mVisibleElements);
     }
 
     @Override
@@ -97,37 +100,19 @@ public class MainActivity extends CommonActivity {
                 .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
 
                     @Override
-                    public void onUsrClick(IElement usr, int position) {
-                        switch (usr.getId()) {
-                            case "com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity":
-                                startActivity(new Intent(MainActivity.this, DemoCollapsibleActivity.class));
-                                break;
-                            case "com.hayukleung.app.util.screen.demo.DemoScreenActivity":
-                                startActivity(new Intent(MainActivity.this, DemoScreenActivity.class));
-                                break;
-                            case "com.hayukleung.app.util.text.demo.DemoTextActivity":
-                                startActivity(new Intent(MainActivity.this, DemoTextActivity.class));
-                                break;
-                            case "com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity":
-                                startActivity(new Intent(MainActivity.this, DemoQRCodeActivity.class));
-                                break;
-                            case "com.hayukleung.app.widget.clock.demo.DemoClockActivity":
-                                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
-                                break;
-                            default:
-                                break;
-                        }
+                    public void onUsrClick(Element usr, int position) {
+                        usr.onElementClick();
                     }
 
                     @Override
-                    public boolean onOrgClick(IElement org, int position) {
+                    public boolean onOrgClick(Element org, int position) {
                         if (!org.hasChildren()) {
                             return true;
                         } else {
                             return false;
                         }
                     }
-        }).commit();
+                }).commit();
     }
 
     /**
@@ -135,41 +120,108 @@ public class MainActivity extends CommonActivity {
      */
     private void initData() {
         // TODO set mAllElements & mVisibleElements
-        Element rootElement = new Element(getPackageName(), getString(R.string.app_name), true);
+        Element rootElement = new Element(getPackageName(), getString(R.string.app_name), true) {
+
+            @Override
+            public void onElementClick() {
+
+            }
+        };
         rootElement.setParentId("");
         mVisibleElements.add(rootElement);
         mAllElements.add(rootElement);
         // 2级 ======================================================
 
-        Element elementUtil = new Element("com.hayukleung.app.util", "util", true);
+        Element elementUtil = new Element("com.hayukleung.app.util", "util", true) {
+
+            @Override
+            public void onElementClick() {
+
+            }
+        };
         elementUtil.setParentId(rootElement.getId());
         mAllElements.add(elementUtil);
 
-        Element elementWidget = new Element("com.hayukleung.app.widget", "widget", true);
+        Element elementWidget = new Element("com.hayukleung.app.widget", "widget", true) {
+
+            @Override
+            public void onElementClick() {
+
+            }
+        };
         elementWidget.setParentId(rootElement.getId());
         mAllElements.add(elementWidget);
 
         // 3级 ======================================================
+        Element elementSnippet = new Element("com.hayukleung.app.util.snippet", "snippet", true) {
+
+            @Override
+            public void onElementClick() {
+
+            }
+        };
+        elementSnippet.setParentId(elementUtil.getId());
+        mAllElements.add(elementSnippet);
+
         Element element;
 
-        element = new Element(DemoScreenActivity.class.getName(), "screen", false);
+        element = new Element(DemoScreenActivity.class.getName(), "screen", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoScreenActivity.class));
+            }
+        };
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
-        element = new Element(DemoTextActivity.class.getName(), "text", false);
+        element = new Element(DemoTextActivity.class.getName(), "text", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoTextActivity.class));
+            }
+        };
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
 
-        element = new Element(DemoCollapsibleActivity.class.getName(), "collapsible", false);
+        element = new Element(DemoCollapsibleActivity.class.getName(), "collapsible", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoCollapsibleActivity.class));
+            }
+        };
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(DemoQRCodeActivity.class.getName(), "qrcode", false);
+        element = new Element(DemoQRCodeActivity.class.getName(), "qrcode", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoQRCodeActivity.class));
+            }
+        };
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(DemoClockActivity.class.getName(), "clock", false);
+        element = new Element(DemoClockActivity.class.getName(), "clock", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
+            }
+        };
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
 
         // 4级 ======================================================
+        element = new Element(DownloadQueueActivity.class.getName(), "handler", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DownloadQueueActivity.class));
+            }
+        };
+        element.setParentId(elementSnippet.getId());
+        mAllElements.add(element);
 
         // 下面三行代码按顺序照抄
         mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();

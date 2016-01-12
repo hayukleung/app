@@ -1,5 +1,7 @@
 package com.hayukleung.app.widget.collapsible;
 
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,12 @@ import java.util.List;
  *
  * @author HayukLeung
  */
-public interface IElement {
+public interface IElement extends Parcelable {
+
+    /**
+     * 结点点击
+     */
+    void onElementClick();
 
     /**
      * 结点类型：人员
@@ -187,5 +194,4 @@ public interface IElement {
          */
         void doInTraverseChild(Element child, int nth);
     }
-
 }

@@ -40,7 +40,7 @@ public class ResUtil {
      * @return
      */
     public int getLayoutResId(String name) {
-        return getResourseIdByName(R_LAYOUT, name);
+        return getResourceIdByName(R_LAYOUT, name);
     }
 
     /**
@@ -50,7 +50,7 @@ public class ResUtil {
      * @return
      */
     public int getIdResId(String name) {
-        return getResourseIdByName(R_ID, name);
+        return getResourceIdByName(R_ID, name);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ResUtil {
      * @return
      */
     public int getDrawableResId(String name) {
-        return getResourseIdByName(R_DRAWABLE, name);
+        return getResourceIdByName(R_DRAWABLE, name);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ResUtil {
      * @return
      */
     public int getAnimResId(String name) {
-        return getResourseIdByName(R_ANIM, name);
+        return getResourceIdByName(R_ANIM, name);
     }
 
     /**
@@ -80,7 +80,7 @@ public class ResUtil {
      * @return
      */
     public int getRawResId(String name) {
-        return getResourseIdByName(R_RAW, name);
+        return getResourceIdByName(R_RAW, name);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ResUtil {
      * @return
      */
     public int getStringResId(String name) {
-        return getResourseIdByName(R_STRING, name);
+        return getResourceIdByName(R_STRING, name);
     }
 
     /**
@@ -100,7 +100,7 @@ public class ResUtil {
      * @return
      */
     public int getAttrResId(String name) {
-        return getResourseIdByName(R_ATTR, name);
+        return getResourceIdByName(R_ATTR, name);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ResUtil {
      * @return
      */
     public int getArrayResId(String name) {
-        return getResourseIdByName(R_ARRAY, name);
+        return getResourceIdByName(R_ARRAY, name);
     }
 
     /**
@@ -120,7 +120,7 @@ public class ResUtil {
      * @return
      */
     public int getXmlResId(String name) {
-        return getResourseIdByName(R_XML, name);
+        return getResourceIdByName(R_XML, name);
     }
 
     /**
@@ -130,7 +130,7 @@ public class ResUtil {
      * @return
      */
     public int getMenuResId(String name) {
-        return getResourseIdByName(R_MENU, name);
+        return getResourceIdByName(R_MENU, name);
     }
     
     /**
@@ -140,7 +140,7 @@ public class ResUtil {
      * @return
      */
     public int getDimenResId(String name) {
-        return getResourseIdByName(R_DIMEN, name);
+        return getResourceIdByName(R_DIMEN, name);
     }
     
     /**
@@ -150,7 +150,7 @@ public class ResUtil {
      * @return
      */
     public int getStyleableResId(String name) {
-        return getResourseIdByName(R_STYLEABLE, name);
+        return getResourceIdByName(R_STYLEABLE, name);
     }
 
     /**
@@ -160,9 +160,9 @@ public class ResUtil {
      * @param name
      * @return
      */
-    private int getResourseIdByName(String className, String name) {
+    private int getResourceIdByName(String className, String name) {
 
-        LogUtil.showLog("getResourseIdByName --> " + mPackageName + " - " + className + " - " + name);
+        LogUtil.showLog("getResourceIdByName --> " + mPackageName + " - " + className + " - " + name);
 
         Class<?> r;
         int id = 0;

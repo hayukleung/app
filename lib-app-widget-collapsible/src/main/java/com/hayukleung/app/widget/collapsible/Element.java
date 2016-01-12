@@ -1,8 +1,8 @@
 package com.hayukleung.app.widget.collapsible;
 
+import android.os.Parcel;
 import android.text.TextUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +11,11 @@ import java.util.List;
  *
  * @author HayukLeung
  */
-public class Element implements IElement, Serializable, Comparable<IElement> {
+public class Element implements IElement, Comparable<IElement> {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 7926360887921956233L;
+    @Override
+    public void onElementClick() {
+    }
 
     /**
      * 文字内容，可以替换为一个Java对象，比如UserInfo
@@ -257,19 +256,18 @@ public class Element implements IElement, Serializable, Comparable<IElement> {
         this.priority = priority;
     }
 
-    /** 常量 ********************************************************************/
     /**
      * 异常：ID
      */
-    private final String EXCEPTION_ID = "本元素ID不能为空：" + this.toString();
+    private static final String EXCEPTION_ID = "本元素ID不能为空";
     /**
      * 异常：孩子结点数目
      */
-    private final String EXCEPTION_CHILDREN_SIZE = "人员元素孩子结点数目不应该大于0：" + this.toString();
+    private static final String EXCEPTION_CHILDREN_SIZE = "人员元素孩子结点数目不应该大于0";
     /**
      * 异常：遍历孩子结点监听
      */
-    private final String EXCEPTION_TRAVERSE_CHILDREN = "遍历孩子结点监听未设置：" + this.toString();
+    private static final String EXCEPTION_TRAVERSE_CHILDREN = "遍历孩子结点监听未设置";
 
     /**
      * 构造函数
@@ -311,4 +309,52 @@ public class Element implements IElement, Serializable, Comparable<IElement> {
         return result;
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeInt(this.level);
+        dest.writeString(this.id);
+        dest.writeString(this.parentId);
+        dest.writeTypedList(children);
+        dest.writeInt(this.accessChildrenNth);
+        dest.writeInt(this.accessChildNth);
+        dest.writeByte(isExpanded ? (byte) 1 : (byte) 0);
+        dest.writeValue(this.type);
+        dest.writeValue(this.priority);
+//        dest.writeString(this.EXCEPTION_ID);
+//        dest.writeString(this.EXCEPTION_CHILDREN_SIZE);
+//        dest.writeString(this.EXCEPTION_TRAVERSE_CHILDREN);
+    }
+
+    protected Element(Parcel in) {
+        this.name = in.readString();
+        this.level = in.readInt();
+        this.id = in.readString();
+        this.parentId = in.readString();
+        this.children = in.createTypedArrayList(Element.CREATOR);
+        this.accessChildrenNth = in.readInt();
+        this.accessChildNth = in.readInt();
+        this.isExpanded = in.readByte() != 0;
+        this.type = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.priority = (Integer) in.readValue(Integer.class.getClassLoader());
+//        this.EXCEPTION_ID = in.readString();
+//        this.EXCEPTION_CHILDREN_SIZE = in.readString();
+//        this.EXCEPTION_TRAVERSE_CHILDREN = in.readString();
+    }
+
+    public static final Creator<Element> CREATOR = new Creator<Element>() {
+        public Element createFromParcel(Parcel source) {
+            return new Element(source);
+        }
+
+        public Element[] newArray(int size) {
+            return new Element[size];
+        }
+    };
 }
