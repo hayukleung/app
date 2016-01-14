@@ -7,6 +7,7 @@ import android.os.HandlerThread;
 import android.view.View;
 
 import com.hayukleung.app.util.ToastUtil;
+import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +40,14 @@ public class RxJavaDemoActivity extends Activity {
         backgroundThread.start();
         backgroundHandler = new Handler(backgroundThread.getLooper());
 
-        findViewById(R.id.button_run_scheduler).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                test();
-            }
-        });
+        View view = findViewById(R.id.button_run_scheduler);
+        RxView.clicks(view) // 以 Observable 形式来反馈点击事件
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        test();
+                    }
+                });
     }
 
     static class BackgroundThread extends HandlerThread {
@@ -119,7 +122,7 @@ public class RxJavaDemoActivity extends Activity {
      *              输入其它，查询得到result3，result4
      * @return
      */
-    Observable<List<String>> query(String keyword) {
+    Observable<List<String>> query(final String keyword) {
         return Observable.create(new Observable.OnSubscribe<List<String>>() {
             @Override
             public void call(Subscriber<? super List<String>> subscriber) {
