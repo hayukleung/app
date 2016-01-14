@@ -4,7 +4,7 @@ include ':app',
         ':appDice',
         ':lib-app-base',
 //        ':lib-app-design_pattern',
-        ':lib-app-rxandroid',
+//        ':lib-app-rxandroid',
         ':lib-app-util',
         ':lib-app-widget-collapsible',
         ':lib-app-widget-qrcode'
