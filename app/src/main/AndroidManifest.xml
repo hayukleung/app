@@ -3,6 +3,10 @@
     package="com.hayukleung.app"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false"/>
+
     <supports-screens
         android:anyDensity="true"
         android:xlargeScreens="true"
@@ -27,6 +31,8 @@
         </activity>
 
         <activity android:name=".widget.clock.demo.DemoClockActivity"/>
+        <activity android:name=".module.tabhost1.DemoTabHost1Activity"/>
+        <activity android:name=".module.tabhost2.DemoTabHost2Activity"/>
     </application>
 
 </manifest>

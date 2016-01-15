@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hayukleung.app.module.tabhost1.DemoTabHost1Activity;
+import com.hayukleung.app.module.tabhost2.DemoTabHost2Activity;
 import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
 import com.hayukleung.app.util.LogUtil;
 import com.hayukleung.app.util.screen.Screen;
@@ -20,12 +22,19 @@ import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by hayukleung on 15/9/3.
  */
 public class MainActivity extends CommonActivity {
 
-    private CollapsibleView mCollapsibleView;
+    @InjectView(R.id.header)
+    public Header mHeader;
+    @InjectView(R.id.ActivityMain$collapsible_view)
+    public CollapsibleView mCollapsibleView;
+
     private ArrayList<Element> mAllElements = new ArrayList<>();
     private ArrayList<Element> mVisibleElements = new ArrayList<>();
 
@@ -33,7 +42,7 @@ public class MainActivity extends CommonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.inject(this);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            Window window = getWindow();
 //
@@ -89,26 +98,30 @@ public class MainActivity extends CommonActivity {
         return null;
     }
 
+    @Override
+    protected void onDestroy() {
+        ButterKnife.reset(this);
+        super.onDestroy();
+    }
+
     /**
      * 初始化控件
      */
     private void initWidgets() {
-        Header header = (Header) findViewById(R.id.header);
         AnalogClockView analogClockView = new AnalogClockView(MainActivity.this);
 //        ViewGroup.LayoutParams params = analogClockView.getLayoutParams();
 //        params.height = getResources().getDimensionPixelSize(R.dimen.header_button_width);
 //        params.width = params.height;
 //        analogClockView.setLayoutParams(params);
-        header.setLeftView(analogClockView, new View.OnClickListener() {
+        mHeader.setLeftView(analogClockView, new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
             }
         });
-        header.setCenterText(R.string.app_name, null);
+        mHeader.setCenterText(R.string.app_name, null);
 
-        mCollapsibleView = (CollapsibleView) findViewById(R.id.ActivityMain$collapsible_view);
         mCollapsibleView
                 .setAllElements(mAllElements)
                 .setVisibleElements(mVisibleElements)
@@ -147,6 +160,14 @@ public class MainActivity extends CommonActivity {
         mAllElements.add(rootElement);
         // 2级 ======================================================
 
+        Element elementModule = new Element("com.hayukleung.app.module", "module", true) {
+            @Override
+            public void onElementClick() {
+            }
+        };
+        elementModule.setParentId(rootElement.getId());
+        mAllElements.add(elementModule);
+
         Element elementSnippet = new Element("com.hayukleung.app.snippet", "snippet", true) {
 
             @Override
@@ -179,6 +200,23 @@ public class MainActivity extends CommonActivity {
 
         // 3级 ======================================================
         Element element;
+
+        element = new Element(DemoTabHost1Activity.class.getName(), "tabHost1", false) {
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoTabHost1Activity.class));
+            }
+        };
+        element.setParentId(elementModule.getId());
+        mAllElements.add(element);
+        element = new Element(DemoTabHost2Activity.class.getName(), "tabHost2", false) {
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoTabHost2Activity.class));
+            }
+        };
+        element.setParentId(elementModule.getId());
+        mAllElements.add(element);
 
         element = new Element(DownloadQueueActivity.class.getName(), "handler", false) {
 
