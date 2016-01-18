@@ -11,9 +11,10 @@ import android.widget.TextView;
 import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.CommonActivity;
 import com.hayukleung.app.R;
-import com.hayukleung.app.view.Footer;
 
 /**
+ * 常规分页底部
+ *
  * DemoTabHost1Activity.java
  * <p>
  * Created by hayukleung on 1/15/16.
@@ -22,7 +23,7 @@ public class DemoTabHost1Activity extends CommonActivity {
     /**
      * FragmentTabHost
      */
-    private Footer mFooter;
+    private Footer1 mFooter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,10 +43,10 @@ public class DemoTabHost1Activity extends CommonActivity {
      */
     private void initTabs() {
         // 设置首页模块
-        MainTab[] tabs = MainTab.values();
+        MainTab1[] tabs = MainTab1.values();
         final int size = tabs.length;
         for (int i = 0; i < size; i++) {
-            MainTab mainTab = tabs[i];
+            MainTab1 mainTab = tabs[i];
             TabHost.TabSpec tab = mFooter.newTabSpec(getString(mainTab.getResName()));
             View indicator = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_tab_host, null);
             TextView title = (TextView) indicator.findViewById(R.id.tab);
@@ -66,7 +67,7 @@ public class DemoTabHost1Activity extends CommonActivity {
             });
             mFooter.addTab(tab, mainTab.getClz(), null);
 
-//            if (mainTab.equals(MainTab.ME)) {
+//            if (mainTab.equals(MainTab2.ME)) {
 //                View cn = indicator.findViewById(R.id.tab_mes);
 //                mBvNotice = new BadgeView(DemoTabHost2Activity.this, cn);
 //                mBvNotice.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
@@ -90,7 +91,7 @@ public class DemoTabHost1Activity extends CommonActivity {
      */
     private void initView() {
         // 找到TabHost
-        mFooter = (Footer) findViewById(android.R.id.tabhost);
+        mFooter = (Footer1) findViewById(android.R.id.tabhost);
         mFooter.setup(this, getSupportFragmentManager(), R.id.real_tab_content);
         if (android.os.Build.VERSION.SDK_INT > 10) {
             mFooter.getTabWidget().setShowDividers(0);
@@ -113,7 +114,7 @@ public class DemoTabHost1Activity extends CommonActivity {
                         v.setSelected(false);
                     }
                 }
-//                if (tabId.equals(getString(MainTab.ME.getResName()))) {
+//                if (tabId.equals(getString(MainTab2.ME.getResName()))) {
 //                    mBvNotice.setText("");
 //                    mBvNotice.hide();
 //                }

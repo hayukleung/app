@@ -139,6 +139,18 @@ public class Header extends LinearLayout {
         mRight.setOnClickListener(listener);
     }
 
+    public void setRightText(String text, int colorId, OnClickListener listener) {
+        AutoScaleTextView view = new AutoScaleTextView(getContext());
+        view.setSingleLine();
+        view.setTextColor(getResources().getColor(colorId));
+        view.setGravity(Gravity.CENTER);
+        view.setText(text);
+
+        mRight.removeAllViews();
+        mRight.addView(view);
+        mRight.setOnClickListener(listener);
+    }
+
     public void setRightText(int resId, int colorId, OnClickListener listener) {
         AutoScaleTextView view = new AutoScaleTextView(getContext());
         view.setSingleLine();

@@ -22,7 +22,7 @@ import java.util.List;
  * layout:custom_radio_button.xml
  * drawable:page_indicator_focused.png
  */
-public class CustomRadioGroup extends LinearLayout {
+public class Footer2 extends LinearLayout {
     /**
      * IMAGE/TEXT-条目的图片/文字
      * START/DIF-初始值/和目标的差值
@@ -54,12 +54,11 @@ public class CustomRadioGroup extends LinearLayout {
     // 条目列表
     private List<RadioButton> lists = new ArrayList<>();
 
-    public CustomRadioGroup(Context c) {
-        super(c);
-        init();
+    public Footer2(Context c) {
+        this(c, null);
     }
 
-    public CustomRadioGroup(Context context, AttributeSet attrs) {
+    public Footer2(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -91,11 +90,13 @@ public class CustomRadioGroup extends LinearLayout {
      * @param selected 选中时的图片
      * @param text 文本内容
      */
-    public void addItem(int unSelected, int selected, String text) {
+    public void addItem(int unSelected, int selected, int text) {
         RadioButton rb = new RadioButton(unSelected, selected, text);
         final int i = lists.size();
         rb.v.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View arg0) {
+                // TODO
                 setCheckedIndex(i);
             }
         });
@@ -121,6 +122,7 @@ public class CustomRadioGroup extends LinearLayout {
         if (leftIndex < 0 || leftIndex >= lists.size() || rightIndex < 0 || rightIndex >= lists.size()) {
             return;
         }
+
         RadioButton a = lists.get(leftIndex);
         RadioButton b = lists.get(rightIndex);
         a.top.setAlpha(alpha);
@@ -135,8 +137,10 @@ public class CustomRadioGroup extends LinearLayout {
 
     /**
      * 选择制定索引的条目
+     *
+     * @param index
      */
-    public void setCheckedIndex(int index) {
+    public void setCheckedIndex(final int index) {
         for (int i = 0; i < lists.size(); i++) {
             if (i == index) {
                 lists.get(i).setChecked(true);
@@ -148,7 +152,7 @@ public class CustomRadioGroup extends LinearLayout {
         }
         this.checkedIndex = index;
         if (this.onItemChangedListener != null) {
-            onItemChangedListener.onItemChanged();
+            onItemChangedListener.onItemChanged(index);
         }
     }
 
@@ -182,7 +186,7 @@ public class CustomRadioGroup extends LinearLayout {
         // 条目的文字，消息
         TextView text, news;
 
-        public RadioButton(int unSelected, int selected, String string) {
+        public RadioButton(int unSelected, int selected, int string) {
             v = inflater.inflate(ID_LAYOUT, null);
             top = (ImageView) v.findViewById(ID_IMAGE_TOP);
             bottom = (ImageView) v.findViewById(ID_IMAGE_BOTTOM);
@@ -227,6 +231,10 @@ public class CustomRadioGroup extends LinearLayout {
      * 条目变更监听接口
      */
     public interface OnItemChangedListener {
-        void onItemChanged();
+        /**
+         *
+         * @param position
+         */
+        void onItemChanged(final int position);
     }
 }

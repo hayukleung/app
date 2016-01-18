@@ -5,11 +5,11 @@ import com.hayukleung.app.R;
 /**
  * 配置模块入口
  *
- * MainTab.java
+ * MainTab2.java
  * <p>
  * Created by hayukleung on 1/15/16.
  */
-public enum MainTab {
+public enum MainTab1 {
 
     /** 第N模块 */
     _0(0, R.string.tab_0, R.drawable.selector_tab_0, Fragment0.class),
@@ -23,7 +23,7 @@ public enum MainTab {
     private int resIcon;
     private Class<?> clz;
 
-    MainTab(int idx, int resName, int resIcon, Class<?> clz) {
+    MainTab1(int idx, int resName, int resIcon, Class<?> clz) {
         this.idx = idx;
         this.resName = resName;
         this.resIcon = resIcon;

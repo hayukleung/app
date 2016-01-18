@@ -10,7 +10,7 @@
         android:layout_height="@dimen/footer_height"
         android:layout_weight="1"/>
 
-    <com.hayukleung.app.view.Footer
+    <com.hayukleung.app.module.tabhost1.Footer1
         android:id="@android:id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="@dimen/footer_height"
@@ -23,6 +23,6 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="0"/>
-    </com.hayukleung.app.view.Footer>
+    </com.hayukleung.app.module.tabhost1.Footer1>
 
 </LinearLayout>

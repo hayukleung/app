@@ -2,10 +2,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.hayukleung.app.module.tabhost2.CustomRadioGroup
+    <com.hayukleung.app.module.tabhost2.Footer2
         android:id="@+id/main_footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/footer_height"
         android:layout_alignParentBottom="true"/>
 
     <android.support.v4.view.ViewPager

@@ -5,4 +5,9 @@
     <string name="tab_2">2</string>
     <string name="tab_3">3</string>
     <string name="tab_4">4</string>
+
+    <string name="tab_a">a</string>
+    <string name="tab_b">b</string>
+    <string name="tab_c">c</string>
+    <string name="tab_d">d</string>
 </resources>

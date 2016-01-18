@@ -1,43 +1,24 @@
 package com.hayukleung.app.module.tabhost2;
 
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.CommonActivity;
 import com.hayukleung.app.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hayukleung.app.util.LogUtil;
 
 /**
  * 微信6.0底部
  */
 public class DemoTabHost2Activity extends CommonActivity {
 
-    private CustomRadioGroup footer;
-    private ViewPager body;
-    private int[] itemImage = {
-            R.drawable.main_footer_message,
-            R.drawable.main_footer_contanct,
-            R.drawable.main_footer_discovery,
-            R.drawable.main_footer_me
-    };
-    private int[] itemCheckedImage = {
-            R.drawable.main_footer_message_selected,
-            R.drawable.main_footer_contanct_selected,
-            R.drawable.main_footer_discovery_selected,
-            R.drawable.main_footer_me_selected
-    };
-    private String[] itemText = {
-            "微信",
-            "通讯录",
-            "发现",
-            "我"
-    };
+    private Footer2 mFooter2;
+    private ViewPager mViewPager;
+    private MainTab2[] mMainTab2s;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,65 +33,82 @@ public class DemoTabHost2Activity extends CommonActivity {
 
     public void initContentView() {
         // 底部
-        footer = (CustomRadioGroup) findViewById(R.id.main_footer);
-        for (int i = 0; i < itemImage.length; i++) {
-            footer.addItem(itemImage[i], itemCheckedImage[i], itemText[i]);
+        mFooter2 = (Footer2) findViewById(R.id.main_footer);
+
+        mMainTab2s = MainTab2.values();
+        final int size = mMainTab2s.length;
+        for (int i = 0; i < size; i++) {
+            mFooter2.addItem(mMainTab2s[i].getResIconOff(), mMainTab2s[i].getResIconOn(), mMainTab2s[i].getResName());
         }
         // 主体
-        body = (ViewPager) findViewById(R.id.main_body);
-        body.setAdapter(new BodyPageAdapter());
-        final MainBodyPageChangeListener bodyChangeListener = new MainBodyPageChangeListener(footer);
-        body.addOnPageChangeListener(bodyChangeListener);
+        mViewPager = (ViewPager) findViewById(R.id.main_body);
+        mViewPager.setAdapter(new BodyPagerAdapter(getSupportFragmentManager()));
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-        footer.setCheckedIndex(body.getCurrentItem());
-        footer.setOnItemChangedListener(new CustomRadioGroup.OnItemChangedListener() {
-            public void onItemChanged() {
-                body.setCurrentItem(footer.getCheckedIndex(), false);
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                LogUtil.showLog(String.format("position --> %d positionOffset --> %f", position, positionOffset));
+                int l, r;
+                if (position > mFooter2.getCheckedIndex()) {
+                    // 方向向右
+                    LogUtil.showLog(String.format("to R"));
+                    l = mFooter2.getCheckedIndex();
+                    r = mFooter2.getCheckedIndex() + 1;
+                } else if (position == mFooter2.getCheckedIndex()) {
+                    // 方向向右
+                    LogUtil.showLog(String.format("to R"));
+                    l = mFooter2.getCheckedIndex();
+                    r = mFooter2.getCheckedIndex() + 1;
+                } else {
+                    // 方向向左
+                    LogUtil.showLog(String.format("to L"));
+                    l = mFooter2.getCheckedIndex() - 1;
+                    r = mFooter2.getCheckedIndex();
+                }
+                mFooter2.itemChangeChecked(l, r, positionOffset);
+                if (0.f == positionOffset) {
+                    mFooter2.setCheckedIndex(position);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
             }
         });
+
+        mFooter2.setOnItemChangedListener(new Footer2.OnItemChangedListener() {
+
+            @Override
+            public void onItemChanged(int position) {
+
+                mViewPager.setCurrentItem(position, false);
+            }
+        });
+        mFooter2.setCheckedIndex(0);
         /**
          * BUG :显示不出数字。数字尺寸太大
          */
-        footer.setItemNewsCount(1, 10); // 设置消息数量
-
+        mFooter2.setItemNewsCount(1, 10); // 设置消息数量
     }
 
-    class BodyPageAdapter extends PagerAdapter {
-        private int[] pageLayouts = {
-                R.layout.main_body_page_a,
-                R.layout.main_body_page_b,
-                R.layout.main_body_page_c,
-                R.layout.main_body_page_d
-        };
-        private List<View> lists = new ArrayList<View>();
+    class BodyPagerAdapter extends FragmentPagerAdapter {
 
-        public BodyPageAdapter() {
-            for (int i = 0; i < pageLayouts.length; i++) {
-                View v = getLayoutInflater().inflate(pageLayouts[i], null);
-                lists.add(v);
-            }
+        public BodyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return Fragment.instantiate(DemoTabHost2Activity.this, mMainTab2s[position].getClz().getName(), null);
         }
 
         @Override
         public int getCount() {
-            return lists.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == arg1;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View v = lists.get(position);
-            container.addView(v);
-            return v;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(lists.get(position));
+            return mMainTab2s.length;
         }
     }
 }

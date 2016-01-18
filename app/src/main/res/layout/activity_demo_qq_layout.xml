@@ -1,0 +1,38 @@
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/id_drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryLight">
+
+        <com.hayukleung.app.view.Header
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            app:headerBackground="@color/white">
+        </com.hayukleung.app.view.Header>
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/id_left_menu"
+        android:name="com.hayukleung.app.module.qqLayout.MenuLeftFragment"
+        android:layout_width="@dimen/xp50.0"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:tag="LEFT"/>
+
+    <fragment
+        android:id="@+id/id_right_menu"
+        android:name="com.hayukleung.app.module.qqLayout.MenuRightFragment"
+        android:layout_width="@dimen/xp30.0"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:tag="RIGHT"/>
+
+</android.support.v4.widget.DrawerLayout>

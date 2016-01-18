@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hayukleung.app.module.qqLayout.DemoQQLayoutActivity;
 import com.hayukleung.app.module.tabhost1.DemoTabHost1Activity;
 import com.hayukleung.app.module.tabhost2.DemoTabHost2Activity;
 import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
@@ -201,6 +202,14 @@ public class MainActivity extends CommonActivity {
         // 3级 ======================================================
         Element element;
 
+        element = new Element(DemoQQLayoutActivity.class.getName(), "qqLayout", false) {
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoQQLayoutActivity.class));
+            }
+        };
+        element.setParentId(elementModule.getId());
+        mAllElements.add(element);
         element = new Element(DemoTabHost1Activity.class.getName(), "tabHost1", false) {
             @Override
             public void onElementClick() {
