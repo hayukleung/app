@@ -90,7 +90,7 @@ public class DemoQQLayoutActivity extends CommonActivity {
 
     private void initView() {
         mHeader = (Header) findViewById(R.id.header);
-        mHeader.setRightText("right", R.color.colorPrimaryDark, new View.OnClickListener() {
+        mHeader.setRightText("right", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(Gravity.RIGHT);

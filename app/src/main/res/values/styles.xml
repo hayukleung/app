@@ -8,14 +8,15 @@
 
     <!-- app主题 -->
     <style name="BaseAppTheme" parent="BaseTheme">
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:author">@string/app_author</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorLink">@color/textColorLink</item>
         <item name="android:windowBackground">@color/windowBackground</item>
-        <item name="android:navigationBarColor">@color/navigationBarColor</item>
+        <!-- toolbar -->
+        <item name="titleTextColor">@android:color/white</item>
         <!-- 自定义头部 -->
         <item name="headerBackground">@color/colorPrimary</item>
         <item name="headerTextColor">@android:color/white</item>

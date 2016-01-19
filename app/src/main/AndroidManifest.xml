@@ -31,6 +31,7 @@
         </activity>
 
         <activity android:name=".widget.clock.demo.DemoClockActivity"/>
+        <activity android:name=".module.material.DemoMaterialActivity"/>
         <activity android:name=".module.qqLayout.DemoQQLayoutActivity"/>
         <activity android:name=".module.tabhost1.DemoTabHost1Activity"/>
         <activity android:name=".module.tabhost2.DemoTabHost2Activity"/>

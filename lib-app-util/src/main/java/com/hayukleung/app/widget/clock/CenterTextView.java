@@ -21,7 +21,7 @@ import com.hayukleung.app.util.screen.Screen;
  * 左中——中中——右中</br>
  * 左下——中下——右下</br>
  * 
- * @see http://blog.csdn.net/carrey1989/article/details/10399727
+ * @see <ref a=http://blog.csdn.net/carrey1989/article/details/10399727 />
  * @author hayukleung
  *
  */
@@ -137,7 +137,10 @@ public class CenterTextView extends View {
         mPaint.setColor(mTextColor);
         mFontMetrics = mPaint.getFontMetrics();
         // 文本的宽度
-        
+
+        if (null == mText) {
+            mText = "";
+        }
         float textWidth = mPaint.measureText(mText);
         float textCenterVerticalBaselineY = mViewHeight / 2 - mFontMetrics.descent + (mFontMetrics.descent - mFontMetrics.ascent) / 2;
         switch (mTextAlign) {

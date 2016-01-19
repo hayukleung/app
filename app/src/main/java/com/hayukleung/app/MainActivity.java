@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hayukleung.app.module.material.DemoMaterialActivity;
 import com.hayukleung.app.module.qqLayout.DemoQQLayoutActivity;
 import com.hayukleung.app.module.tabhost1.DemoTabHost1Activity;
 import com.hayukleung.app.module.tabhost2.DemoTabHost2Activity;
@@ -202,6 +203,14 @@ public class MainActivity extends CommonActivity {
         // 3级 ======================================================
         Element element;
 
+        element = new Element(DemoMaterialActivity.class.getName(), "material", false) {
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoMaterialActivity.class));
+            }
+        };
+        element.setParentId(elementModule.getId());
+        mAllElements.add(element);
         element = new Element(DemoQQLayoutActivity.class.getName(), "qqLayout", false) {
             @Override
             public void onElementClick() {
