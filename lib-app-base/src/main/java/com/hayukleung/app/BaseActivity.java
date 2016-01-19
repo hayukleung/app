@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.hayukleung.app.base.R;
 
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override

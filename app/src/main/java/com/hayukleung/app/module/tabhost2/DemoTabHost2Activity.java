@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.CommonActivity;
+import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.R;
 import com.hayukleung.app.util.LogUtil;
 

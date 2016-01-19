@@ -3,6 +3,7 @@ package android.support.v4.app;
 import java.util.List;
 
 public class FragmentHelper {
+
     public static void noteStateNotSaved(FragmentActivity activity) {
         activity.mFragments.noteStateNotSaved();
     }

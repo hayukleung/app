@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_marginBottom="@dimen/space_normal"
                 android:layout_marginTop="@dimen/space_large"
                 android:textSize="18sp"
-                android:textColor="@color/dark_gray"
+                android:textColor="@android:color/darker_gray"
                 android:text="" />
 
         </LinearLayout>
@@ -50,13 +50,13 @@
                 android:layout_weight="1"
                 android:text="否"
                 android:textSize="16sp"
-                android:textColor="@color/main_color_normal"
+                android:textColor="@android:color/black"
                 android:gravity="center"
                 android:paddingLeft="@dimen/space_normal"
                 android:paddingRight="@dimen/space_normal"
                 android:paddingTop="@dimen/space_large"
                 android:paddingBottom="@dimen/space_large"
-                android:background="@drawable/bg_dialog_btn_right_bottom" />
+                android:background="@drawable/bg_dialog_btn_bottom_left" />
 
             <com.hayukleung.app.view.widget.AutoScaleTextView
                 android:id="@+id/submit"
@@ -65,13 +65,13 @@
                 android:layout_weight="1"
                 android:text="是"
                 android:textSize="16sp"
-                android:textColor="@color/main_color_normal"
+                android:textColor="@android:color/black"
                 android:gravity="center"
                 android:paddingLeft="@dimen/space_normal"
                 android:paddingRight="@dimen/space_normal"
                 android:paddingTop="@dimen/space_large"
                 android:paddingBottom="@dimen/space_large"
-                android:background="@drawable/bg_dialog_btn_right_bottom" />
+                android:background="@drawable/bg_dialog_btn_bottom_right" />
         </android.support.v7.widget.LinearLayoutCompat>
     </LinearLayout>
 </RelativeLayout>

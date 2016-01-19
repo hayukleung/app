@@ -57,7 +57,7 @@ public class Header extends LinearLayout {
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Header, defStyleAttr, 0);
         mRoot.setBackgroundResource(a.getResourceId(R.styleable.Header_headerBackground, R.drawable.bg_header));
-        mTextColorResId = a.getResourceId(R.styleable.Header_headerTextColor, R.color.darker_gray);
+        mTextColorResId = a.getResourceId(R.styleable.Header_headerTextColor, android.R.color.darker_gray);
         a.recycle();
     }
 

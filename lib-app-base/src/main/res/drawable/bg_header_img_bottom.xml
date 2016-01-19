@@ -3,17 +3,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/gray" />
+            <solid android:color="@android:color/darker_gray" />
         </shape>
     </item>
-    <item android:bottom="1px">
+    <item android:bottom="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="#FFFFFFFF" />
+            <solid android:color="@android:color/white" />
             <padding
-                android:bottom="1px"
-                android:left="1px"
-                android:right="1px"
-                android:top="1px" />
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp"
+                android:top="1dp" />
             <size
                 android:width="@dimen/header_avatar_size"
                 android:height="@dimen/header_avatar_size" />

@@ -109,9 +109,9 @@ public class DemoMaterialActivity extends CommonActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new BaseFragment(), "a");
-        adapter.addFragment(new BaseFragment(), "b");
-        adapter.addFragment(new BaseFragment(), "c");
+        adapter.addFragment(new TabAFragment(), "a");
+        adapter.addFragment(new TabBFragment(), "b");
+        adapter.addFragment(new TabCFragment(), "c");
         viewPager.setAdapter(adapter);
     }
 

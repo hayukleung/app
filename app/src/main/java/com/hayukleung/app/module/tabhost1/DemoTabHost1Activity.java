@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.CommonActivity;
+import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.R;
 
 /**

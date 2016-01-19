@@ -14,14 +14,11 @@ import com.hayukleung.app.view.widget.BlockDialog;
  */
 public class Dialogs {
 
-    public interface DialogCallback {
-        void callback();
-    }
-
     /**
      * 是或否
      *
      * @param activity
+     * @param content
      * @param yesCallback
      * @param noCallback
      * @return

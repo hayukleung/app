@@ -19,6 +19,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.CommonActivity;
+import com.hayukleung.app.BaseFragment;
 import com.hayukleung.app.view.Header;
 
 import java.io.IOException;

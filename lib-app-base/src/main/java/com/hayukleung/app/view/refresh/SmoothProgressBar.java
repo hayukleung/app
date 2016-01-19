@@ -9,7 +9,8 @@ import android.view.View;
 import com.hayukleung.app.view.util.ViewUtils;
 
 public class SmoothProgressBar extends View {
-    private static final float PROGRESS_BAR_HEIGHT = 4;//dp
+
+    private static final float PROGRESS_BAR_HEIGHT = 4; // dp
 
     private int mProgressBarHeight;
     private SwipeProgressBar mProgressBar;
