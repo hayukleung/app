@@ -19,7 +19,7 @@
 		    android:layout_height="wrap_content"
 		    >
 	   	<ImageView 
-            android:id="@+id/custom_radio_button_image_botom"
+            android:id="@+id/custom_radio_button_image_bottom"
             android:contentDescription="@string/app_name"
             android:layout_width="32dp"
             android:layout_height="28dp"

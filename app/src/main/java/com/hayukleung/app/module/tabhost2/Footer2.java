@@ -41,7 +41,7 @@ public class Footer2 extends LinearLayout {
     private final int
             ID_LAYOUT = R.layout.custom_radio_button,
             ID_IMAGE_TOP = R.id.custom_radio_button_image_top,
-            ID_IMAGE_BOTTOM = R.id.custom_radio_button_image_botom,
+            ID_IMAGE_BOTTOM = R.id.custom_radio_button_image_bottom,
             ID_TEXT = R.id.custom_radio_button_text,
             ID_NEWS = R.id.custom_radio_button_news;
     // 条目变更监听
@@ -157,7 +157,7 @@ public class Footer2 extends LinearLayout {
     }
 
     /**
-     * 设置指定索引的条目的消息数量
+     * 设置指定索引的条目的消息数    量
      *
      * @param index 条目的索引
      * @param count 消息的数量

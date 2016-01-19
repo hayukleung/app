@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.hayukleung.app.CommonActivity;
 import com.hayukleung.app.BaseFragment;
+import com.hayukleung.app.CommonActivity;
 import com.hayukleung.app.R;
 import com.hayukleung.app.util.LogUtil;
 
@@ -43,40 +43,12 @@ public class DemoTabHost2Activity extends CommonActivity {
         // 主体
         mViewPager = (ViewPager) findViewById(R.id.main_body);
         mViewPager.setAdapter(new BodyPagerAdapter(getSupportFragmentManager()));
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                LogUtil.showLog(String.format("position --> %d positionOffset --> %f", position, positionOffset));
-                int l, r;
-                if (position > mFooter2.getCheckedIndex()) {
-                    // 方向向右
-                    LogUtil.showLog(String.format("to R"));
-                    l = mFooter2.getCheckedIndex();
-                    r = mFooter2.getCheckedIndex() + 1;
-                } else if (position == mFooter2.getCheckedIndex()) {
-                    // 方向向右
-                    LogUtil.showLog(String.format("to R"));
-                    l = mFooter2.getCheckedIndex();
-                    r = mFooter2.getCheckedIndex() + 1;
-                } else {
-                    // 方向向左
-                    LogUtil.showLog(String.format("to L"));
-                    l = mFooter2.getCheckedIndex() - 1;
-                    r = mFooter2.getCheckedIndex();
-                }
-                mFooter2.itemChangeChecked(l, r, positionOffset);
-                if (0.f == positionOffset) {
-                    mFooter2.setCheckedIndex(position);
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                LogUtil.showLog(String.format("position --> %d positionOffset --> %f positionOffsetPixels --> %d", position, positionOffset, positionOffsetPixels));
+                mFooter2.itemChangeChecked(position, position + 1, positionOffset);
             }
         });
 
