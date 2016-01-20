@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 画板 -->
+    <string name="edit_reminder">编辑</string>
+    <string name="authorized_signature">签名授权</string>
+    <string name="my_signature">我的电子签名</string>
+    <string name="authorized_record">授权记录</string>
+    <string name="sure_cut">确定裁剪</string>
+    <string name="resetting">重置</string>
+    <string name="counterclockwise_rotation">逆时针旋转 90°</string>
+    <string name="clockwise_rotation">顺时针旋转 90°</string>
+    <string name="signature_edit">签名编辑</string>
+    <string name="sign_pic_submit_success">签名图片提交成功</string>
+    <string name="sign_pic_not_exist">签名不存在，请创建</string>
+    <string name="sign_pic_exist">签名已存在，点击修改</string>
+    <string name="show_signature">查看签名</string>
+    <string name="create_new_signature">创建新签名</string>
+</resources>

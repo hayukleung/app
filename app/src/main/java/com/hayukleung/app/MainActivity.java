@@ -20,6 +20,7 @@ import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
 import com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity;
+import com.hayukleung.app.widget.paintpad.demo.DemoPaintPadActivity;
 import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
 
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class MainActivity extends CommonActivity {
         mAllElements.add(rootElement);
         // 2级 ======================================================
 
-        Element elementModule = new Element("com.hayukleung.app.module", "module", true) {
+        Element elementModule = new Element("com.hayukleung.app.module", "Module", true) {
             @Override
             public void onElementClick() {
             }
@@ -170,7 +171,7 @@ public class MainActivity extends CommonActivity {
         elementModule.setParentId(rootElement.getId());
         mAllElements.add(elementModule);
 
-        Element elementSnippet = new Element("com.hayukleung.app.snippet", "snippet", true) {
+        Element elementSnippet = new Element("com.hayukleung.app.snippet", "Snippet", true) {
 
             @Override
             public void onElementClick() {
@@ -180,7 +181,7 @@ public class MainActivity extends CommonActivity {
         elementSnippet.setParentId(rootElement.getId());
         mAllElements.add(elementSnippet);
 
-        Element elementUtil = new Element("com.hayukleung.app.util", "util", true) {
+        Element elementUtil = new Element("com.hayukleung.app.util", "Util", true) {
 
             @Override
             public void onElementClick() {
@@ -190,7 +191,7 @@ public class MainActivity extends CommonActivity {
         elementUtil.setParentId(rootElement.getId());
         mAllElements.add(elementUtil);
 
-        Element elementWidget = new Element("com.hayukleung.app.widget", "widget", true) {
+        Element elementWidget = new Element("com.hayukleung.app.widget", "Widget", true) {
 
             @Override
             public void onElementClick() {
@@ -203,7 +204,7 @@ public class MainActivity extends CommonActivity {
         // 3级 ======================================================
         Element element;
 
-        element = new Element(DemoMaterialActivity.class.getName(), "material", false) {
+        element = new Element(DemoMaterialActivity.class.getName(), "Material", false) {
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoMaterialActivity.class));
@@ -211,7 +212,7 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementModule.getId());
         mAllElements.add(element);
-        element = new Element(DemoQQLayoutActivity.class.getName(), "qqLayout", false) {
+        element = new Element(DemoQQLayoutActivity.class.getName(), "QQLayout", false) {
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoQQLayoutActivity.class));
@@ -219,7 +220,7 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementModule.getId());
         mAllElements.add(element);
-        element = new Element(DemoTabHost1Activity.class.getName(), "tabHost1", false) {
+        element = new Element(DemoTabHost1Activity.class.getName(), "TabHost1", false) {
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoTabHost1Activity.class));
@@ -227,7 +228,7 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementModule.getId());
         mAllElements.add(element);
-        element = new Element(DemoTabHost2Activity.class.getName(), "tabHost2", false) {
+        element = new Element(DemoTabHost2Activity.class.getName(), "TabHost2", false) {
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoTabHost2Activity.class));
@@ -236,7 +237,7 @@ public class MainActivity extends CommonActivity {
         element.setParentId(elementModule.getId());
         mAllElements.add(element);
 
-        element = new Element(DownloadQueueActivity.class.getName(), "handler", false) {
+        element = new Element(DownloadQueueActivity.class.getName(), "Handler", false) {
 
             @Override
             public void onElementClick() {
@@ -246,7 +247,7 @@ public class MainActivity extends CommonActivity {
         element.setParentId(elementSnippet.getId());
         mAllElements.add(element);
 
-        element = new Element(DemoScreenActivity.class.getName(), "screen", false) {
+        element = new Element(DemoScreenActivity.class.getName(), "Screen", false) {
 
             @Override
             public void onElementClick() {
@@ -255,7 +256,7 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
-        element = new Element(DemoTextActivity.class.getName(), "text", false) {
+        element = new Element(DemoTextActivity.class.getName(), "Text", false) {
 
             @Override
             public void onElementClick() {
@@ -265,7 +266,7 @@ public class MainActivity extends CommonActivity {
         element.setParentId(elementUtil.getId());
         mAllElements.add(element);
 
-        element = new Element(DemoCollapsibleActivity.class.getName(), "collapsible", false) {
+        element = new Element(DemoCollapsibleActivity.class.getName(), "Collapsible", false) {
 
             @Override
             public void onElementClick() {
@@ -274,7 +275,7 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(DemoQRCodeActivity.class.getName(), "qrcode", false) {
+        element = new Element(DemoQRCodeActivity.class.getName(), "QRCode", false) {
 
             @Override
             public void onElementClick() {
@@ -283,11 +284,20 @@ public class MainActivity extends CommonActivity {
         };
         element.setParentId(elementWidget.getId());
         mAllElements.add(element);
-        element = new Element(DemoClockActivity.class.getName(), "clock", false) {
+        element = new Element(DemoClockActivity.class.getName(), "Clock", false) {
 
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
+            }
+        };
+        element.setParentId(elementWidget.getId());
+        mAllElements.add(element);
+        element = new Element(DemoPaintPadActivity.class.getName(), "PaintPad", false) {
+
+            @Override
+            public void onElementClick() {
+                startActivity(new Intent(MainActivity.this, DemoPaintPadActivity.class));
             }
         };
         element.setParentId(elementWidget.getId());

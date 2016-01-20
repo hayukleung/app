@@ -31,6 +31,8 @@ public class DirMgr {
     public static final String PATH_SHARE_CACHE = ROOT + "/shareImg";
     /** 文件保存目录 */
     public static final String PATH_FILE        = ROOT + "/file";
+    /** 绘画板图片保存路径 */
+    public static final String PATH_PAINTPAD = ROOT + "/paintpad";
     
     /**
      * 初始化目录
@@ -42,6 +44,7 @@ public class DirMgr {
         mkdir(PATH_IMG_SAVE);
         mkdir(PATH_APK);
         mkdir(PATH_SHARE_CACHE);
+        mkdir(PATH_PAINTPAD);
     }
 
     /**
