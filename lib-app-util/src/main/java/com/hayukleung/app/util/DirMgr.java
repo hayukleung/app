@@ -32,7 +32,7 @@ public class DirMgr {
     /** 文件保存目录 */
     public static final String PATH_FILE        = ROOT + "/file";
     /** 绘画板图片保存路径 */
-    public static final String PATH_PAINTPAD = ROOT + "/paintpad";
+    public static final String PATH_PAINTPAD    = ROOT + "/paintpad";
     
     /**
      * 初始化目录

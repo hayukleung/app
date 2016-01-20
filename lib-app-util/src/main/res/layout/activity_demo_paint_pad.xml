@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:visibility="visible">
+    android:layout_height="match_parent">
 
-    <com.hayukleung.app.widget.paintpad.PaintPad
-        android:id="@+id/paint_pad"
+    <!-- main view -->
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"/>
+        android:background="@android:color/darker_gray"
+        android:visibility="visible">
 
+        <com.hayukleung.app.widget.paintpad.PaintPad
+            android:id="@+id/paint_pad"
+            android:layout_width="@dimen/xp100"
+            android:layout_height="@dimen/xp100"
+            android:layout_above="@+id/bottom"/>
 
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
-
-        <SeekBar
-            android:id="@+id/seek_bar"
-            android:layout_width="@dimen/xp94.0"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/xp4.0"
-            android:layout_marginTop="@dimen/xp4.0"
-            android:max="15"
-            android:maxHeight="@dimen/xp2.0"
-            android:minHeight="@dimen/xp2.0"
-            android:progressDrawable="@drawable/bg_paint_pad_progress"
-            android:thumb="@drawable/bg_paint_pad_thumb"
-            android:thumbOffset="0dp"/>
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/xp5.0"
+            android:layout_marginRight="@dimen/xp5.0"/>
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-</RelativeLayout>
+    <!-- side view -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="@dimen/xp80.0"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/layout_demo_paint_pad_navigation"/>
+</android.support.v4.widget.DrawerLayout>

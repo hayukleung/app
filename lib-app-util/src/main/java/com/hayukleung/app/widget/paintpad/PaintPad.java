@@ -2,9 +2,11 @@ package com.hayukleung.app.widget.paintpad;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -181,12 +183,15 @@ public class PaintPad extends View {
 
     /**
      * Check the sdcard is available or not.
+     *
+     * @param context
+     * @return
      */
-    public String saveBitmap() {
+    public String saveBitmap(Context context) {
         String state = Environment.getExternalStorageState();
 
         if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return saveToSdcard();
+            return saveToSdcard(context);
         } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             Toast.makeText(this.mContext, "SDCard只读", Toast.LENGTH_LONG).show();
             return null;
@@ -211,12 +216,15 @@ public class PaintPad extends View {
 
     /**
      * Save the bitmap to sdcard.
+     *
+     * @param context
+     * @return
      */
-    private String saveToSdcard() {
-        File paintpad = new File(DirMgr.PATH_PAINTPAD);
+    private String saveToSdcard(Context context) {
+        File file = new File(DirMgr.PATH_PAINTPAD);
         try {
-            if (!paintpad.exists()) {
-                paintpad.mkdirs();
+            if (!file.exists()) {
+                file.mkdirs();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,9 +236,13 @@ public class PaintPad extends View {
         String fullPath = DirMgr.PATH_PAINTPAD + "/" + timeStamp + suffixName;
         try {
             mBitmap.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(fullPath));
+            Toast.makeText(this.mContext, "保存成功：" + fullPath, Toast.LENGTH_SHORT).show();
+            // 通知文件系统收录该图片
+            Uri data = Uri.parse("file:///" + fullPath);
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, data));
             return fullPath;
         } catch (FileNotFoundException e) {
-            Toast.makeText(this.mContext, "保存失败：" + fullPath, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.mContext, "保存失败：" + fullPath, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             return null;
         }
