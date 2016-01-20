@@ -47,4 +47,8 @@ public class Brush extends Paint {
 	public void setPaintWidth(float textWidth){
 	    brush.setStrokeWidth(textWidth);
 	}
+
+	public float getPaintWidth() {
+		return brush.getStrokeWidth();
+	}
 }

@@ -1,6 +1,7 @@
 package com.hayukleung.app.widget.paintpad.drawings;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
 
 import com.hayukleung.app.widget.paintpad.tools.Brush;
@@ -13,8 +14,14 @@ public class PathLine extends Drawing {
 	private float mX, mY;
 	private static final float TOUCH_TOLERANCE = 4;
 
+    private Paint mPoint;
+
 	public PathLine() {
 		mPath = new Path();
+
+        mPoint = new Paint(Brush.getPen());
+        mPoint.setStyle(Paint.Style.FILL);
+        mPoint.setAntiAlias(true);
 	}
 
 	@Override
@@ -28,6 +35,10 @@ public class PathLine extends Drawing {
 		mPath.moveTo(x, y);
 		this.mX = x;
 		this.mY = y;
+
+        // 优化点：下指时就画点
+        mPoint.setColor(Brush.getPen().getColor());
+        canvas.drawCircle(x, y, Brush.getPen().getPaintWidth() / 2f, mPoint);
 	}
 
 	@Override

@@ -29,7 +29,11 @@ public class PaintPad extends View {
     private boolean isMoving = false;
     private Drawing mDrawing = null;
     private Context mContext;
-    private boolean isStartDraw = false;// 是否开始绘制签名
+
+    /**
+     * 是否开始绘制
+     */
+    private boolean isStartDraw = false;
 
     /**
      * Set the shape that is drawing.

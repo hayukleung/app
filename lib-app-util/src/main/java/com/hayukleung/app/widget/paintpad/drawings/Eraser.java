@@ -24,7 +24,7 @@ public class Eraser extends Drawing {
 
 	@Override
 	public void draw(Canvas canvas) {
-		System.out.println("drawing earser");
+		System.out.println("drawing eraser");
 		canvas.drawPath(this.mPath, eraser);
 	}
 
