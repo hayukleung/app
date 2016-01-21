@@ -1,12 +1,12 @@
-package com.hayukleung.app.util.screen.demo;
+package com.hayukleung.app.screen.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hayukleung.app.util.LogUtil;
-import com.hayukleung.app.util.R;
+import com.hayukleung.app.screen.R;
 
 /**
  * 屏幕适配
@@ -23,6 +23,6 @@ public class DemoScreenActivity extends Activity {
         View view = findViewById(R.id.square);
         ViewGroup.LayoutParams params = view.getLayoutParams();
 
-        LogUtil.showLog(String.format("view-width --> %d, view-height --> %d", params.width, params.height));
+        Log.d(getString(R.string.app_name), String.format("view-width --> %d, view-height --> %d", params.width, params.height));
     }
 }

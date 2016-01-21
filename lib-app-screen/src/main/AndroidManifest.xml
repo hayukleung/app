@@ -1,0 +1,11 @@
+<manifest package="com.hayukleung.app.screen"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity android:name=".demo.DemoScreenActivity"/>
+    </application>
+
+</manifest>

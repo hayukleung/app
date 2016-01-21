@@ -12,7 +12,7 @@ import android.graphics.Paint.FontMetrics;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hayukleung.app.util.screen.Screen;
+import com.hayukleung.app.screen.Screen;
 
 /**
  * 自定义文本显示控件</br>

@@ -1,4 +1,4 @@
-package com.hayukleung.app.util.screen;
+package com.hayukleung.app.screen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class DimenGenerator {
     /**
      * 目标目录
      */
-    private String dirStr = "./lib-app-util/src/main/res";
+    private String dirStr = "./lib-app-screen/src/main/res";
 
     private final static String WTemplate = "<dimen name=\"x{0}\">{1}px</dimen>\n";
     private final static String HTemplate = "<dimen name=\"y{0}\">{1}px</dimen>\n";
@@ -40,7 +40,7 @@ public class DimenGenerator {
     /**
      * 待生成分辨率
      */
-    private static final String SUPPORT_DIMESION =
+    private static final String SUPPORT_DIMENSION =
             "240,320;" +
             "240,400;" +
             "240,432;" +
@@ -62,7 +62,7 @@ public class DimenGenerator {
             "1440,2560;" +
             "1600,2560;";
 
-    private String supportStr = SUPPORT_DIMESION;
+    private String supportStr = SUPPORT_DIMENSION;
 
     public DimenGenerator(int baseX, int baseY, String supportStr) {
         this.baseW = baseX;

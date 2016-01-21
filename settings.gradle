@@ -1,6 +1,6 @@
-rootProject.name='xDroid'
+rootProject.name = 'xDroid'
 
-include ':app',
+include ':app', ':lib-app-screen',
         ':appDice',
         ':lib-app-base',
 //        ':lib-app-design_pattern',

@@ -1,17 +1,16 @@
 /**
  * 
  */
-package com.hayukleung.app.util.screen;
+package com.hayukleung.app.screen;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-
-import com.hayukleung.app.util.LogUtil;
 
 /**
  * 屏幕模型，对DisplayMetrics进行封装
@@ -57,11 +56,11 @@ public class Screen {
         this.densityScale = metrics.density;
         this.fontScale = metrics.scaledDensity;
         this.orientation = heightPx > widthPx ? ORIENTATION_VERTICAL : ORIENTATION_HORIZONTAL;
-        LogUtil.showLog(context, String.format("width --> %dpx height --> %dpx", this.widthPx, this.heightPx));
+        Log.d(context.getString(R.string.app_name), String.format("width --> %dpx height --> %dpx", this.widthPx, this.heightPx));
 
         Point point = new Point();
         ((Activity) context).getWindowManager().getDefaultDisplay().getSize(point);
-        LogUtil.showLog(context, "the screen size is " + point.toString());
+        Log.d(context.getString(R.string.app_name), "the screen size is " + point.toString());
     }
 
     /**

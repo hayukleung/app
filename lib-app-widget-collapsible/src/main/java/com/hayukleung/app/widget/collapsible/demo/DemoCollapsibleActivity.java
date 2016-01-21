@@ -2,8 +2,8 @@ package com.hayukleung.app.widget.collapsible.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 
-import com.hayukleung.app.util.ToastUtil;
 import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
@@ -69,7 +69,7 @@ public class DemoCollapsibleActivity extends Activity {
                 .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
                     @Override
                     public void onUsrClick(Element usr, int position) {
-                        ToastUtil.showToast(DemoCollapsibleActivity.this, usr.getName());
+                        Snackbar.make(mCollapsibleView, usr.getName(), Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
