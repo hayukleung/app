@@ -6,6 +6,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <activity android:name="com.hayukleung.app.CommonActivity"/>
     </application>
 
 </manifest>

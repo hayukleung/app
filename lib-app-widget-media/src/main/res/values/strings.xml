@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">lib-app-widget-media</string>
+
+    <!--选择图片-->
+    <string name="folder_all">所有图片</string>
+    <string name="preview">预览</string>
+    <string name="previews">预览</string>
+    <string name="msg_no_camera">No system camera found</string>
+    <string name="msg_no_crop">No crop found</string>
+    <string name="msg_no_sdcard">No SD card found</string>
+    <string name="msg_amount_limit">最多只能选择%s张照片</string>
+    <string name="confirm_resource">确定</string>
+    <string name="confirm_resources">确定(%1$s/%2$s)</string>
+
+</resources>

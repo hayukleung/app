@@ -20,6 +20,7 @@ import com.hayukleung.app.widget.collapsible.CollapsibleView;
 import com.hayukleung.app.widget.collapsible.Element;
 import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
 import com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity;
+import com.hayukleung.app.widget.media.mediapicker.MediaSelectFragment;
 import com.hayukleung.app.widget.paintpad.demo.DemoPaintPadActivity;
 import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
 
@@ -298,6 +299,19 @@ public class MainActivity extends CommonActivity {
             @Override
             public void onElementClick() {
                 startActivity(new Intent(MainActivity.this, DemoPaintPadActivity.class));
+            }
+        };
+        element.setParentId(elementWidget.getId());
+        mAllElements.add(element);
+        element = new Element(MediaSelectFragment.class.getName(), "MediaPicker", false) {
+
+            @Override
+            public void onElementClick() {
+                Bundle bundle = new Bundle();
+                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_MULTI);
+                bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 9);
+                Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
             }
         };
         element.setParentId(elementWidget.getId());

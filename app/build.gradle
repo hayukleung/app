@@ -90,6 +90,7 @@ dependencies {
     compile project(':lib-app-util')
     compile project(':lib-app-widget-collapsible')
     compile project(':lib-app-widget-qrcode')
+    compile project(':lib-app-widget-media')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.+'

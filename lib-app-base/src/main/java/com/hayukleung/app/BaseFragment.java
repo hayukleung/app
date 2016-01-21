@@ -33,7 +33,7 @@ import com.hayukleung.app.base.R;
  *
  * @author Evgeny Shishkin
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     private View mProgressContainer;
     private View mNetworkErrorContainer;
