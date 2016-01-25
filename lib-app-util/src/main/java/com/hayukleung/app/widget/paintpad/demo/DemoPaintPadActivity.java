@@ -60,7 +60,7 @@ public class DemoPaintPadActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mPaintPad = (PaintPad) findViewById(R.id.paint_pad);
 //        mSeekBar = (SeekBar) findViewById(R.id.seek_bar);
-        mDrawing = new DrawingFactory().createDrawing(DrawingId.DRAWING_CIRCLE);
+        mDrawing = new DrawingFactory().createDrawing(DrawingId.DRAWING_PATHLINE);
         mPaintPad.setDrawing(mDrawing);
 
         if (null != savedInstanceState) {

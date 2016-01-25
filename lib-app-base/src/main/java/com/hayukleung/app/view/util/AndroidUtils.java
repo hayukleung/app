@@ -38,13 +38,17 @@ public class AndroidUtils {
         intent.setDataAndType(data, "image/*");
         intent.putExtra("output", out);
         intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", aspectX);// 裁剪框比例
+        // 裁剪框比例
+        intent.putExtra("aspectX", aspectX);
         intent.putExtra("aspectY", aspectY);
-        intent.putExtra("outputX", outputX);// 输出图片大小
+        // 输出图片大小
+        intent.putExtra("outputX", outputX);
         intent.putExtra("outputY", outputY);
-        intent.putExtra("scale", true);// 去黑边
-        intent.putExtra("scaleUpIfNeeded", true);// 去黑边
-        intent.putExtra("return-data", false);// 不返回图片数据
+        // 去黑边
+        intent.putExtra("scale", true);
+        intent.putExtra("scaleUpIfNeeded", true);
+        // 不返回图片数据
+        intent.putExtra("return-data", false);
         return intent;
     }
 
@@ -61,7 +65,8 @@ public class AndroidUtils {
     static {
         try {
             GL_MAX_TEXTURE_SIZE = glMaxTextureSize();
-        } catch (Throwable ignored) {}
+        } catch (Throwable ignored) {
+        }
     }
 
     public static int getGlMaxTextureSize() {
@@ -95,7 +100,8 @@ public class AndroidUtils {
                 EGL10.EGL_NONE
         };
         EGLSurface surf = egl.eglCreatePbufferSurface(dpy, config, surfAttr);
-        final int EGL_CONTEXT_CLIENT_VERSION = 0x3098;  // missing in EGL10
+        // missing in EGL10
+        final int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
         int[] ctxAttrib = {
                 EGL_CONTEXT_CLIENT_VERSION, 1,
                 EGL10.EGL_NONE

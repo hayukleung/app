@@ -3,7 +3,9 @@ package com.hayukleung.app.util;
 import android.app.Activity;
 
 /**
- * SDK包资源读取方法 </br> 替换所有R.XXX.XXX的获取资源ID方法
+ * SDK包资源读取方法
+ * </br> 替换所有R.XXX.XXX的获取资源ID方法
+ * </br> 适用于Eclipse工程，Android Studio工程无需使用
  * 
  * @author HayukLeung
  * 

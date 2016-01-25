@@ -105,7 +105,7 @@ public class MediaSelectFragment extends CommonFragment {
     TextView mComplete;
     View mCountLayout;
     TextView mCount;
-    View mImageFloderLayout;
+    View mImageFolderLayout;
     SwipeRefreshLayout mRefreshLayout;
     ImageView mTakePhoto;
 
@@ -279,7 +279,7 @@ public class MediaSelectFragment extends CommonFragment {
         mComplete = (TextView) mContentView.findViewById(R.id.complete);
         mCountLayout = mContentView.findViewById(R.id.count_layout);
         mCount = (TextView) mContentView.findViewById(R.id.count);
-        mImageFloderLayout = mContentView.findViewById(R.id.image_folder_layout);
+        mImageFolderLayout = mContentView.findViewById(R.id.image_folder_layout);
         mRefreshLayout = (SwipeRefreshLayout) mContentView.findViewById(R.id.refresh_layout);
         mTakePhoto = (ImageView) mContentView.findViewById(R.id.take_photo);
 
@@ -451,12 +451,12 @@ public class MediaSelectFragment extends CommonFragment {
      * 初始化展示文件夹的popupWindow
      */
     private void initListDirPopupWindow() {
-        if (mImageFloderLayout.getVisibility() == View.VISIBLE) {
-            mImageFloderLayout.setVisibility(View.GONE);
+        if (mImageFolderLayout.getVisibility() == View.VISIBLE) {
+            mImageFolderLayout.setVisibility(View.GONE);
             mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
             return;
         }
-        mImageFloderLayout.setVisibility(View.VISIBLE);
+        mImageFolderLayout.setVisibility(View.VISIBLE);
         mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_18dp);
         mImageFolderAdapter = new ImageFolderAdapter(mActivity, mFolders);
         dirListView.setAdapter(mImageFolderAdapter);
@@ -502,7 +502,7 @@ public class MediaSelectFragment extends CommonFragment {
                     } else {
                         mMediaSelectAdapter.setData(mResources);
                     }
-                    mImageFloderLayout.setVisibility(View.GONE);
+                    mImageFolderLayout.setVisibility(View.GONE);
                     mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -513,7 +513,7 @@ public class MediaSelectFragment extends CommonFragment {
         mImageFolderBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mImageFloderLayout.setVisibility(View.GONE);
+                mImageFolderLayout.setVisibility(View.GONE);
                 mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
             }
         });
@@ -541,24 +541,24 @@ public class MediaSelectFragment extends CommonFragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 mIsFromCameraBack = true;
-//                if (mode == MODE_CAMERA) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra(EXTRA_RESULT, new Resource(mCameraTmpFile.getAbsolutePath()));
-//                    getActivity().setResult(Activity.RESULT_OK, intent);
-//                    getActivity().onBackPressed();
-//                } else {
-//                    AndroidUtils.insertImage(mActivity, mCameraTmpFile.getAbsolutePath());
-//                    selectResource(new Resource(mCameraTmpFile.getAbsolutePath()));
-//                    mCameraTmpFile = null;
-//                }
+                if (mode == MODE_CAMERA) {
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_RESULT, new Resource(mCameraTmpFile.getAbsolutePath()));
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().onBackPressed();
+                } else {
+                    AndroidUtils.insertImage(mActivity, mCameraTmpFile.getAbsolutePath());
+                    selectResource(new Resource(mCameraTmpFile.getAbsolutePath()));
+                    mCameraTmpFile = null;
+                }
                 // 拍完照片直接返回
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                mSelectedResources.add(new Resource(mCameraTmpFile.getAbsolutePath()));
-                bundle.putSerializable(EXTRA_RESULT, mSelectedResources);
-                intent.putExtras(bundle);
-                getActivity().setResult(Activity.RESULT_OK, intent);
-                getActivity().onBackPressed();
+//                Intent intent = new Intent();
+//                Bundle bundle = new Bundle();
+//                mSelectedResources.add(new Resource(mCameraTmpFile.getAbsolutePath()));
+//                bundle.putSerializable(EXTRA_RESULT, mSelectedResources);
+//                intent.putExtras(bundle);
+//                getActivity().setResult(Activity.RESULT_OK, intent);
+//                getActivity().onBackPressed();
                 return;
             } else if (requestCode == REQUEST_CROP) {
                 Intent intent = new Intent();

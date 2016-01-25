@@ -5,7 +5,9 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 public class SquareLayout extends RelativeLayout {
+
     private static final float DEFAULT_RATIO = 1;
+
     private float mRatio = DEFAULT_RATIO;
 
     public SquareLayout(Context context, AttributeSet attrs, int defStyle) {
