@@ -41,7 +41,7 @@
     <FrameLayout
         android:id="@+id/bottom_capture"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/xp12.0"
+        android:layout_height="@dimen/header_height"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@android:color/darker_gray"
@@ -94,9 +94,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="9"
-                    android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
             </RelativeLayout>
 
             <TextView
@@ -105,21 +105,22 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/count_layout"
+                android:gravity="center"
                 android:padding="@dimen/space_normal"
                 android:text="完成"
-                android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"/>
         </RelativeLayout>
 
     </FrameLayout>
 
+    <!-- 相册目录列表 -->
     <ScrollView
         android:id="@+id/image_folder_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_capture"
         android:layout_below="@+id/header_layout"
-        android:layout_marginBottom="@dimen/footer_height"
         android:background="#a0000000"
         android:clickable="true"
         android:fillViewport="true"

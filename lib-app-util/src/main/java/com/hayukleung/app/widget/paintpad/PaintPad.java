@@ -56,13 +56,11 @@ public class PaintPad extends View {
     }
 
     public PaintPad(Context context) {
-        super(context);
-        initView(context);
+        this(context, null);
     }
 
     public PaintPad(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initView(context);
+        this(context, attrs, 0);
     }
 
     public PaintPad(Context context, AttributeSet attrs, int defStyle) {

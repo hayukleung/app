@@ -100,14 +100,14 @@ public class MediaSelectFragment extends CommonFragment {
     private static final int LOADER_ALL = 0;
     private static final int LOADER_CATEGORY = 1;
 
-    GridView mList;
-    TextView mPreview;
-    TextView mComplete;
-    View mCountLayout;
-    TextView mCount;
-    View mImageFolderLayout;
-    SwipeRefreshLayout mRefreshLayout;
-    ImageView mTakePhoto;
+    private GridView mList;
+    private TextView mPreview;
+    private TextView mComplete;
+    private View mCountLayout;
+    private TextView mCount;
+    private View mImageFolderLayout;
+    private SwipeRefreshLayout mRefreshLayout;
+    private ImageView mTakePhoto;
 
     // 结果数据
     private ArrayList<Resource> mSelectedResources;
@@ -123,15 +123,15 @@ public class MediaSelectFragment extends CommonFragment {
     private ImageFolderAdapter mImageFolderAdapter;
     private FolderAdapter mFolderAdapter;
 
-    private int mode = MODE_SINGLE;
+    private int mMode = MODE_SINGLE;
     private boolean mIsShowCamera = true;
 
-    TextView mHeaderTitle;
-    ImageView mHeaderIcon;
-    RelativeLayout mHeaderLeft;
-    LinearLayout mHeaderCenter;
-    ListView dirListView;
-    View mImageFolderBackground;
+    private TextView mHeaderTitle;
+    private ImageView mHeaderIcon;
+    private RelativeLayout mHeaderLeft;
+    private LinearLayout mHeaderCenter;
+    private ListView mDirListView;
+    private View mImageFolderBackground;
 
     /** 是否从相机返回 */
     private boolean mIsFromCameraBack = false;
@@ -250,14 +250,14 @@ public class MediaSelectFragment extends CommonFragment {
         }
 
         // 图片选择模式
-        mode = getArguments().getInt(EXTRA_SELECT_MODE, MODE_SINGLE);
+        mMode = getArguments().getInt(EXTRA_SELECT_MODE, MODE_SINGLE);
 
         // 选择图片数量
         mDesireImageCount = getArguments().getInt(EXTRA_SELECT_COUNT);
 
-        if (mode == MODE_MULTI) {
+        if (mMode == MODE_MULTI) {
             mSelectedResources = (ArrayList<Resource>) getArguments().getSerializable(EXTRA_DEFAULT_SELECTED_LIST);
-        } else if (mode == MODE_CAMERA) {
+        } else if (mMode == MODE_CAMERA) {
             showCameraAction();
         }
         if (mSelectedResources == null) {
@@ -287,7 +287,7 @@ public class MediaSelectFragment extends CommonFragment {
         mHeaderIcon = (ImageView) mContentView.findViewById(R.id.header_icon);
         mHeaderLeft = (RelativeLayout) mContentView.findViewById(R.id.header_left);
         mHeaderCenter = (LinearLayout) mContentView.findViewById(R.id.header_center);
-        dirListView = (ListView) mContentView.findViewById(R.id.id_list_dirs);
+        mDirListView = (ListView) mContentView.findViewById(R.id.id_list_dirs);
         mImageFolderBackground = mContentView.findViewById(R.id.image_folder_background);
 
         return mContentView;
@@ -381,7 +381,7 @@ public class MediaSelectFragment extends CommonFragment {
      */
     private void showCameraAction() {
         // 判断选择数量问题
-        if (mode == MODE_MULTI && mDesireImageCount == mSelectedResources.size()) {
+        if (mMode == MODE_MULTI && mDesireImageCount == mSelectedResources.size()) {
             ToastUtil.showToast(mActivity, getString(R.string.msg_amount_limit, mDesireImageCount));
             return;
         }
@@ -408,7 +408,7 @@ public class MediaSelectFragment extends CommonFragment {
     private void selectResource(Resource resource) {
         if (resource != null) {
             // 多选模式
-            if (mode == MODE_MULTI) {
+            if (mMode == MODE_MULTI) {
                 if (mSelectedResources.contains(resource)) {
                     mSelectedResources.remove(resource);
                 } else {
@@ -422,12 +422,12 @@ public class MediaSelectFragment extends CommonFragment {
                 }
                 updateUI();
                 mMediaSelectAdapter.notifyDataSetChanged();
-            } else if (mode == MODE_SINGLE) {
+            } else if (mMode == MODE_SINGLE) {
                 Intent data = new Intent();
                 data.putExtra(EXTRA_RESULT, resource);
                 getActivity().setResult(Activity.RESULT_OK, data);
                 getActivity().onBackPressed();
-            } else if (mode == MODE_CROP) {
+            } else if (mMode == MODE_CROP) {
                 try {
                     Uri data = Uri.fromFile(new File(resource.getFilePath()));
                     mCropTmpFile = FileUtils.getTmpFile();
@@ -459,8 +459,8 @@ public class MediaSelectFragment extends CommonFragment {
         mImageFolderLayout.setVisibility(View.VISIBLE);
         mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_18dp);
         mImageFolderAdapter = new ImageFolderAdapter(mActivity, mFolders);
-        dirListView.setAdapter(mImageFolderAdapter);
-        dirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mDirListView.setAdapter(mImageFolderAdapter);
+        mDirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -533,7 +533,7 @@ public class MediaSelectFragment extends CommonFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mode == MODE_CAMERA && resultCode != Activity.RESULT_OK) {
+        if (mMode == MODE_CAMERA && resultCode != Activity.RESULT_OK) {
             // 如果选择拍照，取消拍照，则直接返回
             getActivity().onBackPressed();
             return;
@@ -541,7 +541,7 @@ public class MediaSelectFragment extends CommonFragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 mIsFromCameraBack = true;
-                if (mode == MODE_CAMERA) {
+                if (mMode == MODE_CAMERA) {
                     Intent intent = new Intent();
                     intent.putExtra(EXTRA_RESULT, new Resource(mCameraTmpFile.getAbsolutePath()));
                     getActivity().setResult(Activity.RESULT_OK, intent);
@@ -581,7 +581,7 @@ public class MediaSelectFragment extends CommonFragment {
     }
 
     private void updateUI() {
-        if (mode != MODE_MULTI) {
+        if (mMode != MODE_MULTI) {
             return;
         }
         int selectedCount = mSelectedResources.size();

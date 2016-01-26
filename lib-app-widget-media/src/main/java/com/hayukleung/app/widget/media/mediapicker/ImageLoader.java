@@ -8,19 +8,19 @@ import com.hayukleung.app.widget.media.picasso.Picasso;
 import com.squareup.okhttp.OkUrlFactory;
 
 public class ImageLoader {
-    private static Picasso Instance;
+    private static Picasso sInstance;
 
     private ImageLoader() {
     }
 
     public static Picasso Instance() {
-        if (Instance == null) {
+        if (sInstance == null) {
             Context context = Library.Instance().getContext();
             Picasso.Builder builder = new Picasso.Builder(context).downloader(new DefaultDownloader(new OkUrlFactory(Utils.getDefaultHttpClient())));
             builder.loggingEnabled(Library.Instance().isDebug());
             init(builder);
         }
-        return Instance;
+        return sInstance;
     }
 
     public static void init() {
@@ -28,6 +28,6 @@ public class ImageLoader {
     }
 
     public static void init(Picasso.Builder builder) {
-        Instance = builder.build();
+        sInstance = builder.build();
     }
 }

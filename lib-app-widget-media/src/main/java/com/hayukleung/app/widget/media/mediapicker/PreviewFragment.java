@@ -28,16 +28,16 @@ public class PreviewFragment extends CommonFragment {
     private ArrayList<Resource> mSelectedResources;
     private SystemUiHider mSystemUiHider;
 
-    ViewPager mPager;
-    View mPreviewHeader;
-    RelativeLayout mHeaderLeft;
-    RelativeLayout mHeaderRight;
-    View mFooter;
-    CheckBox mSelected;
-    TextView mComplete;
-    TextView mImagePosition;
-    RelativeLayout mCountLayout;
-    TextView mCount;
+    private ViewPager mPager;
+    private View mPreviewHeader;
+    private RelativeLayout mHeaderLeft;
+    private RelativeLayout mHeaderRight;
+    private View mFooter;
+    private CheckBox mSelected;
+    private TextView mComplete;
+    private TextView mImagePosition;
+    private RelativeLayout mCountLayout;
+    private TextView mCount;
     private int mShortAnimTime;
     private int mCurrentPosition = 0;
     private Resource mCurrentResource;

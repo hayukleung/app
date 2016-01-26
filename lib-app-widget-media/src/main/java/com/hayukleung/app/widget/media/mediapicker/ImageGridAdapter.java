@@ -22,7 +22,7 @@ public class ImageGridAdapter extends BaseAdapter<Resource> {
     private boolean showSelectIndicator = true;
 
     private List<Resource> mSelectedData;
-    List<Resource> mResource = new ArrayList<>();
+    private List<Resource> mResource = new ArrayList<>();
 
     public ImageGridAdapter(Activity context, ArrayList<Resource> data, List<Resource> selectedData, boolean showCamera) {
         super(context, data);
@@ -31,22 +31,27 @@ public class ImageGridAdapter extends BaseAdapter<Resource> {
     }
 
     /**
-     * 显示选择指示器
+     * 设置是否显示选择指示器
      *
-     * @param b
+     * @param showSelectIndicator
      */
-    public void showSelectIndicator(boolean b) {
-        showSelectIndicator = b;
+    public void showSelectIndicator(boolean showSelectIndicator) {
+        this.showSelectIndicator = showSelectIndicator;
     }
 
     public boolean isShowCamera() {
         return showCamera;
     }
 
-    public void setShowCamera(boolean b) {
-        if (showCamera == b) return;
+    /**
+     * 设置是否显示相机
+     *
+     * @param showCamera
+     */
+    public void setShowCamera(boolean showCamera) {
+        if (this.showCamera == showCamera) return;
 
-        showCamera = b;
+        this.showCamera = showCamera;
         notifyDataSetChanged();
     }
 
@@ -181,6 +186,7 @@ public class ImageGridAdapter extends BaseAdapter<Resource> {
             }
             File imageFile = new File(data.getFilePath());
 
+            // 显示图片
             ImageLoader.Instance()
                     .load(imageFile)
                     .config(Bitmap.Config.RGB_565)

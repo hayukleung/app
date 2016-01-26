@@ -290,7 +290,7 @@ public final class Request {
             rotationPivotY = request.rotationPivotY;
             hasRotationPivot = request.hasRotationPivot;
             if (request.transformations != null) {
-                transformations = new ArrayList<com.hayukleung.app.widget.media.picasso.Transformation>(request.transformations);
+                transformations = new ArrayList<>(request.transformations);
             }
             config = request.config;
             priority = request.priority;
