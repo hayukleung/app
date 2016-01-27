@@ -1,5 +1,8 @@
 package com.hayukleung.app.widget.media.mediapicker;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 
 import com.hayukleung.app.Activities;
 import com.hayukleung.app.CommonFragment;
+import com.hayukleung.app.screen.Screen;
 import com.hayukleung.app.util.ToastUtil;
 import com.hayukleung.app.view.refresh.SwipeRefreshLayout;
 import com.hayukleung.app.view.util.AndroidUtils;
@@ -84,11 +88,17 @@ public class MediaSelectFragment extends CommonFragment {
     private static final String CAMERA_FILE_PATH = "camera_file_path";
     private static final String CROP_FILE_PATH = "crop_file_path";
 
-    /** 请求加载系统照相机 */
+    /**
+     * 请求加载系统照相机
+     */
     private static final int REQUEST_CAMERA = 100;
-    /** 预览 */
+    /**
+     * 预览
+     */
     private static final int REQUEST_PREVIEW = 101;
-    /** 剪切 */
+    /**
+     * 剪切
+     */
     private static final int REQUEST_CROP = 102;
 
     public static final String EXTRA_CROP_ASPECTX = "crop_aspectx";
@@ -116,9 +126,13 @@ public class MediaSelectFragment extends CommonFragment {
     private Folder mCurrentFolder;
     private ArrayList<Resource> mResources = new ArrayList<>();
 
-    /** 图片数量最多的文件夹 */
+    /**
+     * 图片数量最多的文件夹
+     */
     private File mImgDir = new File("");
-    /** 所有图片 */
+    /**
+     * 所有图片
+     */
     private List<String> mImages = new ArrayList<>();
     private ImageFolderAdapter mImageFolderAdapter;
     private FolderAdapter mFolderAdapter;
@@ -133,7 +147,9 @@ public class MediaSelectFragment extends CommonFragment {
     private ListView mDirListView;
     private View mImageFolderBackground;
 
-    /** 是否从相机返回 */
+    /**
+     * 是否从相机返回
+     */
     private boolean mIsFromCameraBack = false;
 
     private ImageGridAdapter mMediaSelectAdapter;
@@ -447,77 +463,193 @@ public class MediaSelectFragment extends CommonFragment {
         }
     }
 
+    // TODO
+    private static final int DURATION = 600;
+    private AnimatorSet mAnimatorSetVisible;
+    private AnimatorSet mAnimatorSetGone;
+    private static final int DURATION_CLOCKWISE = 400;
+    private Animator mAnimatorClockwise;
+    private Animator mAnimatorAntiClockwise;
+
     /**
      * 初始化展示文件夹的popupWindow
      */
     private void initListDirPopupWindow() {
-        if (mImageFolderLayout.getVisibility() == View.VISIBLE) {
-            mImageFolderLayout.setVisibility(View.GONE);
-            mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
-            return;
-        }
-        mImageFolderLayout.setVisibility(View.VISIBLE);
-        mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_18dp);
-        mImageFolderAdapter = new ImageFolderAdapter(mActivity, mFolders);
-        mDirListView.setAdapter(mImageFolderAdapter);
-        mDirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                try {
-//                    mCurrentFolder = mFolders.get(position);
-                    mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
-                    if (position == 0) {
-                        mHeaderTitle.setText("所有图片");
-                    } else {
-                        mHeaderTitle.setText(mFolders.get(position).name);
-                    }
-                    if (position != 0) {
-                        mImgDir = new File(mFolders.get(position).path);
-                        mImages = Arrays.asList(mImgDir.list(new FilenameFilter() {
-                            @Override
-                            public boolean accept(File dir, String filename) {
-                                if (filename.endsWith(".jpg") || filename.endsWith(".png")
-                                        || filename.endsWith(".jpeg"))
-                                    return true;
-                                return false;
-                            }
-                        }));
-                    }
-//                for (int i = 0; i < mFolders.size(); i++) {
-//                    mFolders.get(i).setSelected(false);
-//                }
-//                mFolders.get(position).setSelected(true);
-                    mImageFolderAdapter.changeData(mFolders);
-                    List<Resource> typeResources = new ArrayList<Resource>();
-                    if (position != 0) {
-                        for (Resource resource : mResources) {
-                            for (String filename : mImages) {
-                                if (resource.getFilename().equals(filename)) {
-                                    typeResources.add(resource);
+
+        toggleDirList();
+
+        if (null == mImageFolderAdapter) {
+            mImageFolderAdapter = new ImageFolderAdapter(mActivity, mFolders);
+            mDirListView.setAdapter(mImageFolderAdapter);
+            mDirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+//                        mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
+                        if (position == 0) {
+                            mHeaderTitle.setText("所有图片");
+                        } else {
+                            mHeaderTitle.setText(mFolders.get(position).name);
+                        }
+                        if (position != 0) {
+                            mImgDir = new File(mFolders.get(position).path);
+                            mImages = Arrays.asList(mImgDir.list(new FilenameFilter() {
+                                @Override
+                                public boolean accept(File dir, String filename) {
+                                    if (filename.endsWith(".jpg") || filename.endsWith(".png") || filename.endsWith(".jpeg")) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            }));
+                        }
+                        mImageFolderAdapter.changeData(mFolders);
+                        List<Resource> typeResources = new ArrayList<Resource>();
+                        if (position != 0) {
+                            for (Resource resource : mResources) {
+                                for (String filename : mImages) {
+                                    if (resource.getFilename().equals(filename)) {
+                                        typeResources.add(resource);
+                                    }
                                 }
                             }
+                            mMediaSelectAdapter.setData(typeResources);
+                        } else {
+                            mMediaSelectAdapter.setData(mResources);
                         }
-                        mMediaSelectAdapter.setData(typeResources);
-                    } else {
-                        mMediaSelectAdapter.setData(mResources);
+//                        mImageFolderLayout.setVisibility(View.GONE);
+//                        mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
+                        toggleDirList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    mImageFolderLayout.setVisibility(View.GONE);
-                    mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        });
+            });
 
-        mImageFolderBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mImageFolderLayout.setVisibility(View.GONE);
-                mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
-            }
-        });
+            mImageFolderBackground.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    mImageFolderLayout.setVisibility(View.GONE);
+//                    mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
+                    toggleDirList();
+                }
+            });
+        }
+    }
 
+    private Screen mScreen;
+
+    private int getDirListAnimationTranslationY() {
+        if (null == mScreen) {
+            mScreen = Screen.getInstance(mActivity);
+        }
+        return -Math.min(
+                mFolders.size() * getResources().getDimensionPixelSize(R.dimen.xp12_0) + mFolders.size() - 1,
+                mScreen.heightPx - mScreen.getStatusBarHeight(mActivity) - 2 * getResources().getDimensionPixelSize(R.dimen.header_height));
+    }
+
+    private void toggleDirList() {
+        if (mImageFolderLayout.getVisibility() == View.VISIBLE) {
+            if (null == mAnimatorSetGone) {
+                mAnimatorSetGone = new AnimatorSet();
+                mAnimatorSetGone.play(ObjectAnimator.ofFloat(mDirListView, "translationY", 0f, getDirListAnimationTranslationY()).setDuration(DURATION));
+                mAnimatorSetGone.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mImageFolderLayout.setVisibility(View.GONE);
+                        if (null == mAnimatorClockwise) {
+                            mAnimatorClockwise = ObjectAnimator.ofFloat(mHeaderIcon, "rotation", 0, 180);
+                            mAnimatorClockwise.setDuration(DURATION_CLOCKWISE);
+                            mAnimatorClockwise.addListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mHeaderIcon.setRotation(0);
+                                    mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animation) {
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animation) {
+                                }
+                            });
+                        }
+                        mAnimatorClockwise.start();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+                });
+            }
+            mDirListView.setPivotX(getResources().getDimensionPixelSize(R.dimen.xp50_0));
+            mAnimatorSetGone.start();
+            return;
+        } else {
+            if (null == mAnimatorSetVisible) {
+                mAnimatorSetVisible = new AnimatorSet();
+                mAnimatorSetVisible.play(ObjectAnimator.ofFloat(mDirListView, "translationY", getDirListAnimationTranslationY(), 0f).setDuration(DURATION));
+                mAnimatorSetVisible.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        mDirListView.setTranslationY(getDirListAnimationTranslationY());
+                        mImageFolderLayout.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (null == mAnimatorAntiClockwise) {
+                            mAnimatorAntiClockwise = ObjectAnimator.ofFloat(mHeaderIcon, "rotation", 0, -180);
+                            mAnimatorAntiClockwise.setDuration(DURATION_CLOCKWISE);
+                            mAnimatorAntiClockwise.addListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mHeaderIcon.setRotation(0);
+                                    mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_18dp);
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animation) {
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animation) {
+                                }
+                            });
+                        }
+                        mAnimatorAntiClockwise.start();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+                });
+            }
+            mDirListView.setPivotX(getResources().getDimensionPixelSize(R.dimen.xp50_0));
+            mAnimatorSetVisible.start();
+        }
     }
 
     @Override

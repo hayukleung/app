@@ -20,8 +20,6 @@ import android.view.WindowManager;
  */
 public class Screen {
 
-    private Context mContext;
-    
     /** 宽 */
     public int widthPx;
     /** 高 */
@@ -218,15 +216,17 @@ public class Screen {
      *
      * @return
      */
-    public int getStatusBarHeight() {
+    public int getStatusBarHeight(Context context) {
         int statusBarHeight = 0;
 
-        int resourceId = mContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            statusBarHeight = mContext.getResources().getDimensionPixelSize(resourceId);
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
         }
 
         return statusBarHeight;
     }
+
+
 
 }
