@@ -1,21 +1,25 @@
 #工程介绍
 
---app icon
+##app icon
 https://github.com/konifar/android-material-design-icon-generator-plugin
 
---app
+##app
 主工程，展示各个module的demo
 
---lib-app-base
+##lib-app-base
 基础库
---lib-app-design_pattern
+
+##lib-app-design_pattern
 设计模式实例
---lib-app-util
+
+##lib-app-util
 通用工具集合
---lib-app-widget-collapsible
+
+##lib-app-widget-collapsible
 RecyclerView实现的多级列表控件
---lib-app-widget-qrcode
+
+##lib-app-widget-qrcode
 基于ZXing的二维码扫描
 
-// TODO
+##TODO
 --lib-app-network-volley
