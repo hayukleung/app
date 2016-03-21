@@ -444,6 +444,7 @@ public class MediaSelectFragment extends CommonFragment {
                 getActivity().setResult(Activity.RESULT_OK, data);
                 getActivity().onBackPressed();
             } else if (mMode == MODE_CROP) {
+                // 裁剪
                 try {
                     Uri data = Uri.fromFile(new File(resource.getFilePath()));
                     mCropTmpFile = FileUtils.getTmpFile();
@@ -517,8 +518,6 @@ public class MediaSelectFragment extends CommonFragment {
                         } else {
                             mMediaSelectAdapter.setData(mResources);
                         }
-//                        mImageFolderLayout.setVisibility(View.GONE);
-//                        mHeaderIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_18dp);
                         toggleDirList();
                     } catch (Exception e) {
                         e.printStackTrace();

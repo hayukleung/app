@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">小白鼠</string>
+
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">小白鼠APP请求获取指纹识别权限</string>
+    <string name="quit">放弃授权</string>
+</resources>

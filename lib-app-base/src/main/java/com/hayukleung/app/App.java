@@ -17,13 +17,15 @@ public class App extends MultiDexApplication {
     public static Activity ACTIVITY;
     public static boolean VISIBLE;
 
-    private static App mInstance;
-    private ObjectMapper mObjectMapper;
-    private String mToken;
-    private SharedPreferences preferences;
+    private static App sInstance;
 
-    public static App Instance() {
-        return mInstance;
+    private ObjectMapper mObjectMapper;
+
+    // ------
+    private String mToken;
+
+    public static App instance() {
+        return sInstance;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class App extends MultiDexApplication {
     }
 
     private void init() {
-        mInstance = this;
+        sInstance = this;
         Library.init(this);
         new Configuration(this);
     }
@@ -44,14 +46,14 @@ public class App extends MultiDexApplication {
 
     public String getToken() {
         if (mToken == null) {
-            mToken = Configuration.Instance().getToken();
+            mToken = Configuration.instance().getToken();
         }
         return mToken;
     }
 
     public void setToken(String token) {
         mToken = token;
-        Configuration.Instance().setToken(token);
+        Configuration.instance().setToken(token);
     }
 
     public ObjectMapper getObjectMapper() {

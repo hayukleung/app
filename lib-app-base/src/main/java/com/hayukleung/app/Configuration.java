@@ -7,19 +7,23 @@ import android.content.SharedPreferences.Editor;
 public class Configuration {
 
     private static final String PREF = "configuration.pref";
+
+    // ------
     private static final String TOKEN = "token";
-    private static Configuration mInstance;
+
+    private static Configuration sInstance;
+
     private SharedPreferences mPreferences;
     private Editor mEditor;
 
     Configuration(Context context) {
         mPreferences = context.getApplicationContext().getSharedPreferences(PREF, Context.MODE_MULTI_PROCESS);
         mEditor = mPreferences.edit();
-        mInstance = this;
+        sInstance = this;
     }
 
-    public static Configuration Instance() {
-        return mInstance;
+    public static Configuration instance() {
+        return sInstance;
     }
 
     public SharedPreferences getPreferences() {

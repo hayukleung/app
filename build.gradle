@@ -5,7 +5,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+//        classpath 'com.android.tools.build:gradle:1.5.0'
+//        classpath "com.android.tools.build:gradle-experimental:0.6.0-beta5"
+        classpath "com.android.tools.build:gradle:2.0.0-beta5"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -16,3 +19,13 @@ allprojects {
         jcenter()
     }
 }
+
+
+//Error:Could not find com.android.tools.build:gradle-experimental:2.0.0-beta5.
+//        Searched in the following locations:
+//        file:/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/tools/build/gradle-experimental/2.0.0-beta5/gradle-experimental-2.0.0-beta5.pom
+//file:/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/tools/build/gradle-experimental/2.0.0-beta5/gradle-experimental-2.0.0-beta5.jar
+//https://jcenter.bintray.com/com/android/tools/build/gradle-experimental/2.0.0-beta5/gradle-experimental-2.0.0-beta5.pom
+//https://jcenter.bintray.com/com/android/tools/build/gradle-experimental/2.0.0-beta5/gradle-experimental-2.0.0-beta5.jar
+//Required by:
+//:xDroid:unspecified

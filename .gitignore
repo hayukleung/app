@@ -1,10 +1,9 @@
 /.gradle
 /.idea
+/googleFingerprintDialog
 /build
 /gradle
 /*.iml
 /gradlew
 /gradlew.bat
 /local.properties
-.DS_Store
-/captures

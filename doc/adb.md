@@ -1,6 +1,9 @@
 ####################################################################################################
 # adb常用命令
 # from http://www.jikexueyuan.com
+# ref http://adbshell.com/
+# ref http://wiki.jikexueyuan.com/project/linux-command/
+# see https://github.com/hayukleung/adb-wrapper
 ####################################################################################################
 ##001.获取连接上计算机的设备
 adb devices
@@ -13,7 +16,7 @@ adb reboot bootloader
 ##005.重启设备进入recovery模式
 adb reboot recovery
 ##006.发送命令到指定设备
-adb [-d|-e|-s <serialNumber>] <command>
+adb [-d|-e|-s <serialNumber>] shell <command>
 ##007.启动adb服务进程
 adb start-server
 ##008.终止adb服务进程
@@ -44,7 +47,7 @@ adb shell ps -x <pid>
 adb shell service list
 ##021.查看当前内存占用
 adb shell cat /proc/meminfo
-##022.查看IO内存分区
+##022.查看IO内存分区（root required）
 adb shell cat /proc/iomem
 ##023.查看所有存储设备名
 adb shell ls mnt

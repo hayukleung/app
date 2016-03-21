@@ -1,10 +1,13 @@
 rootProject.name = 'xDroid'
 
-include ':app', ':lib-app-screen', ':lib-app-widget-media',
+include ':app',
         ':appDice',
+        ':appMice',
         ':lib-app-base',
-//        ':lib-app-design_pattern',
+        ':lib-app-screen',
         ':lib-app-util',
         ':lib-app-widget-collapsible',
+        ':lib-app-widget-media',
         ':lib-app-widget-qrcode',
-        ':lib-app-volley'
+        ':lib-app-volley',
+        ':googleFingerprintDialog'

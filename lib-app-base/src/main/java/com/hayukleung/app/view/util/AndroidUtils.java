@@ -33,6 +33,17 @@ public class AndroidUtils {
         return intent;
     }
 
+    /**
+     * 裁图
+     *
+     * @param data
+     * @param out
+     * @param aspectX
+     * @param aspectY
+     * @param outputX
+     * @param outputY
+     * @return
+     */
     public static Intent getImageFromCrop(Uri data, Uri out, int aspectX, int aspectY, int outputX, int outputY) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(data, "image/*");

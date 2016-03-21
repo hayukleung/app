@@ -329,17 +329,15 @@ public class MainActivity extends CommonActivity {
                 /**
                  * 选择图片并裁剪
                  */
-//                public void getPhotoByCrop() {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_CROP);
-//                    bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTX, 1);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTY, 1);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTX, 400);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTY, 400);
-//                    Activities.startActivity(BaseFragment.this, MediaSelectFragment.class, bundle, REQUEST_CODE_IMAGE_CROP);
-//                }
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_CROP);
+//                bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+//                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
+//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTX, 1);
+//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTY, 1);
+//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTX, 400);
+//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTY, 400);
+//                Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
 
                 /**
                  * 选择多张图片

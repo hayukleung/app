@@ -6,6 +6,9 @@ https://github.com/konifar/android-material-design-icon-generator-plugin
 ##app
 主工程，展示各个module的demo
 
+##appMice
+Android6.0小白鼠工程
+
 ##lib-app-base
 基础库
 

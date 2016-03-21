@@ -60,7 +60,7 @@ public class ResourceBody extends FileBody {
         try {
             IImage iImage = ImageLoader.Instance().load(Uri.fromFile(file)).resize(mWidth, mHeight).centerInside().onlyScaleDown().thumbnail().get();
             Bitmap bitmap = ((BitmapImage) iImage).getBitmap();
-            mTempFile = FileUtils.getTmpFile(App.Instance().getCacheDir(), null);
+            mTempFile = FileUtils.getTmpFile(App.instance().getCacheDir(), null);
             out = new FileOutputStream(mTempFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
             bitmap.recycle();
