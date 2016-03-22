@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/Activation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xp4.0"
+        android:layout_marginRight="@dimen/xp4.0"
+        android:layout_marginTop="@dimen/xp4.0"
+        android:drawableLeft="@mipmap/mice"
+        android:padding="@dimen/xp5.0"
+        android:text="激活权限"/>
+
+    <Button
+        android:id="@+id/Deactivation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xp4.0"
+        android:layout_marginRight="@dimen/xp4.0"
+        android:layout_marginTop="@dimen/xp4.0"
+        android:drawableLeft="@mipmap/mice"
+        android:padding="@dimen/xp5.0"
+        android:text="取消权限"/>
+
+    <Button
+        android:id="@+id/Lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xp4.0"
+        android:layout_marginRight="@dimen/xp4.0"
+        android:layout_marginTop="@dimen/xp4.0"
+        android:drawableLeft="@mipmap/mice"
+        android:padding="@dimen/xp5.0"
+        android:text="点击锁屏"/>
+
+</LinearLayout>

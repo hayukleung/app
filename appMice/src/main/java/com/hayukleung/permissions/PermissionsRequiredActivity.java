@@ -1,6 +1,5 @@
 package com.hayukleung.permissions;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class PermissionsRequiredActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 0;
-    private static final String[] PERMISSIONS = new String[] { Manifest.permission.USE_FINGERPRINT };
+
+    protected abstract String[] requiredPermissions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +21,13 @@ public abstract class PermissionsRequiredActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (PermissionsUtils.lacksPermissions(PermissionsRequiredActivity.this, PERMISSIONS)) {
+        if (PermissionsUtils.lacksPermissions(PermissionsRequiredActivity.this, requiredPermissions())) {
             startPermissionsActivity();
         }
     }
 
     private void startPermissionsActivity() {
-        PermissionsRequestActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
+        PermissionsRequestActivity.startActivityForResult(this, REQUEST_CODE, requiredPermissions());
     }
 
     @Override

@@ -3,9 +3,8 @@
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-
     <application
+        android:name="com.hayukleung.devicepolicy.App"
         android:allowBackup="true"
         android:icon="@mipmap/mice"
         android:label="@string/app_name"
@@ -32,6 +31,21 @@
         <activity
             android:name="com.hayukleung.permissions.PermissionsRequestActivity"
             android:theme="@style/AppTheme.Permissions"/>
+
+        <!--设备权限-->
+        <activity
+            android:name="com.hayukleung.devicepolicy.DevicePolicyActivity"/>
+        <receiver
+            android:name="com.hayukleung.devicepolicy.AdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN"
+            android:description="@string/description">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_list"/>
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
