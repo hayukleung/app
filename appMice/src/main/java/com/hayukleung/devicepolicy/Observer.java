@@ -7,5 +7,5 @@ package com.hayukleung.devicepolicy;
  */
 public interface Observer {
 
-    void update();
+  void update();
 }

@@ -7,9 +7,9 @@ package com.hayukleung.devicepolicy;
  */
 public interface Observable {
 
-    void set(Observer observer);
+  void set(Observer observer);
 
-    void clear();
+  void clear();
 
-    void notice();
+  void notice();
 }
