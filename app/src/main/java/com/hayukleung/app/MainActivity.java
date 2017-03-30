@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import com.hayukleung.absolutescreenmatch.Screen;
 import com.hayukleung.app.module.material.DemoMaterialActivity;
 import com.hayukleung.app.module.qqLayout.DemoQQLayoutActivity;
 import com.hayukleung.app.module.tabhost1.DemoTabHost1Activity;
 import com.hayukleung.app.module.tabhost2.DemoTabHost2Activity;
-import com.hayukleung.app.screen.Screen;
 import com.hayukleung.app.screen.demo.DemoScreenActivity;
 import com.hayukleung.app.snippet.handler_and_looper.DownloadQueueActivity;
 import com.hayukleung.app.util.LogUtil;
@@ -31,328 +31,304 @@ import java.util.ArrayList;
  */
 public class MainActivity extends CommonActivity {
 
-    @InjectView(R.id.header)
-    public Header mHeader;
-    @InjectView(R.id.ActivityMain$collapsible_view)
-    public CollapsibleView mCollapsibleView;
+  @InjectView(R.id.header) public Header mHeader;
+  @InjectView(R.id.ActivityMain$collapsible_view) public CollapsibleView mCollapsibleView;
 
-    private ArrayList<Element> mAllElements = new ArrayList<>();
-    private ArrayList<Element> mVisibleElements = new ArrayList<>();
+  private ArrayList<Element> mAllElements = new ArrayList<>();
+  private ArrayList<Element> mVisibleElements = new ArrayList<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            Window window = getWindow();
-//
-//            // clear FLAG_TRANSLUCENT_STATUS flag:
-//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//
-//            // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//
-//            // finally change the color
-//            window.setStatusBarColor(getResources().getColor(R.color.base));
-//        }
-        initWidgets();
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.inject(this);
+    // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    // Window window = getWindow();
+    //
+    // // clear FLAG_TRANSLUCENT_STATUS flag:
+    // window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    //
+    // // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+    // window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+    //
+    // // finally change the color
+    // window.setStatusBarColor(getResources().getColor(R.color.base));
+    // }
+    initWidgets();
 
-        if (null == savedInstanceState) {
-            initData();
-        } else {
-            onRestoreInstanceState(savedInstanceState);
-        }
-
-        int[] screen = Screen.getScreenSize(MainActivity.this, true);
-        LogUtil.showLog(String.format("width --> %d height --> %d", screen[0], screen[1]));
+    if (null == savedInstanceState) {
+      initData();
+    } else {
+      onRestoreInstanceState(savedInstanceState);
     }
 
-    @Override protected BaseFragment newFragment() {
-        return null;
+    int[] screen = Screen.getScreenSize(MainActivity.this, true);
+    LogUtil.showLog(String.format("width --> %d height --> %d", screen[0], screen[1]));
+  }
+
+  @Override protected BaseFragment newFragment() {
+    return null;
+  }
+
+  @Override protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    // outState.putSerializable("all", (Serializable) mAllElements);
+    outState.putParcelableArrayList("all", mAllElements);
+    // outState.putSerializable("visible", (Serializable) mVisibleElements);
+    outState.putParcelableArrayList("visible", mVisibleElements);
+  }
+
+  @Override protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    if (null != savedInstanceState) {
+      if (0 == mAllElements.size()) {
+        // mAllElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("all"));
+        mAllElements = savedInstanceState.getParcelableArrayList("all");
+      }
+      if (0 == mVisibleElements.size()) {
+        // mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
+        mVisibleElements = savedInstanceState.getParcelableArrayList("visible");
+      }
+      mCollapsibleView.setAllElements(mAllElements).setVisibleElements(mVisibleElements).commit();
+      // mCollapsibleView.buildTree().notifyDataSetChanged();
     }
+  }
 
-    @Override protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //        outState.putSerializable("all", (Serializable) mAllElements);
-        outState.putParcelableArrayList("all", mAllElements);
-        //        outState.putSerializable("visible", (Serializable) mVisibleElements);
-        outState.putParcelableArrayList("visible", mVisibleElements);
-    }
+  /**
+   * 初始化控件
+   */
+  private void initWidgets() {
+    AnalogClockView analogClockView = new AnalogClockView(MainActivity.this);
+    // ViewGroup.LayoutParams params = analogClockView.getLayoutParams();
+    // params.height = getResources().getDimensionPixelSize(R.dimen.header_button_width);
+    // params.width = params.height;
+    // analogClockView.setLayoutParams(params);
+    mHeader.setLeftView(analogClockView, new View.OnClickListener() {
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (null != savedInstanceState) {
-            if (0 == mAllElements.size()) {
-//                mAllElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("all"));
-                mAllElements = savedInstanceState.getParcelableArrayList("all");
+      @Override public void onClick(View v) {
+        startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
+      }
+    });
+    mHeader.setCenterText(R.string.app_name, null);
+
+    mCollapsibleView.setAllElements(mAllElements)
+        .setVisibleElements(mVisibleElements)
+        .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
+
+          @Override public void onUsrClick(Element usr, int position) {
+            usr.onElementClick();
+          }
+
+          @Override public boolean onOrgClick(Element org, int position) {
+            if (!org.hasChildren()) {
+              return true;
+            } else {
+              return false;
             }
-            if (0 == mVisibleElements.size()) {
-//                mVisibleElements.addAll((ArrayList<Element>) savedInstanceState.getSerializable("visible"));
-                mVisibleElements = savedInstanceState.getParcelableArrayList("visible");
-            }
-            mCollapsibleView.setAllElements(mAllElements).setVisibleElements(mVisibleElements).commit();
-//            mCollapsibleView.buildTree().notifyDataSetChanged();
-        }
-    }
+          }
+        })
+        .commit();
+  }
 
-    /**
-     * 初始化控件
-     */
-    private void initWidgets() {
-        AnalogClockView analogClockView = new AnalogClockView(MainActivity.this);
-//        ViewGroup.LayoutParams params = analogClockView.getLayoutParams();
-//        params.height = getResources().getDimensionPixelSize(R.dimen.header_button_width);
-//        params.width = params.height;
-//        analogClockView.setLayoutParams(params);
-        mHeader.setLeftView(analogClockView, new View.OnClickListener() {
+  /**
+   * 初始化数据
+   */
+  private void initData() {
+    // TODO set mAllElements & mVisibleElements
+    Element rootElement = new Element(getPackageName(), getString(R.string.app_name), true) {
 
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
-            }
-        });
-        mHeader.setCenterText(R.string.app_name, null);
+      @Override public void onElementClick() {
 
-        mCollapsibleView
-                .setAllElements(mAllElements)
-                .setVisibleElements(mVisibleElements)
-                .setOnCollapsibleClickListener(new OnCollapsibleClickListener() {
+      }
+    };
+    rootElement.setParentId("");
+    mVisibleElements.add(rootElement);
+    mAllElements.add(rootElement);
+    // 2级 ======================================================
 
-                    @Override
-                    public void onUsrClick(Element usr, int position) {
-                        usr.onElementClick();
-                    }
+    Element elementModule = new Element("com.hayukleung.app.module", "Module", true) {
+      @Override public void onElementClick() {
+      }
+    };
+    elementModule.setParentId(rootElement.getId());
+    mAllElements.add(elementModule);
 
-                    @Override
-                    public boolean onOrgClick(Element org, int position) {
-                        if (!org.hasChildren()) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                }).commit();
-    }
+    Element elementSnippet = new Element("com.hayukleung.app.snippet", "Snippet", true) {
 
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-        // TODO set mAllElements & mVisibleElements
-        Element rootElement = new Element(getPackageName(), getString(R.string.app_name), true) {
+      @Override public void onElementClick() {
 
-            @Override
-            public void onElementClick() {
+      }
+    };
+    elementSnippet.setParentId(rootElement.getId());
+    mAllElements.add(elementSnippet);
 
-            }
-        };
-        rootElement.setParentId("");
-        mVisibleElements.add(rootElement);
-        mAllElements.add(rootElement);
-        // 2级 ======================================================
+    Element elementUtil = new Element("com.hayukleung.app.util", "Util", true) {
 
-        Element elementModule = new Element("com.hayukleung.app.module", "Module", true) {
-            @Override
-            public void onElementClick() {
-            }
-        };
-        elementModule.setParentId(rootElement.getId());
-        mAllElements.add(elementModule);
+      @Override public void onElementClick() {
 
-        Element elementSnippet = new Element("com.hayukleung.app.snippet", "Snippet", true) {
+      }
+    };
+    elementUtil.setParentId(rootElement.getId());
+    mAllElements.add(elementUtil);
 
-            @Override
-            public void onElementClick() {
+    Element elementWidget = new Element("com.hayukleung.app.widget", "Widget", true) {
 
-            }
-        };
-        elementSnippet.setParentId(rootElement.getId());
-        mAllElements.add(elementSnippet);
+      @Override public void onElementClick() {
 
-        Element elementUtil = new Element("com.hayukleung.app.util", "Util", true) {
+      }
+    };
+    elementWidget.setParentId(rootElement.getId());
+    mAllElements.add(elementWidget);
 
-            @Override
-            public void onElementClick() {
+    // 3级 ======================================================
+    Element element;
 
-            }
-        };
-        elementUtil.setParentId(rootElement.getId());
-        mAllElements.add(elementUtil);
+    element = new Element(DemoMaterialActivity.class.getName(), "Material", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoMaterialActivity.class));
+      }
+    };
+    element.setParentId(elementModule.getId());
+    mAllElements.add(element);
+    element = new Element(DemoQQLayoutActivity.class.getName(), "QQLayout", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoQQLayoutActivity.class));
+      }
+    };
+    element.setParentId(elementModule.getId());
+    mAllElements.add(element);
+    element = new Element(DemoTabHost1Activity.class.getName(), "TabHost1", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoTabHost1Activity.class));
+      }
+    };
+    element.setParentId(elementModule.getId());
+    mAllElements.add(element);
+    element = new Element(DemoTabHost2Activity.class.getName(), "TabHost2", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoTabHost2Activity.class));
+      }
+    };
+    element.setParentId(elementModule.getId());
+    mAllElements.add(element);
 
-        Element elementWidget = new Element("com.hayukleung.app.widget", "Widget", true) {
+    element = new Element(DownloadQueueActivity.class.getName(), "Handler", false) {
 
-            @Override
-            public void onElementClick() {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DownloadQueueActivity.class));
+      }
+    };
+    element.setParentId(elementSnippet.getId());
+    mAllElements.add(element);
 
-            }
-        };
-        elementWidget.setParentId(rootElement.getId());
-        mAllElements.add(elementWidget);
+    element = new Element(DemoScreenActivity.class.getName(), "Screen", false) {
 
-        // 3级 ======================================================
-        Element element;
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoScreenActivity.class));
+      }
+    };
+    element.setParentId(elementUtil.getId());
+    mAllElements.add(element);
+    element = new Element(DemoTextActivity.class.getName(), "Text", false) {
 
-        element = new Element(DemoMaterialActivity.class.getName(), "Material", false) {
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoMaterialActivity.class));
-            }
-        };
-        element.setParentId(elementModule.getId());
-        mAllElements.add(element);
-        element = new Element(DemoQQLayoutActivity.class.getName(), "QQLayout", false) {
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoQQLayoutActivity.class));
-            }
-        };
-        element.setParentId(elementModule.getId());
-        mAllElements.add(element);
-        element = new Element(DemoTabHost1Activity.class.getName(), "TabHost1", false) {
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoTabHost1Activity.class));
-            }
-        };
-        element.setParentId(elementModule.getId());
-        mAllElements.add(element);
-        element = new Element(DemoTabHost2Activity.class.getName(), "TabHost2", false) {
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoTabHost2Activity.class));
-            }
-        };
-        element.setParentId(elementModule.getId());
-        mAllElements.add(element);
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoTextActivity.class));
+      }
+    };
+    element.setParentId(elementUtil.getId());
+    mAllElements.add(element);
 
-        element = new Element(DownloadQueueActivity.class.getName(), "Handler", false) {
+    element = new Element(DemoCollapsibleActivity.class.getName(), "Collapsible", false) {
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DownloadQueueActivity.class));
-            }
-        };
-        element.setParentId(elementSnippet.getId());
-        mAllElements.add(element);
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoCollapsibleActivity.class));
+      }
+    };
+    element.setParentId(elementWidget.getId());
+    mAllElements.add(element);
+    element = new Element(DemoQRCodeActivity.class.getName(), "QRCode", false) {
 
-        element = new Element(DemoScreenActivity.class.getName(), "Screen", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoQRCodeActivity.class));
+      }
+    };
+    element.setParentId(elementWidget.getId());
+    mAllElements.add(element);
+    element = new Element(DemoClockActivity.class.getName(), "Clock", false) {
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoScreenActivity.class));
-            }
-        };
-        element.setParentId(elementUtil.getId());
-        mAllElements.add(element);
-        element = new Element(DemoTextActivity.class.getName(), "Text", false) {
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
+      }
+    };
+    element.setParentId(elementWidget.getId());
+    mAllElements.add(element);
+    element = new Element(DemoPaintPadActivity.class.getName(), "PaintPad", false) {
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoTextActivity.class));
-            }
-        };
-        element.setParentId(elementUtil.getId());
-        mAllElements.add(element);
+      @Override public void onElementClick() {
+        startActivity(new Intent(MainActivity.this, DemoPaintPadActivity.class));
+      }
+    };
+    element.setParentId(elementWidget.getId());
+    mAllElements.add(element);
+    element = new Element(MediaSelectFragment.class.getName(), "MediaPicker", false) {
 
-        element = new Element(DemoCollapsibleActivity.class.getName(), "Collapsible", false) {
+      @Override public void onElementClick() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_MULTI);
+        bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+        bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 9);
+        Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoCollapsibleActivity.class));
-            }
-        };
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-        element = new Element(DemoQRCodeActivity.class.getName(), "QRCode", false) {
+        /**
+         * 选择单张图片
+         *
+         * @param isFromDiscover
+         */
+        // public void getPhoto(final boolean isFromDiscover) {
+        // Bundle bundle = new Bundle();
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_SINGLE);
+        // bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
+        // Activities.startActivity(BaseFragment.this, MediaSelectFragment.class, bundle, isFromDiscover ? REQUEST_CODE_IMAGE_GALLERY_JS : REQUEST_CODE_IMAGE_GALLERY);
+        // }
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoQRCodeActivity.class));
-            }
-        };
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-        element = new Element(DemoClockActivity.class.getName(), "Clock", false) {
+        /**
+         * 选择图片并裁剪
+         */
+        // Bundle bundle = new Bundle();
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_CROP);
+        // bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
+        // bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTX, 1);
+        // bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTY, 1);
+        // bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTX, 400);
+        // bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTY, 400);
+        // Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoClockActivity.class));
-            }
-        };
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-        element = new Element(DemoPaintPadActivity.class.getName(), "PaintPad", false) {
+        /**
+         * 选择多张图片
+         *
+         * @param bundle
+         * @param maxSelectCount
+         */
+        // public void getMultiPhoto(final Bundle bundle, final int maxSelectCount) {
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_MULTI);
+        // bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
+        // bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, maxSelectCount);
+        // Activities.startActivity(BaseFragment.this, MediaSelectFragment.class, bundle, REQUEST_CODE_IMAGE_GALLERY);
+        // }
+      }
+    };
+    element.setParentId(elementWidget.getId());
+    mAllElements.add(element);
 
-            @Override
-            public void onElementClick() {
-                startActivity(new Intent(MainActivity.this, DemoPaintPadActivity.class));
-            }
-        };
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-        element = new Element(MediaSelectFragment.class.getName(), "MediaPicker", false) {
+    // 4级 ======================================================
 
-            @Override
-            public void onElementClick() {
-                Bundle bundle = new Bundle();
-                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_MULTI);
-                bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
-                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 9);
-                Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
+    // 下面三行代码按顺序照抄
+    mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();
+  }
 
-                /**
-                 * 选择单张图片
-                 *
-                 * @param isFromDiscover
-                 */
-//                public void getPhoto(final boolean isFromDiscover) {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_SINGLE);
-//                    bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
-//                    Activities.startActivity(BaseFragment.this, MediaSelectFragment.class, bundle, isFromDiscover ? REQUEST_CODE_IMAGE_GALLERY_JS : REQUEST_CODE_IMAGE_GALLERY);
-//                }
-
-                /**
-                 * 选择图片并裁剪
-                 */
-//                Bundle bundle = new Bundle();
-//                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_CROP);
-//                bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
-//                bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, 1);
-//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTX, 1);
-//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_ASPECTY, 1);
-//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTX, 400);
-//                bundle.putInt(MediaSelectFragment.EXTRA_CROP_OUTPUTY, 400);
-//                Activities.startActivity(MainActivity.this, MediaSelectFragment.class, bundle, 0x0001);
-
-                /**
-                 * 选择多张图片
-                 *
-                 * @param bundle
-                 * @param maxSelectCount
-                 */
-//                public void getMultiPhoto(final Bundle bundle, final int maxSelectCount) {
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_MODE, MediaSelectFragment.MODE_MULTI);
-//                    bundle.putBoolean(MediaSelectFragment.EXTRA_SHOW_CAMERA, false);
-//                    bundle.putInt(MediaSelectFragment.EXTRA_SELECT_COUNT, maxSelectCount);
-//                    Activities.startActivity(BaseFragment.this, MediaSelectFragment.class, bundle, REQUEST_CODE_IMAGE_GALLERY);
-//                }
-            }
-        };
-        element.setParentId(elementWidget.getId());
-        mAllElements.add(element);
-
-        // 4级 ======================================================
-
-        // 下面三行代码按顺序照抄
-        mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();
-    }
-
-    @Override protected void onDestroy() {
-        ButterKnife.reset(this);
-        super.onDestroy();
-    }
+  @Override protected void onDestroy() {
+    ButterKnife.reset(this);
+    super.onDestroy();
+  }
 }
