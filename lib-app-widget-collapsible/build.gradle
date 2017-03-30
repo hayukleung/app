@@ -22,5 +22,8 @@ dependencies {
   compile 'com.android.support:appcompat-v7:25.3.0'
   compile 'com.android.support:recyclerview-v7:25.3.0'
   compile 'com.android.support:design:25.3.0'
+
+  compile 'com.github.hayukleung:collapsible-view:1.0.1'
+
   compile project(':lib-app-screen')
 }

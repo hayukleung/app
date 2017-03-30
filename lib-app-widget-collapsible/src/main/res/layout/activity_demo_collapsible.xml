@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hayukleung.app.widget.collapsible.CollapsibleView
+  <com.hayukleung.collapsibleview.CollapsibleView
         android:id="@+id/collapsible_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:drawableOrg="@null"
-        app:drawableUsr="@null"
         app:drawableClosed="@null"
-        app:drawableOpened="@null" />
+      app:drawableOpened="@null"
+      app:drawableOrg="@null"
+      app:drawableUsr="@null"
+      />
 
 </RelativeLayout>

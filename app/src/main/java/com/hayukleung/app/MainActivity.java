@@ -3,7 +3,8 @@ package com.hayukleung.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.hayukleung.app.module.material.DemoMaterialActivity;
 import com.hayukleung.app.module.qqLayout.DemoQQLayoutActivity;
 import com.hayukleung.app.module.tabhost1.DemoTabHost1Activity;
@@ -16,18 +17,14 @@ import com.hayukleung.app.util.text.demo.DemoTextActivity;
 import com.hayukleung.app.view.Header;
 import com.hayukleung.app.widget.clock.AnalogClockView;
 import com.hayukleung.app.widget.clock.demo.DemoClockActivity;
-import com.hayukleung.app.widget.collapsible.CollapsibleView;
-import com.hayukleung.app.widget.collapsible.Element;
-import com.hayukleung.app.widget.collapsible.OnCollapsibleClickListener;
 import com.hayukleung.app.widget.collapsible.demo.DemoCollapsibleActivity;
 import com.hayukleung.app.widget.media.mediapicker.MediaSelectFragment;
 import com.hayukleung.app.widget.paintpad.demo.DemoPaintPadActivity;
 import com.hayukleung.app.widget.qrcode.demo.DemoQRCodeActivity;
-
+import com.hayukleung.collapsibleview.CollapsibleView;
+import com.hayukleung.collapsibleview.Element;
+import com.hayukleung.collapsibleview.OnCollapsibleClickListener;
 import java.util.ArrayList;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by hayukleung on 15/9/3.
@@ -71,6 +68,18 @@ public class MainActivity extends CommonActivity {
         LogUtil.showLog(String.format("width --> %d height --> %d", screen[0], screen[1]));
     }
 
+    @Override protected BaseFragment newFragment() {
+        return null;
+    }
+
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //        outState.putSerializable("all", (Serializable) mAllElements);
+        outState.putParcelableArrayList("all", mAllElements);
+        //        outState.putSerializable("visible", (Serializable) mVisibleElements);
+        outState.putParcelableArrayList("visible", mVisibleElements);
+    }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -86,26 +95,6 @@ public class MainActivity extends CommonActivity {
             mCollapsibleView.setAllElements(mAllElements).setVisibleElements(mVisibleElements).commit();
 //            mCollapsibleView.buildTree().notifyDataSetChanged();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-//        outState.putSerializable("all", (Serializable) mAllElements);
-        outState.putParcelableArrayList("all", mAllElements);
-//        outState.putSerializable("visible", (Serializable) mVisibleElements);
-        outState.putParcelableArrayList("visible", mVisibleElements);
-    }
-
-    @Override
-    protected BaseFragment newFragment() {
-        return null;
-    }
-
-    @Override
-    protected void onDestroy() {
-        ButterKnife.reset(this);
-        super.onDestroy();
     }
 
     /**
@@ -360,5 +349,10 @@ public class MainActivity extends CommonActivity {
 
         // 下面三行代码按顺序照抄
         mCollapsibleView.buildTree().sortTree().notifyDataSetChanged();
+    }
+
+    @Override protected void onDestroy() {
+        ButterKnife.reset(this);
+        super.onDestroy();
     }
 }
